@@ -59,6 +59,9 @@
     <Compile Include="Compilation\ModuleDefinition.cs" />
     <Compile Include="Parsing\SlangGrammar.cs" />
     <Compile Include="Parsing\SlangParser.cs" />
+    <Compile Include="Compilation\CompilationRoot.cs" />
+    <Compile Include="Compilation\CompilationUnit.cs" />
+    <Compile Include="Compilation\CompilationMetadata.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

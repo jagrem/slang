@@ -1,12 +1,10 @@
 ﻿using System;
-using slang.IL;
-using slang.AST;
 
 namespace slang.Compilation
 {
     public class Compiler
     {
-        public AssemblyDefinition Compile(ProgramNode root)
+        public AssemblyDefinition Compile(CompilationRoot root)
         {
             throw new NotImplementedException ();
         }

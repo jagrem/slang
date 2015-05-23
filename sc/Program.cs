@@ -18,6 +18,10 @@ namespace sc
                 Console.Error.WriteLine ("No files specified.");
             }
 
+            var projectName = args [0];
+
+            var compilationRoot = new CompilationRoot (new CompilationMetadata (projectName));
+
             foreach(var arg in args) {
                 if(!File.Exists (arg)) {
                     WriteError ("Input file: '{0}' does not exist.", arg);
@@ -29,27 +33,29 @@ namespace sc
                     Environment.Exit (2);
                 }
 
-                var parser = new SlangParser ();
-                ProgramNode root = null;
-
                 try {
-                    root = parser.Parse (File.ReadAllText (arg));
+                    WriteInfo ("Parsing {0}...", arg);
+                    var parser = new SlangParser ();
+                    var root = parser.Parse (File.ReadAllText (arg));
+                    compilationRoot.CompilationUnits.Add(new CompilationUnit(arg, root));
                 } catch(Exception e) {
                     WriteError ("Parse error: {0}.", e);
                     Environment.Exit (3);
                 }
+            }
 
-                AssemblyDefinition assemblyDefinition = null;
+            AssemblyDefinition assemblyDefinition = null;
 
-                try {
-                    var compiler = new Compiler ();
-                    assemblyDefinition = compiler.Compile (root);
-                } catch(Exception e) {
-                    Console.Error.WriteLine ("Compile error: {0}.", e);
-                    Environment.Exit (4);
-                }
+            try {
+                    WriteInfo ("Compiling {0}...", projectName);
+                var compiler = new Compiler ();
+                assemblyDefinition = compiler.Compile (compilationRoot);
+            } catch(Exception e) {
+                WriteError ("Compile error: {0}.", e);
+                Environment.Exit (4);
+            }
 
-                try {
+            try {
                 Generator.GenerateAssembly (assemblyDefinition);
             } catch(Exception e) {
                 WriteError ("IL generation error: {0}.", e);
