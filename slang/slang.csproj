@@ -62,6 +62,16 @@
     <Compile Include="Compilation\CompilationRoot.cs" />
     <Compile Include="Compilation\CompilationUnit.cs" />
     <Compile Include="Compilation\CompilationMetadata.cs" />
+    <Compile Include="Parsing\NewParser.cs" />
+    <Compile Include="Parsing\Lexing\Lexer.cs" />
+    <Compile Include="Parsing\Lexing\Token.cs" />
+    <Compile Include="Parsing\Lexing\RealLiteral.cs" />
+    <Compile Include="Parsing\Lexing\IntegerLiteral.cs" />
+    <Compile Include="Parsing\Lexing\BooleanLiteral.cs" />
+    <Compile Include="Parsing\Lexing\CharacterLiteral.cs" />
+    <Compile Include="Parsing\Lexing\Error.cs" />
+    <Compile Include="Parsing\Lexing\End.cs" />
+    <Compile Include="Parsing\Lexing\Start.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -69,6 +79,7 @@
     <Folder Include="AST\" />
     <Folder Include="Compilation\" />
     <Folder Include="Parsing\" />
+    <Folder Include="Parsing\Lexing\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

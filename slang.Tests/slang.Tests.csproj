@@ -61,6 +61,8 @@
     <Compile Include="IL\GeneratorTests.cs" />
     <Compile Include="ParserTests.cs" />
     <Compile Include="..\slang.Tests\ParserTestCaseDataExtensions.cs" />
+    <Compile Include="Parsing\Literals\LiteralTests.cs" />
+    <Compile Include="Parsing\Literals\IdentifierTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -68,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IL\" />
+    <Folder Include="Parsing\" />
+    <Folder Include="Parsing\Literals\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\slang\slang.csproj">
