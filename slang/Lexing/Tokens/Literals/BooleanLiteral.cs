@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace slang.Parsing.Lexing
+﻿namespace slang.Lexing.Tokens.Literals
 {
     public class BooleanLiteral : Token
     {

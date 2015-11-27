@@ -1,4 +1,4 @@
-﻿namespace slang.Parsing.Lexing
+﻿namespace slang.Lexing.Tokens
 {
     public abstract class Token
     {
@@ -8,6 +8,8 @@
         {
             return string.Format ("[{0}: \"{1}\"]", this.GetType ().Name, Value);
         }
+
+        public static Token Empty { get { return null; } }
     }
 }
 

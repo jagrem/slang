@@ -1,4 +1,4 @@
-﻿namespace slang.Parsing.Lexing
+﻿namespace slang.Lexing.Tokens.Literals
 {
     public class CharacterLiteral : Token
     {

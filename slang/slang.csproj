@@ -63,15 +63,63 @@
     <Compile Include="Compilation\CompilationUnit.cs" />
     <Compile Include="Compilation\CompilationMetadata.cs" />
     <Compile Include="Parsing\NewParser.cs" />
-    <Compile Include="Parsing\Lexing\Lexer.cs" />
-    <Compile Include="Parsing\Lexing\Token.cs" />
-    <Compile Include="Parsing\Lexing\RealLiteral.cs" />
-    <Compile Include="Parsing\Lexing\IntegerLiteral.cs" />
-    <Compile Include="Parsing\Lexing\BooleanLiteral.cs" />
-    <Compile Include="Parsing\Lexing\CharacterLiteral.cs" />
-    <Compile Include="Parsing\Lexing\Error.cs" />
-    <Compile Include="Parsing\Lexing\End.cs" />
-    <Compile Include="Parsing\Lexing\Start.cs" />
+    <Compile Include="Lexing\Extensions\CharacterExtensions.cs" />
+    <Compile Include="Lexing\Extensions\LexerStateExtensions.cs" />
+    <Compile Include="Lexing\Lexer.cs" />
+    <Compile Include="Lexing\LexerState.cs" />
+    <Compile Include="Lexing\State.cs" />
+    <Compile Include="Lexing\Tokens\End.cs" />
+    <Compile Include="Lexing\Tokens\Error.cs" />
+    <Compile Include="Lexing\Tokens\Identifier.cs" />
+    <Compile Include="Lexing\Tokens\Keyword.cs" />
+    <Compile Include="Lexing\Tokens\Keywords\ClassDefinition.cs" />
+    <Compile Include="Lexing\Tokens\Keywords\Definition.cs" />
+    <Compile Include="Lexing\Tokens\Keywords\InterfaceDefinition.cs" />
+    <Compile Include="Lexing\Tokens\Keywords\TraitDefinition.cs" />
+    <Compile Include="Lexing\Tokens\Literals\BooleanLiteral.cs" />
+    <Compile Include="Lexing\Tokens\Literals\CharacterLiteral.cs" />
+    <Compile Include="Lexing\Tokens\Literals\IntegerLiteral.cs" />
+    <Compile Include="Lexing\Tokens\Literals\RealLiteral.cs" />
+    <Compile Include="Lexing\Tokens\Start.cs" />
+    <Compile Include="Lexing\Tokens\Token.cs" />
+    <Compile Include="Lexing\Transitions\BasicTransitions.cs" />
+    <Compile Include="Lexing\Transitions\Constants\Specifiers.cs" />
+    <Compile Include="Lexing\Transitions\Numbers\DecimalInteger.cs" />
+    <Compile Include="Lexing\Transitions\Numbers\HexadecimalInteger.cs" />
+    <Compile Include="Lexing\Transitions\Numbers\Number.cs" />
+    <Compile Include="Lexing\Transitions\Numbers\Real.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\LeftParenthesis.cs" />
+    <Compile Include="Lexing\Tokens\Symbol.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\RightParenthesis.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\LeftSquareBracket.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\RightSquareBracket.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\LeftBrace.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\RightBrace.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\LeftAngleBracket.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\RightAngleBracket.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Dot.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Comma.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\QuestionMark.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\ExclamationMark.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Colon.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\SemiColon.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Plus.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Ampersand.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Caret.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Asterisk.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Modulus.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Octothorp.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Hyphen.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Apostrophe.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\At.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Tilde.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\ForwardSlash.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Equals.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Pipe.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\BackSlash.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\DollarSign.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation\Underscore.cs" />
+    <Compile Include="Lexing\Tokens\Literals\StringLiteral.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -79,9 +127,10 @@
     <Folder Include="AST\" />
     <Folder Include="Compilation\" />
     <Folder Include="Parsing\" />
-    <Folder Include="Parsing\Lexing\" />
+    <Folder Include="Lexing\Tokens\Punctuation\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Lexing\Tokens\Literals\README" />
   </ItemGroup>
 </Project>
