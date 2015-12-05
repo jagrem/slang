@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using slang.Lexing.Transitions.Numbers;
 using slang.Lexing.Tokens;
+using slang.Lexing.Transitions;
 
 namespace slang.Lexing
 {
@@ -12,6 +13,8 @@ namespace slang.Lexing
             .Concat (Number.Transitions)
             .Concat (HexadecimalInteger.Transitions)
             .Concat (DecimalInteger.Transitions)
+            .Concat (Punctuation.Transitions)
+            .Concat (Keywords.Transitions)
             .ToDictionary (p => p.Key, p => p.Value);
         
         public static IEnumerable<Token> Analyze(string input)

@@ -1,0 +1,44 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="/Users/james/devel/slang/slang/bin/Debug/slang.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="slang.Lexing.Tokens.Keywords" #>
+<#@ import namespace="slang.Lexing" #>
+<#@ import namespace="slang.Lexing.Tools" #>
+using System.Collections.Generic;
+using System;
+using slang.Lexing.Extensions;
+using slang.Lexing.Tokens.Keywords;
+
+namespace slang.Lexing.Transitions
+{
+    static class Keywords
+    {
+        public static readonly Dictionary<State,Func<LexerState,LexerState>> Transitions = new Dictionary<State,Func<LexerState,LexerState>> 
+        {
+<# 
+
+var transitions = CodeGeneration
+    .GetTransitionsForKeywords("Zero", Keyword.AllKeywords, 0)
+    .Where(t => t.FromState != "Zero");
+
+var transitionGroups = transitions.GroupBy(t => t.FromState);
+foreach(var transitionGroup in transitionGroups) { #>
+            { 
+                State.<#= transitionGroup.Key #>,
+                s =>  { 
+                    switch(s.Value) {
+<#    foreach(var transition in transitionGroup) { #>
+                    case <# if(transition.Character > 0) { #>'<#= transition.Character #>'<# } else { #>(char)0<# } #>: <# if(transition is TerminalTransition ) { #>return s.Returns(new Keyword("<#= (transition as TerminalTransition).Token #>"))<# } else { #>return s.TransitionTo(State.<#= transition.ToState #>)<# } #>;
+<#    } #>
+                    default: return s.TransitionTo(State.Identifier);
+                    }
+                }
+            },
+<#
+} #>
+        };
+    }
+}

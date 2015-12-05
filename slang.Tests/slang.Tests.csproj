@@ -68,6 +68,8 @@
     <Compile Include="Lexing\Literals\CharacterLiteralTests.cs" />
     <Compile Include="Lexing\Literals\StringLiteralTests.cs" />
     <Compile Include="Lexing\Punctuation\PunctuationTests.cs" />
+    <Compile Include="Lexing\Keywords\KeywordTests.cs" />
+    <Compile Include="Lexing\CodeGenerationTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,6 +79,7 @@
     <Folder Include="IL\" />
     <Folder Include="Lexing\" />
     <Folder Include="Lexing\Punctuation\" />
+    <Folder Include="Lexing\Keywords\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\slang\slang.csproj">

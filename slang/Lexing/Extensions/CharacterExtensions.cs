@@ -52,6 +52,44 @@ namespace slang.Lexing.Extensions
             }
         }
 
+        public static bool IsPunctuation(this char c) {
+            switch (c) {
+            case '&':
+            case '\'':
+            case '*':
+            case '@':
+            case '\\':
+            case '^':
+            case ':':
+            case ',':
+            case '$':
+            case '.':
+            case '=':
+            case '!':
+            case '/':
+            case '-':
+            case '<':
+            case '{':
+            case '(':
+            case '[': 
+            case '%':
+            case '#':
+            case '|':
+            case '+':
+            case '?':
+            case '>':
+            case '}':
+            case ')':
+            case ']':
+            case ';':
+            case '~':
+            case '_':
+                return true;
+            default:
+                return false;
+            }
+        }
+
         public static bool IsLongSpecifier(this char c) {
             return c == 'l' || c == 'L';
         }

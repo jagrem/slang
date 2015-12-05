@@ -1,0 +1,80 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="/Users/james/devel/slang/slang/bin/Debug/slang.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="slang.Lexing.Tokens.Keywords" #>
+<#@ import namespace="slang.Lexing" #>
+<#@ import namespace="slang.Lexing.Tools" #>
+namespace slang.Lexing
+{
+    public enum State {
+        Zero,
+        Empty,
+        Error,
+
+        Identifier,
+
+<# 
+    var keywordStates = CodeGeneration.GetStatesForKeywords(Keyword.AllKeywords, 0);
+    foreach(var state in keywordStates) {
+#>
+        <#= state #>,
+<#
+    }
+#>
+
+        // numbers
+        S_number,
+        S_number_zero,
+        S_number_and_hexadecimal_specifier,
+        S_hexadecimal_number,
+        S_signed_exponent_and_number_with_specifier,
+        S_signed_exponent_and_number, 
+        S_number_with_signed_exponent,
+        S_number_with_exponent,
+        S_number_with_real_specifier,
+        S_number_with_integer_specifier,
+        S_number_with_unsigned_specifier,
+        S_number_with_unsigned_integer_specifier,
+        S_decimal_point_and_number,
+        S_number_and_decimal_point,
+
+        //
+
+        // punctuation
+        P_ampersand,
+        P_apostrophe,
+        P_asterisk,
+        P_at,
+        P_back_slash,
+        P_caret,
+        P_colon,
+        P_comma,
+        P_dollar_sign,
+        //P_dot,
+        P_equals,
+        P_exclamation_mark,
+        P_forward_slash,
+        P_hyphen,
+        P_left_angle_bracket,
+        P_left_brace,
+        P_left_parenthesis,
+        P_left_square_bracket,
+        P_modulus,
+        P_octothorpe,
+        P_pipe,
+        P_plus,
+        P_question_mark,
+        P_right_angle_bracket,
+        P_right_brace,
+        P_right_parenthesis,
+        P_right_square_bracket,
+        P_semicolon,
+        P_tilde,
+        P_underscore
+    }
+    
+}
+
