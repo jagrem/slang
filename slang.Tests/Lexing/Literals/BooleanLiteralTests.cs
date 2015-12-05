@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using System.Collections.Generic;
-using slang.Lexing.Tokens.Literals;
+using slang.Lexing.Tokens.Keywords;
 
 namespace slang.Tests.Lexing.Literals
 {
@@ -21,13 +21,8 @@ namespace slang.Tests.Lexing.Literals
 
         static IEnumerable<TestCaseData> GetLiterals()
         {
-            
-            yield return new TestCaseData ("true", typeof(BooleanLiteral), "true").SetName ("Given a lowercase 'true' When parsed Then a boolean literal is returned");
-            yield return new TestCaseData ("True", typeof(BooleanLiteral), "true").SetName ("Given capitalized 'true' When parsed Then a boolean literal is returned");
-            yield return new TestCaseData ("TRUE", typeof(BooleanLiteral), "true").SetName ("Given an all uppercase 'true' When parsed Then a boolean literal is returned");
-            yield return new TestCaseData ("false", typeof(BooleanLiteral), "false").SetName ("Given lowercase 'false' When parsed Then a boolean literal is returned");
-            yield return new TestCaseData ("False", typeof(BooleanLiteral), "false").SetName ("Given capitalized 'false' When parsed Then a boolean literal is returned");
-            yield return new TestCaseData ("FALSE", typeof(BooleanLiteral), "false").SetName ("Given an all uppercase 'false' When parsed Then a boolean literal is returned");
+            yield return new TestCaseData ("true", typeof(Keyword), "true").SetName ("Given a lowercase 'true' When parsed Then a boolean literal is returned");
+            yield return new TestCaseData ("false", typeof(Keyword), "false").SetName ("Given lowercase 'false' When parsed Then a boolean literal is returned");
         }
     }
 }
