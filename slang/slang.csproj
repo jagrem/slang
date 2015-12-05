@@ -123,6 +123,8 @@
       <DependentUpon>State.tt</DependentUpon>
     </Compile>
     <Compile Include="Lexing\Tools\CodeGeneration.cs" />
+    <Compile Include="Lexing\Transitions\TerminalTransition.cs" />
+    <Compile Include="Lexing\Transitions\Transition.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

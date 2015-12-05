@@ -55,14 +55,14 @@ namespace slang.Tests.Lexing
             var result = CodeGeneration.GetTransitionsForKeywords ("Zero", new[] { "ab", "abc" }).ToArray ();
 
             result.ShouldBeEquivalentTo (
-                new Transition[] { 
-                    new Transition { Character = 'a', FromState = "Zero", ToState = "M_a_ab_or_abc" },
-                    new Transition { Character = 'b', FromState = "M_a_ab_or_abc", ToState = "M_ab_ab_or_abc" },
-                    new TerminalTransition { Character = ' ', FromState = "M_ab_ab_or_abc", ToState = "Zero", Token = "ab" },
-                    new TerminalTransition { Character = (char)0, FromState = "M_ab_ab_or_abc", ToState = "Zero", Token = "ab" },
-                    new Transition { Character = 'c', FromState = "M_ab_ab_or_abc", ToState = "K_abc" },
-                    new TerminalTransition { Character = ' ', FromState = "K_abc", ToState = "Zero", Token = "abc" },
-                    new TerminalTransition { Character = (char)0, FromState = "K_abc", ToState = "Zero", Token = "abc" },
+                new[] { 
+                    new { Character = 'a', FromState = "Zero", ToState = "M_a_ab_or_abc", Token = (string)null },
+                    new { Character = 'b', FromState = "M_a_ab_or_abc", ToState = "M_ab_ab_or_abc", Token = (string)null },
+                    new { Character = ' ', FromState = "M_ab_ab_or_abc", ToState = "Zero", Token = "ab" },
+                    new { Character = (char)0, FromState = "M_ab_ab_or_abc", ToState = "Zero", Token = "ab" },
+                    new { Character = 'c', FromState = "M_ab_ab_or_abc", ToState = "K_abc", Token = (string)null },
+                    new { Character = ' ', FromState = "K_abc", ToState = "Zero", Token = "abc" },
+                    new { Character = (char)0, FromState = "K_abc", ToState = "Zero", Token = "abc" },
                 }, config => config.IncludingAllRuntimeProperties ());
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System;
+using slang.Lexing.Transitions;
 
 namespace slang.Lexing.Tools
 {
@@ -56,17 +57,6 @@ namespace slang.Lexing.Tools
 
             return transitions;
         }
-    }
-
-    public class Transition
-    {
-        public char Character { get; set; }
-        public string FromState { get; set; }
-        public string ToState { get; set; }
-    }
-
-    public class TerminalTransition : Transition {
-        public string Token { get; set; }
     }
 }
 
