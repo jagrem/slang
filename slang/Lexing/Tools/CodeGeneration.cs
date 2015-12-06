@@ -5,9 +5,9 @@ using slang.Lexing.Transitions;
 
 namespace slang.Lexing.Tools
 {
-    public static class CodeGeneration
+    static class CodeGeneration
     {
-        public static IEnumerable<string> GetStatesForKeywords(IEnumerable<string> keywords, int startingFrom = 0)
+        public static IEnumerable<string> GetStatesForKeywords()
         {
             return GetTransitionsForKeywords ()
                 .Where(t => t.ToState != "Zero")

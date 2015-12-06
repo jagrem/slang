@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
-using slang.Lexing.Transitions.Numbers;
 using slang.Lexing.Tokens;
 using slang.Lexing.Transitions;
 
@@ -9,13 +8,7 @@ namespace slang.Lexing
 {
     public static class Lexer
     {
-        static readonly Dictionary<State,Func<LexerState,LexerState>> transitions = Zero.Transitions
-            .Concat (Number.Transitions)
-            .Concat (HexadecimalInteger.Transitions)
-            .Concat (DecimalInteger.Transitions)
-            .Concat (slang.Lexing.Transitions.Punctuation.Transitions)
-            .Concat (Keywords.Transitions)
-            .ToDictionary (p => p.Key, p => p.Value);
+        static readonly Dictionary<State,Func<LexerState,LexerState>> transitions = Transition.GetTransitions();
         
         public static IEnumerable<Token> Analyze(string input)
         {

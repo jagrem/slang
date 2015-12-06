@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
 using System.Linq;
-using System.Collections.Generic;
 using slang.Lexing.Tools;
 
 namespace slang.Tests.Lexing
@@ -9,28 +8,6 @@ namespace slang.Tests.Lexing
     [TestFixture]
     public class CodeGenerationTests
     {
-        [Test]
-        public void Given_keywords_starting_with_different_letters_When_getting_states_Then_a_set_of_states_is_produced_for_each_keyword()
-        {
-            var keywords = new[] { "ab", "bc" };
-            var result = CodeGeneration.GetStatesForKeywords (keywords);
-            result.ShouldBeEquivalentTo (new[] { "K_a_ab", "K_ab", "K_b_bc", "K_bc" });
-        }
-
-        [Test]
-        public void Given_keywords_starting_with_the_same_letter_When_getting_states_Then_a_merged_state_is_produced()
-        {
-            var keywords = new[] { "abcd", "acde" };
-            var result = CodeGeneration.GetStatesForKeywords (keywords).ToArray();
-            result [0].Should ().Be ("M_a_abcd_or_acde");
-            result [1].Should ().Be ("K_ab_abcd");
-            result [2].Should ().Be ("K_abc_abcd");
-            result [3].Should ().Be ("K_abcd");
-            result [4].Should ().Be ("K_ac_acde");
-            result [5].Should ().Be ("K_acd_acde");
-            result [6].Should ().Be ("K_acde");
-        }
-
         [Test]
         public void Given_keywords_starting_with_different_letters_When_getting_transitions_Then_separate_transitions_are_produced_for_each_keyword()
         {

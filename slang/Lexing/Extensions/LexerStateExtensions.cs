@@ -15,7 +15,7 @@ namespace slang.Lexing.Extensions
         }
 
         public static LexerState ToError(this LexerState lexerState) {
-            return new LexerState { Token = Token.Empty, State = State.Error, Buffer = lexerState.Buffer + lexerState.Value, Value = lexerState.Value };
+            return new LexerState { Token = new Error("Received: " + lexerState.Buffer + lexerState.Value), State = State.Error, Buffer = lexerState.Buffer + lexerState.Value, Value = lexerState.Value };
         }
 
         public static LexerState Returns(this LexerState lexerState, Token token)

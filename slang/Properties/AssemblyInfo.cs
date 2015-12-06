@@ -2,6 +2,7 @@
 
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
+using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle ("slang")]
 [assembly: AssemblyDescription ("A Scala-like language for .NET")]
@@ -19,3 +20,4 @@
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
 
+[assembly: InternalsVisibleTo("slang.Tests")]
