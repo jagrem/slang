@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace slang.Lexing.Tokens
+namespace slang.Lexing.Tokens.Constants
 {
     public static class Punctuation
     {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using slang.Lexing.Extensions;
-using slang.Lexing.Tokens.Keywords;
 using slang.Lexing.Tokens;
 
 namespace slang.Lexing.Transitions

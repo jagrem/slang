@@ -4,14 +4,13 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="slang.Lexing.Tokens.Keywords" #>
+<#@ import namespace="slang.Lexing.Tokens" #>
 <#@ import namespace="slang.Lexing" #>
 <#@ import namespace="slang.Lexing.Tools" #>
 <#@ import namespace="slang.Lexing.Transitions" #>
 using System.Collections.Generic;
 using System;
 using slang.Lexing.Extensions;
-using slang.Lexing.Tokens.Keywords;
 using slang.Lexing.Tokens;
 
 namespace slang.Lexing.Transitions
@@ -23,7 +22,7 @@ namespace slang.Lexing.Transitions
 <# 
 
 var transitions = CodeGeneration
-    .GetTransitionsForKeywords("Zero", Keyword.AllKeywords, 0)
+    .GetTransitionsForKeywords()
     .Where(t => t.FromState != "Zero");
 
 var transitionGroups = transitions.GroupBy(t => t.FromState);

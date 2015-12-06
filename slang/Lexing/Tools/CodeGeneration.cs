@@ -9,15 +9,20 @@ namespace slang.Lexing.Tools
     {
         public static IEnumerable<string> GetStatesForKeywords(IEnumerable<string> keywords, int startingFrom = 0)
         {
-            return GetTransitionsForKeywords ("Zero", keywords, startingFrom)
+            return GetTransitionsForKeywords ()
                 .Where(t => t.ToState != "Zero")
                 .Select(t => t.ToState);
         }
 
-        public static IEnumerable<Transition> GetTransitionsForKeywords(string fromState, IEnumerable<string> keywords, int startingFrom = 0)
+        public static IEnumerable<Transition> GetTransitionsForKeywords()
+        {
+            return GetTransitionsForTerms ("Zero", slang.Lexing.Tokens.Constants.Keywords.AllKeywords.Select (t => t.Value));
+        }
+
+        public static IEnumerable<Transition> GetTransitionsForTerms(string fromState, IEnumerable<string> terms, int startingFrom = 0)
         {
             var transitions = new List<Transition> ();
-            var groups = keywords.GroupBy(k => new String(k.Take(startingFrom + 1).ToArray ()));
+            var groups = terms.GroupBy(k => new String(k.Take(startingFrom + 1).ToArray ()));
 
             foreach (var group in groups) {
 
@@ -28,7 +33,7 @@ namespace slang.Lexing.Tools
                 var charactersReceivedSoFar = group.Key;
                 transitions.AddRange (group.Where (keyword => keyword == charactersReceivedSoFar).SelectMany (keyword => GetTerminalTransitions (stateName, keyword)));
 
-                transitions.AddRange (GetTransitionsForKeywords (stateName, group.Where(k => k != charactersReceivedSoFar).ToList (), startingFrom + 1));
+                transitions.AddRange (GetTransitionsForTerms (stateName, group.Where(k => k != charactersReceivedSoFar).ToList (), startingFrom + 1));
             }
 
             return transitions;
@@ -52,7 +57,7 @@ namespace slang.Lexing.Tools
         }
 
         public static IEnumerable<Transition> GetTransitionsForPunctuation() {
-            return slang.Lexing.Tokens.Punctuation.GetAllPunctuation ()
+            return slang.Lexing.Tokens.Constants.Punctuation.GetAllPunctuation ()
                 .SelectMany (t => new[] {
                     new Transition { FromState = "Zero", ToState = "P_" + t.Name, Character = t.Value[0] },
                     new TerminalTransition { FromState = "P_" + t.Name, ToState = "Zero", Character = t.Value[0], Token = "Symbol"  },

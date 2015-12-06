@@ -89,7 +89,6 @@
     <Compile Include="Lexing\Transitions\Keywords.cs">
       <DependentUpon>Keywords.tt</DependentUpon>
     </Compile>
-    <Compile Include="Lexing\Tokens\Keywords\Keywords.cs" />
     <Compile Include="Lexing\State.cs">
       <DependentUpon>State.tt</DependentUpon>
     </Compile>
@@ -97,10 +96,12 @@
     <Compile Include="Lexing\Transitions\TerminalTransition.cs" />
     <Compile Include="Lexing\Transitions\Transition.cs" />
     <Compile Include="Lexing\Tokens\TokenInfo.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation.cs" />
     <Compile Include="Lexing\Transitions\Zero.cs">
       <DependentUpon>Zero.tt</DependentUpon>
     </Compile>
+    <Compile Include="Lexing\Tokens\Keyword.cs" />
+    <Compile Include="Lexing\Tokens\Constants\Keywords.cs" />
+    <Compile Include="Lexing\Tokens\Constants\Punctuation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -108,8 +109,8 @@
     <Folder Include="AST\" />
     <Folder Include="Compilation\" />
     <Folder Include="Parsing\" />
-    <Folder Include="Lexing\Tokens\Keywords\" />
     <Folder Include="Lexing\Tools\" />
+    <Folder Include="Lexing\Tokens\Constants\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

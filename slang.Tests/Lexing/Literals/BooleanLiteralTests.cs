@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using System.Collections.Generic;
-using slang.Lexing.Tokens.Keywords;
+using slang.Lexing.Tokens;
 
 namespace slang.Tests.Lexing.Literals
 {

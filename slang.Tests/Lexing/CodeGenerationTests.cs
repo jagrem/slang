@@ -34,7 +34,7 @@ namespace slang.Tests.Lexing
         [Test]
         public void Given_keywords_starting_with_different_letters_When_getting_transitions_Then_separate_transitions_are_produced_for_each_keyword()
         {
-            var result = CodeGeneration.GetTransitionsForKeywords ("Zero", new[] { "ab", "bc" }).ToArray ();
+            var result = CodeGeneration.GetTransitionsForTerms ("Zero", new[] { "ab", "bc" }).ToArray ();
 
             result.ShouldBeEquivalentTo (
                 new[] { 
@@ -52,7 +52,7 @@ namespace slang.Tests.Lexing
         [Test]
         public void Given_a_keyword_that_contains_another_keyword_When_getting_transitions_Then_the_correct_transitions_are_created()
         {
-            var result = CodeGeneration.GetTransitionsForKeywords ("Zero", new[] { "ab", "abc" }).ToArray ();
+            var result = CodeGeneration.GetTransitionsForTerms ("Zero", new[] { "ab", "abc" }).ToArray ();
 
             result.ShouldBeEquivalentTo (
                 new[] { 
@@ -69,7 +69,7 @@ namespace slang.Tests.Lexing
         [Test]
         public void Given_keywords_starting_wth_the_same_letter_When_getting_transitions_Then_the_correct_transitions_are_created()
         {
-            var result = CodeGeneration.GetTransitionsForKeywords ("Zero", new[] { "ab", "ac" }).ToArray ();
+            var result = CodeGeneration.GetTransitionsForTerms ("Zero", new[] { "ab", "ac" }).ToArray ();
 
             result.ShouldBeEquivalentTo (
                 new[] { 
