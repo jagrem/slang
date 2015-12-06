@@ -10,7 +10,7 @@ namespace slang.Lexing.Transitions
         public static readonly Dictionary<State,Func<LexerState,LexerState>> Transitions = new Dictionary<State,Func<LexerState,LexerState>> 
         {
               { State.P_ampersand, s => s.Returns(new Symbol("&")) },
-              { State.P_apostrophe, s => s.Returns(new Symbol("'")) },
+              { State.P_apostrophe, s => s.Returns(new Symbol("\'")) },
               { State.P_asterisk, s => s.Returns(new Symbol("*")) },
               { State.P_at, s => s.Returns(new Symbol("@")) },
               { State.P_back_slash, s => s.Returns(new Symbol("\\")) },

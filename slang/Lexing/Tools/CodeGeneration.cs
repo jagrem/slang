@@ -5,7 +5,7 @@ using slang.Lexing.Transitions;
 
 namespace slang.Lexing.Tools
 {
-    static class CodeGeneration
+    public static class CodeGeneration
     {
         public static IEnumerable<string> GetStatesForKeywords()
         {
@@ -17,6 +17,14 @@ namespace slang.Lexing.Tools
         public static IEnumerable<Transition> GetTransitionsForKeywords()
         {
             return GetTransitionsForTerms ("Zero", slang.Lexing.Tokens.Constants.Keywords.AllKeywords.Select (t => t.Value));
+        }
+
+        public static IEnumerable<Transition> GetTransitionsForPunctuation() {
+            return slang.Lexing.Tokens.Constants.Punctuation.GetAllPunctuation ()
+                .SelectMany (t => new[] {
+                    new Transition { FromState = "Zero", ToState = "P_" + t.Name, Character = t.Value[0] },
+                    new TerminalTransition { FromState = "P_" + t.Name, ToState = "Zero", Character = t.Value[0], Token = "Symbol"  },
+                });
         }
 
         public static IEnumerable<Transition> GetTransitionsForTerms(string fromState, IEnumerable<string> terms, int startingFrom = 0)
@@ -54,34 +62,6 @@ namespace slang.Lexing.Tools
                 new TerminalTransition { Token = keyword, FromState = stateName, ToState = "Zero", Character = ' ' },
                 new TerminalTransition { Token = keyword, FromState = stateName, ToState = "Zero", Character = (char)0 }
             };
-        }
-
-        public static IEnumerable<Transition> GetTransitionsForPunctuation() {
-            return slang.Lexing.Tokens.Constants.Punctuation.GetAllPunctuation ()
-                .SelectMany (t => new[] {
-                    new Transition { FromState = "Zero", ToState = "P_" + t.Name, Character = t.Value[0] },
-                    new TerminalTransition { FromState = "P_" + t.Name, ToState = "Zero", Character = t.Value[0], Token = "Symbol"  },
-                });
-        }
-
-        public static string GetCharacterAsQuotedCharacter(char c)
-        {
-            string value;
-
-            switch(c) {
-            case (char)0: return "(char)0";
-            case '\'':
-                value = "\\\'";
-                break;
-            case '\\':
-                value = "\\\\";
-                break;
-            default:
-                value = c.ToString ();
-                break;
-            }
-
-            return "'" + value + "'";
         }
     }
 }

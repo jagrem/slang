@@ -8,6 +8,7 @@
 <#@ import namespace="slang.Lexing" #>
 <#@ import namespace="slang.Lexing.Tools" #>
 <#@ import namespace="slang.Lexing.Transitions" #>
+<#@ import namespace="slang.Lexing.Extensions" #>
 using System.Collections.Generic;
 using System;
 using slang.Lexing.Extensions;
@@ -26,21 +27,14 @@ var transitions = CodeGeneration
     .Where(t => t.FromState != "Zero");
 
 var transitionGroups = transitions.GroupBy(t => t.FromState);
+
 foreach(var transitionGroup in transitionGroups) { #>
             { 
                 State.<#= transitionGroup.Key #>,
                 s =>  { 
                     switch(s.Value) {
 <#    foreach(var transition in transitionGroup) { #>
-                    case <# 
-            if(transition.Character > 0)
-            { 
-                #>'<#= transition.Character #>'<# 
-            } else { 
-                #>(char)0<#
-            }
-
-            #>: <#
+                    case <#= transition.Character.AsQuotedCharacter() #>: <#
 
             if(transition is TerminalTransition ) {
                 #>return s.Returns(new Keyword("<#= (transition as TerminalTransition).Token #>"))<#

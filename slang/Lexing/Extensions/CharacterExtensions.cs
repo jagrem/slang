@@ -1,6 +1,6 @@
 namespace slang.Lexing.Extensions
 {
-    static class CharacterExtensions
+    public static class CharacterExtensions
     {
         public static bool IsDigit(this char c)
         {
@@ -160,6 +160,27 @@ namespace slang.Lexing.Extensions
             return c == '+' || c == '-';
         }
 
+        public static string AsQuotedCharacter(this char c)
+        {
+            return "'" + GetEscapedCharacter (c) + "'";
+        }
+
+        public static string AsQuotedString (this char c)
+        {
+            return "\"" + GetEscapedCharacter(c) + "\"";
+        }
+
+        static string GetEscapedCharacter(char c) {
+            switch(c) {
+            case (char)0: return "(char)0";
+            case '\'':
+                return "\\\'";
+            case '\\':
+                return "\\\\";
+            default:
+                return c.ToString ();
+            }
+        }
     }
     
 }

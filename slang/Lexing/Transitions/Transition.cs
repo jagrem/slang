@@ -5,7 +5,7 @@ using System;
 
 namespace slang.Lexing.Transitions
 {
-    class Transition
+    public class Transition
     {
         public char Character { get; set; }
         public string FromState { get; set; }

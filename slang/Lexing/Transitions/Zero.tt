@@ -5,10 +5,10 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="slang.Lexing.Tools" #>
-<#@ import namespace="slang.Lexing.Tokens.Keywords" #>
+<#@ import namespace="slang.Lexing.Extensions" #>
 <#
     var transitions = CodeGeneration
-        .GetTransitionsForKeywords("Zero", Keyword.AllKeywords, 0)
+        .GetTransitionsForKeywords()
         .Where(t => t.FromState == "Zero")
         .Concat(CodeGeneration
              .GetTransitionsForPunctuation()
@@ -44,7 +44,7 @@ namespace slang.Lexing.Transitions
     foreach(var transition in transitions) {
 
 #>
-                    case <#= CodeGeneration.GetCharacterAsQuotedCharacter(transition.Character)  #>: return s.TransitionTo(State.<#= transition.ToState #>);
+                    case <#= transition.Character.AsQuotedCharacter()  #>: return s.TransitionTo(State.<#= transition.ToState #>);
 <#
     }
 #>

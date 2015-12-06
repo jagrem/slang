@@ -6,8 +6,8 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="slang.Lexing.Tools" #>
 <#@ import namespace="slang.Lexing.Transitions" #>
+<#@ import namespace="slang.Lexing.Extensions" #>
 <#
-
   var transitions = CodeGeneration
       .GetTransitionsForPunctuation()
       .Where(t => t.FromState != "Zero");
@@ -32,26 +32,10 @@ namespace slang.Lexing.Transitions
                     var terminal = transition as TerminalTransition;
 
                     if(terminal == null){
-
-                        #>s.Value == <#
-
-                        if(transition.Character > 0) {
-                            if(transition.Character == '\'') {
-                                character = "\\'";
-                            }
-                            else {
-                                character = transition.Character.ToString();
-                            }
-
-                            #>'<#=character#>'<#;
-                        } else {
-                            #>(char)0<#
-                        }
-
-                        #> ? s.TransitionTo(State.<#= transition.ToState #>) : s.TransitionTo(State.Zero)<# 
+                        #>s.Value == <#= transition.Character.AsQuotedCharacter() #> ? s.TransitionTo(State.<#= transition.ToState #>) : s.TransitionTo(State.Zero)<# 
                     }
                     else {
-                        #>s.Returns(new <#= terminal.Token #>("<#= terminal.Character == '\\' ? "\\\\" : terminal.Character.ToString()  #>"))<#
+                        #>s.Returns(new <#= terminal.Token #>(<#= terminal.Character.AsQuotedString()  #>))<#
                     }
 #> },
 <#
