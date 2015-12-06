@@ -1,0 +1,60 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="/Users/james/devel/slang/slang/bin/Debug/slang.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="slang.Lexing.Tools" #>
+<#@ import namespace="slang.Lexing.Tokens.Keywords" #>
+<#
+    var transitions = CodeGeneration
+        .GetTransitionsForKeywords("Zero", Keyword.AllKeywords, 0)
+        .Where(t => t.FromState == "Zero")
+        .Concat(CodeGeneration
+             .GetTransitionsForPunctuation()
+             .Where(t => t.FromState == "Zero"));
+#>
+using System.Collections.Generic;
+using System;
+using slang.Lexing.Tokens;
+using slang.Lexing.Extensions;
+
+namespace slang.Lexing.Transitions
+{
+    static class Zero
+    {
+        public static readonly Dictionary<State,Func<LexerState,LexerState>> Transitions = new Dictionary<State,Func<LexerState,LexerState>> {
+            { 
+                State.Zero,
+                s => {
+                    switch(s.Value) {
+                    case (char)0: return new LexerState {  Token = new End(), State = State.Empty };
+                    case '.': return new LexerState { Token = Token.Empty, State = State.S_number_and_decimal_point, Buffer = "0." };
+                    case '0': return s.TransitionTo(State.S_number_zero);
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': return s.TransitionTo (State.S_number);
+<#
+    foreach(var transition in transitions) {
+
+#>
+                    case <#= CodeGeneration.GetCharacterAsQuotedCharacter(transition.Character)  #>: return s.TransitionTo(State.<#= transition.ToState #>);
+<#
+    }
+#>
+                    default: return s.TransitionTo(State.Zero);
+                    }
+                }
+            },
+        };
+    }
+}
+
+
+

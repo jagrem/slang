@@ -1,0 +1,62 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="/Users/james/devel/slang/slang/bin/Debug/slang.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="slang.Lexing.Tools" #>
+<#@ import namespace="slang.Lexing.Transitions" #>
+<#
+
+  var transitions = CodeGeneration
+      .GetTransitionsForPunctuation()
+      .Where(t => t.FromState != "Zero");
+
+#>using System;
+using System.Collections.Generic;
+using slang.Lexing.Extensions;
+using slang.Lexing.Tokens;
+ 
+namespace slang.Lexing.Transitions
+{
+    static class Punctuation
+    {
+        public static readonly Dictionary<State,Func<LexerState,LexerState>> Transitions = new Dictionary<State,Func<LexerState,LexerState>> 
+        {
+<#
+                foreach(var transition in transitions) {
+
+#>              { State.<#= transition.FromState #>, s => <#
+                    var character = string.Empty;
+
+                    var terminal = transition as TerminalTransition;
+
+                    if(terminal == null){
+
+                        #>s.Value == <#
+
+                        if(transition.Character > 0) {
+                            if(transition.Character == '\'') {
+                                character = "\\'";
+                            }
+                            else {
+                                character = transition.Character.ToString();
+                            }
+
+                            #>'<#=character#>'<#;
+                        } else {
+                            #>(char)0<#
+                        }
+
+                        #> ? s.TransitionTo(State.<#= transition.ToState #>) : s.TransitionTo(State.Zero)<# 
+                    }
+                    else {
+                        #>s.Returns(new <#= terminal.Token #>("<#= terminal.Character == '\\' ? "\\\\" : terminal.Character.ToString()  #>"))<#
+                    }
+#> },
+<#
+                }
+#>
+        };
+    }
+}

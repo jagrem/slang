@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System;
 using slang.Lexing.Extensions;
 using slang.Lexing.Tokens.Keywords;
+using slang.Lexing.Tokens;
 
 namespace slang.Lexing.Transitions
 {
@@ -32,8 +33,34 @@ foreach(var transitionGroup in transitionGroups) { #>
                 s =>  { 
                     switch(s.Value) {
 <#    foreach(var transition in transitionGroup) { #>
-                    case <# if(transition.Character > 0) { #>'<#= transition.Character #>'<# } else { #>(char)0<# } #>: <# if(transition is TerminalTransition ) { #>return s.Returns(new Keyword("<#= (transition as TerminalTransition).Token #>"))<# } else { #>return s.TransitionTo(State.<#= transition.ToState #>)<# } #>;
-<#    } #>
+                    case <# 
+            if(transition.Character > 0)
+            { 
+                #>'<#= transition.Character #>'<# 
+            } else { 
+                #>(char)0<#
+            }
+
+            #>: <#
+
+            if(transition is TerminalTransition ) {
+                #>return s.Returns(new Keyword("<#= (transition as TerminalTransition).Token #>"))<#
+            }
+            else
+            {
+                #>return s.TransitionTo(State.<#= transition.ToState #>)<#
+            } #>;
+<#    
+    }
+
+    if(!transitionGroup.Any(t => t is TerminalTransition)) {
+#>
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
+<#
+    }
+
+#>
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }

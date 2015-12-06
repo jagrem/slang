@@ -9,53 +9,74 @@ namespace slang.Lexing.Tools
     {
         public static IEnumerable<string> GetStatesForKeywords(IEnumerable<string> keywords, int startingFrom = 0)
         {
-            return GetTransitionsForKeywords ("Zero", keywords, startingFrom).Where(t => t.ToState != "Zero").Select(t => t.ToState);
+            return GetTransitionsForKeywords ("Zero", keywords, startingFrom)
+                .Where(t => t.ToState != "Zero")
+                .Select(t => t.ToState);
         }
 
         public static IEnumerable<Transition> GetTransitionsForKeywords(string fromState, IEnumerable<string> keywords, int startingFrom = 0)
         {
             var transitions = new List<Transition> ();
-
             var groups = keywords.GroupBy(k => new String(k.Take(startingFrom + 1).ToArray ()));
 
             foreach (var group in groups) {
 
-                string statePrefix = group.Count() > 1 ? "M" : "K";
-                var charactersReceivedSoFar = group.Key;
+                string stateName = GetStateName (group);
                 var characterThatTriggersTransition = group.Key.Last ();
-                var keywordName = group.Count () > 1 ? string.Join ("_or_", group) : group.First ();
-                var isFinalState = charactersReceivedSoFar == keywordName;
-                var stateName = isFinalState ? statePrefix + "_" + keywordName : statePrefix + "_" + charactersReceivedSoFar + "_" + keywordName;
+                transitions.Add (new Transition { FromState = fromState, ToState = stateName, Character = characterThatTriggersTransition });
 
-                transitions.Add (
-                    new Transition {
-                        FromState = fromState,
-                        ToState = stateName,
-                        Character = characterThatTriggersTransition,
-                    });
-
-                foreach(var keyword in group) {
-                    if(charactersReceivedSoFar == keyword)
-                        transitions.AddRange (new [] {
-                            new TerminalTransition {
-                                Token = keyword,
-                                FromState = stateName,
-                                ToState = "Zero",
-                                Character = ' '
-                            },
-                            new TerminalTransition {
-                                Token = keyword,
-                                FromState = stateName,
-                                ToState = "Zero",
-                                Character = (char)0
-                            }
-                        });
-                }
+                var charactersReceivedSoFar = group.Key;
+                transitions.AddRange (group.Where (keyword => keyword == charactersReceivedSoFar).SelectMany (keyword => GetTerminalTransitions (stateName, keyword)));
 
                 transitions.AddRange (GetTransitionsForKeywords (stateName, group.Where(k => k != charactersReceivedSoFar).ToList (), startingFrom + 1));
             }
 
             return transitions;
+        }
+
+        static string GetStateName (IGrouping<string, string> group)
+        {
+            string statePrefix = group.Count () > 1 ? "M" : "K";
+            var charactersReceivedSoFar = group.Key;
+            var keywordName = group.Count () > 1 ? string.Join ("_or_", group) : group.First ();
+            var isFinalState = charactersReceivedSoFar == keywordName;
+            return isFinalState ? statePrefix + "_" + keywordName : statePrefix + "_" + charactersReceivedSoFar + "_" + keywordName;
+        }
+
+        static TerminalTransition[] GetTerminalTransitions (string stateName, string keyword)
+        {
+            return new[] {
+                new TerminalTransition { Token = keyword, FromState = stateName, ToState = "Zero", Character = ' ' },
+                new TerminalTransition { Token = keyword, FromState = stateName, ToState = "Zero", Character = (char)0 }
+            };
+        }
+
+        public static IEnumerable<Transition> GetTransitionsForPunctuation() {
+            return slang.Lexing.Tokens.Punctuation.GetAllPunctuation ()
+                .SelectMany (t => new[] {
+                    new Transition { FromState = "Zero", ToState = "P_" + t.Name, Character = t.Value[0] },
+                    new TerminalTransition { FromState = "P_" + t.Name, ToState = "Zero", Character = t.Value[0], Token = "Symbol"  },
+                });
+        }
+
+        public static string GetCharacterAsQuotedCharacter(char c)
+        {
+            string value;
+
+            switch(c) {
+            case (char)0: return "(char)0";
+            case '\'':
+                value = "\\\'";
+                break;
+            case '\\':
+                value = "\\\\";
+                break;
+            default:
+                value = c.ToString ();
+                break;
+            }
+
+            return "'" + value + "'";
         }
     }
 }

@@ -9,11 +9,11 @@ namespace slang.Lexing
 {
     public static class Lexer
     {
-        static readonly Dictionary<State,Func<LexerState,LexerState>> transitions = BasicTransitions.Transitions
+        static readonly Dictionary<State,Func<LexerState,LexerState>> transitions = Zero.Transitions
             .Concat (Number.Transitions)
             .Concat (HexadecimalInteger.Transitions)
             .Concat (DecimalInteger.Transitions)
-            .Concat (Punctuation.Transitions)
+            .Concat (slang.Lexing.Transitions.Punctuation.Transitions)
             .Concat (Keywords.Transitions)
             .ToDictionary (p => p.Key, p => p.Value);
         

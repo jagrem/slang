@@ -2,6 +2,7 @@
 using System;
 using slang.Lexing.Extensions;
 using slang.Lexing.Tokens.Keywords;
+using slang.Lexing.Tokens;
 
 namespace slang.Lexing.Transitions
 {
@@ -16,6 +17,8 @@ namespace slang.Lexing.Transitions
                     case 'b': return s.TransitionTo(State.K_ab_abstract);
                     case 's': return s.TransitionTo(State.M_as_as_or_async);
                     case 'w': return s.TransitionTo(State.K_aw_await);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -25,6 +28,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_abs_abstract);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -34,6 +39,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_abst_abstract);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -43,6 +50,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_abstr_abstract);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -52,6 +61,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_abstra_abstract);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -61,6 +72,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_abstrac_abstract);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -70,6 +83,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_abstract);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -100,6 +115,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_asyn_async);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -109,6 +126,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_async);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -128,6 +147,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_awa_await);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -137,6 +158,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_awai_await);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -146,6 +169,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_await);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -168,6 +193,8 @@ namespace slang.Lexing.Transitions
                     case 'o': return s.TransitionTo(State.K_bo_bool);
                     case 'r': return s.TransitionTo(State.K_br_break);
                     case 'y': return s.TransitionTo(State.K_by_byte);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -177,6 +204,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_bas_base);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -186,6 +215,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_base);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -205,6 +236,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'o': return s.TransitionTo(State.K_boo_bool);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -214,6 +247,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_bool);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -233,6 +268,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_bre_break);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -242,6 +279,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_brea_break);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -251,6 +290,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'k': return s.TransitionTo(State.K_break);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -270,6 +311,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_byt_byte);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -279,6 +322,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_byte);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -301,6 +346,8 @@ namespace slang.Lexing.Transitions
                     case 'h': return s.TransitionTo(State.M_ch_char_or_checked);
                     case 'l': return s.TransitionTo(State.K_cl_class);
                     case 'o': return s.TransitionTo(State.K_co_continue);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -311,6 +358,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_cas_case);
                     case 't': return s.TransitionTo(State.K_cat_catch);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -320,6 +369,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_case);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -339,6 +390,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_catc_catch);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -348,6 +401,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'h': return s.TransitionTo(State.K_catch);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -368,6 +423,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_cha_char);
                     case 'e': return s.TransitionTo(State.K_che_checked);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -377,6 +434,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_char);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -396,6 +455,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_chec_checked);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -405,6 +466,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'k': return s.TransitionTo(State.K_check_checked);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -414,6 +477,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_checke_checked);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -423,6 +488,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_checked);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -442,6 +509,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_cla_class);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -451,6 +520,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_clas_class);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -460,6 +531,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_class);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -479,6 +552,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_con_continue);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -488,6 +563,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_cont_continue);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -497,6 +574,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_conti_continue);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -506,6 +585,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_contin_continue);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -515,6 +596,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'u': return s.TransitionTo(State.K_continu_continue);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -524,6 +607,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_continue);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -545,6 +630,8 @@ namespace slang.Lexing.Transitions
                     case 'e': return s.TransitionTo(State.M_de_decimal_or_def_or_default);
                     case 'y': return s.TransitionTo(State.K_dy_dynamic);
                     case 'o': return s.TransitionTo(State.M_do_do_or_double);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -555,6 +642,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_dec_decimal);
                     case 'f': return s.TransitionTo(State.M_def_def_or_default);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -564,6 +653,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_deci_decimal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -573,6 +664,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'm': return s.TransitionTo(State.K_decim_decimal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -582,6 +675,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_decima_decimal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -591,6 +686,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_decimal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -621,6 +718,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'u': return s.TransitionTo(State.K_defau_default);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -630,6 +729,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_defaul_default);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -639,6 +740,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_default);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -658,6 +761,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_dyn_dynamic);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -667,6 +772,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_dyna_dynamic);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -676,6 +783,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'm': return s.TransitionTo(State.K_dynam_dynamic);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -685,6 +794,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_dynami_dynamic);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -694,6 +805,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_dynamic);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -724,6 +837,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'b': return s.TransitionTo(State.K_doub_double);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -733,6 +848,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_doubl_double);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -742,6 +859,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_double);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -763,6 +882,8 @@ namespace slang.Lexing.Transitions
                     case 'l': return s.TransitionTo(State.K_el_else);
                     case 'n': return s.TransitionTo(State.K_en_enum);
                     case 'x': return s.TransitionTo(State.K_ex_extends);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -772,6 +893,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_els_else);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -781,6 +904,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_else);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -800,6 +925,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'u': return s.TransitionTo(State.K_enu_enum);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -809,6 +936,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'm': return s.TransitionTo(State.K_enum);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -828,6 +957,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_ext_extends);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -837,6 +968,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_exte_extends);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -846,6 +979,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_exten_extends);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -855,6 +990,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_extend_extends);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -864,6 +1001,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_extends);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -886,6 +1025,8 @@ namespace slang.Lexing.Transitions
                     case 'i': return s.TransitionTo(State.M_fi_finally_or_fixed);
                     case 'l': return s.TransitionTo(State.K_fl_float);
                     case 'o': return s.TransitionTo(State.K_fo_for);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -895,6 +1036,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_fal_false);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -904,6 +1047,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_fals_false);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -913,6 +1058,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_false);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -933,6 +1080,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_fin_finally);
                     case 'x': return s.TransitionTo(State.K_fix_fixed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -942,6 +1091,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_fina_finally);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -951,6 +1102,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_final_finally);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -960,6 +1113,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_finall_finally);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -969,6 +1124,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'y': return s.TransitionTo(State.K_finally);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -988,6 +1145,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_fixe_fixed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -997,6 +1156,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_fixed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1016,6 +1177,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'o': return s.TransitionTo(State.K_flo_float);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1025,6 +1188,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_floa_float);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1034,6 +1199,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_float);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1053,6 +1220,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_for);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1075,6 +1244,8 @@ namespace slang.Lexing.Transitions
                     case 'm': return s.TransitionTo(State.M_im_implicit_or_import);
                     case 'n': return s.TransitionTo(State.M_in_in_or_int_or_internal);
                     case 's': return s.TransitionTo(State.K_is);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1094,6 +1265,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'p': return s.TransitionTo(State.M_imp_implicit_or_import);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1104,6 +1277,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_impl_implicit);
                     case 'o': return s.TransitionTo(State.K_impo_import);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1113,6 +1288,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_impli_implicit);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1122,6 +1299,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_implic_implicit);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1131,6 +1310,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_implici_implicit);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1140,6 +1321,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_implicit);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1159,6 +1342,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_impor_import);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1168,6 +1353,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_import);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1209,6 +1396,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_inter_internal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1218,6 +1407,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_intern_internal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1227,6 +1418,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_interna_internal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1236,6 +1429,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_internal);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1265,6 +1460,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'o': return s.TransitionTo(State.M_lo_lock_or_long);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1275,6 +1472,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_loc_lock);
                     case 'n': return s.TransitionTo(State.K_lon_long);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1284,6 +1483,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'k': return s.TransitionTo(State.K_lock);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1303,6 +1504,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'g': return s.TransitionTo(State.K_long);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1322,6 +1525,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_ma_match);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1331,6 +1536,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_mat_match);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1340,6 +1547,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_matc_match);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1349,6 +1558,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'h': return s.TransitionTo(State.K_match);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1368,6 +1579,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_ne_new);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1377,6 +1590,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'w': return s.TransitionTo(State.K_new);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1398,6 +1613,8 @@ namespace slang.Lexing.Transitions
                     case 'b': return s.TransitionTo(State.K_ob_object);
                     case 'p': return s.TransitionTo(State.K_op_operator);
                     case 'v': return s.TransitionTo(State.K_ov_override);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1407,6 +1624,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'j': return s.TransitionTo(State.K_obj_object);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1416,6 +1635,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_obje_object);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1425,6 +1646,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_objec_object);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1434,6 +1657,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_object);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1453,6 +1678,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_ope_operator);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1462,6 +1689,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_oper_operator);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1471,6 +1700,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_opera_operator);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1480,6 +1711,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_operat_operator);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1489,6 +1722,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'o': return s.TransitionTo(State.K_operato_operator);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1498,6 +1733,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_operator);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1517,6 +1754,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_ove_override);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1526,6 +1765,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_over_override);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1535,6 +1776,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_overr_override);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1544,6 +1787,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_overri_override);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1553,6 +1798,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_overrid_override);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1562,6 +1809,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_override);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1582,6 +1831,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_pa_package);
                     case 'r': return s.TransitionTo(State.M_pr_private_or_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1591,6 +1842,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_pac_package);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1600,6 +1853,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'k': return s.TransitionTo(State.K_pack_package);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1609,6 +1864,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_packa_package);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1618,6 +1875,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'g': return s.TransitionTo(State.K_packag_package);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1627,6 +1886,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_package);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1647,6 +1908,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_pri_private);
                     case 'o': return s.TransitionTo(State.K_pro_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1656,6 +1919,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'v': return s.TransitionTo(State.K_priv_private);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1665,6 +1930,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_priva_private);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1674,6 +1941,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_privat_private);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1683,6 +1952,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_private);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1702,6 +1973,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_prot_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1711,6 +1984,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_prote_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1720,6 +1995,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'c': return s.TransitionTo(State.K_protec_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1729,6 +2006,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_protect_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1738,6 +2017,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_protecte_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1747,6 +2028,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_protected);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1766,6 +2049,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.M_re_readonly_or_return);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1776,6 +2061,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_rea_readonly);
                     case 't': return s.TransitionTo(State.K_ret_return);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1785,6 +2072,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_read_readonly);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1794,6 +2083,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'o': return s.TransitionTo(State.K_reado_readonly);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1803,6 +2094,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_readon_readonly);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1812,6 +2105,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_readonl_readonly);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1821,6 +2116,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'y': return s.TransitionTo(State.K_readonly);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1840,6 +2137,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'u': return s.TransitionTo(State.K_retu_return);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1849,6 +2148,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'r': return s.TransitionTo(State.K_retur_return);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1858,6 +2159,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'n': return s.TransitionTo(State.K_return);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1877,6 +2180,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_se_sealed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1886,6 +2191,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.K_sea_sealed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1895,6 +2202,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_seal_sealed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1904,6 +2213,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_seale_sealed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1913,6 +2224,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_sealed);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1934,6 +2247,8 @@ namespace slang.Lexing.Transitions
                     case 'h': return s.TransitionTo(State.M_th_this_or_throw);
                     case 'r': return s.TransitionTo(State.M_tr_trait_or_true_or_try);
                     case 'y': return s.TransitionTo(State.K_ty_type);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1944,6 +2259,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_thi_this);
                     case 'r': return s.TransitionTo(State.K_thr_throw);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1953,6 +2270,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 's': return s.TransitionTo(State.K_this);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1972,6 +2291,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'o': return s.TransitionTo(State.K_thro_throw);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -1981,6 +2302,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'w': return s.TransitionTo(State.K_throw);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2002,6 +2325,8 @@ namespace slang.Lexing.Transitions
                     case 'a': return s.TransitionTo(State.K_tra_trait);
                     case 'u': return s.TransitionTo(State.K_tru_true);
                     case 'y': return s.TransitionTo(State.K_try);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2011,6 +2336,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_trai_trait);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2020,6 +2347,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_trait);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2039,6 +2368,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_true);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2068,6 +2399,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'p': return s.TransitionTo(State.K_typ_type);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2077,6 +2410,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_type);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2096,6 +2431,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'a': return s.TransitionTo(State.M_va_val_or_var);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2106,6 +2443,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_val);
                     case 'r': return s.TransitionTo(State.K_var);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2136,6 +2475,8 @@ namespace slang.Lexing.Transitions
                     switch(s.Value) {
                     case 'h': return s.TransitionTo(State.K_wh_while);
                     case 'i': return s.TransitionTo(State.K_wi_with);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2145,6 +2486,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_whi_while);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2154,6 +2497,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_whil_while);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2163,6 +2508,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_while);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2182,6 +2529,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 't': return s.TransitionTo(State.K_wit_with);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2191,6 +2540,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'h': return s.TransitionTo(State.K_with);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2210,6 +2561,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'i': return s.TransitionTo(State.K_yi_yield);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2219,6 +2572,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'e': return s.TransitionTo(State.K_yie_yield);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2228,6 +2583,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'l': return s.TransitionTo(State.K_yiel_yield);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }
@@ -2237,6 +2594,8 @@ namespace slang.Lexing.Transitions
                 s =>  { 
                     switch(s.Value) {
                     case 'd': return s.TransitionTo(State.K_yield);
+                    case ' ': return s.Returns(new Identifier(s.Buffer));
+                    case (char)0: return s.Returns(new Identifier(s.Buffer));
                     default: return s.TransitionTo(State.Identifier);
                     }
                 }

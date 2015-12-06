@@ -76,45 +76,16 @@
     <Compile Include="Lexing\Tokens\Literals\RealLiteral.cs" />
     <Compile Include="Lexing\Tokens\Start.cs" />
     <Compile Include="Lexing\Tokens\Token.cs" />
-    <Compile Include="Lexing\Transitions\BasicTransitions.cs" />
     <Compile Include="Lexing\Transitions\Constants\Specifiers.cs" />
     <Compile Include="Lexing\Transitions\Numbers\DecimalInteger.cs" />
     <Compile Include="Lexing\Transitions\Numbers\HexadecimalInteger.cs" />
     <Compile Include="Lexing\Transitions\Numbers\Number.cs" />
     <Compile Include="Lexing\Transitions\Numbers\Real.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\LeftParenthesis.cs" />
     <Compile Include="Lexing\Tokens\Symbol.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\RightParenthesis.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\LeftSquareBracket.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\RightSquareBracket.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\LeftBrace.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\RightBrace.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\LeftAngleBracket.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\RightAngleBracket.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Dot.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Comma.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\QuestionMark.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\ExclamationMark.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Colon.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\SemiColon.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Plus.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Ampersand.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Caret.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Asterisk.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Modulus.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Hyphen.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Apostrophe.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\At.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Tilde.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\ForwardSlash.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Equals.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Pipe.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\BackSlash.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\DollarSign.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Underscore.cs" />
     <Compile Include="Lexing\Tokens\Literals\StringLiteral.cs" />
-    <Compile Include="Lexing\Transitions\Punctuation.cs" />
-    <Compile Include="Lexing\Tokens\Punctuation\Octothorpe.cs" />
+    <Compile Include="Lexing\Transitions\Punctuation.cs">
+      <DependentUpon>Punctuation.tt</DependentUpon>
+    </Compile>
     <Compile Include="Lexing\Transitions\Keywords.cs">
       <DependentUpon>Keywords.tt</DependentUpon>
     </Compile>
@@ -125,6 +96,11 @@
     <Compile Include="Lexing\Tools\CodeGeneration.cs" />
     <Compile Include="Lexing\Transitions\TerminalTransition.cs" />
     <Compile Include="Lexing\Transitions\Transition.cs" />
+    <Compile Include="Lexing\Tokens\TokenInfo.cs" />
+    <Compile Include="Lexing\Tokens\Punctuation.cs" />
+    <Compile Include="Lexing\Transitions\Zero.cs">
+      <DependentUpon>Zero.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -132,7 +108,6 @@
     <Folder Include="AST\" />
     <Folder Include="Compilation\" />
     <Folder Include="Parsing\" />
-    <Folder Include="Lexing\Tokens\Punctuation\" />
     <Folder Include="Lexing\Tokens\Keywords\" />
     <Folder Include="Lexing\Tools\" />
   </ItemGroup>
@@ -146,6 +121,14 @@
     <None Include="Lexing\Transitions\Keywords.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Keywords.cs</LastGenOutput>
+    </None>
+    <None Include="Lexing\Transitions\Punctuation.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Punctuation.cs</LastGenOutput>
+    </None>
+    <None Include="Lexing\Transitions\Zero.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Zero.cs</LastGenOutput>
     </None>
   </ItemGroup>
 </Project>
