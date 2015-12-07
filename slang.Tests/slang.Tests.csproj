@@ -29,31 +29,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions.Core">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.3.3.0\lib\net45\FluentAssertions.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Ploeh.AutoFixture.Idioms">
-      <HintPath>..\packages\AutoFixture.Idioms.3.30.4\lib\net40\Ploeh.AutoFixture.Idioms.dll</HintPath>
+    <Reference Include="FluentAssertions.Core">
+      <HintPath>..\packages\FluentAssertions.4.1.0\lib\net45\FluentAssertions.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.Albedo">
-      <HintPath>..\packages\Albedo.1.0.2\lib\net35\Ploeh.Albedo.dll</HintPath>
-    </Reference>
-    <Reference Include="Irony">
-      <HintPath>..\packages\Irony.0.9.0\lib\net45\Irony.dll</HintPath>
-    </Reference>
-    <Reference Include="Irony.Interpreter">
-      <HintPath>..\packages\Irony.Interpreter.0.9.0\lib\net45\Irony.Interpreter.dll</HintPath>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.4.1.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture">
-      <HintPath>..\packages\AutoFixture.3.30.5\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+      <HintPath>..\packages\AutoFixture.3.37.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony">
+      <HintPath>..\packages\Irony.0.9.1\lib\net40\Irony.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony.Interpreter">
+      <HintPath>..\packages\Irony.Interpreter.0.9.1\lib\net40\Irony.Interpreter.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
