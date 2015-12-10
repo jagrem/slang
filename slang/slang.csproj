@@ -102,6 +102,8 @@
     <Compile Include="Lexing\Tokens\Keyword.cs" />
     <Compile Include="Lexing\Tokens\Constants\Keywords.cs" />
     <Compile Include="Lexing\Tokens\Constants\Punctuation.cs" />
+    <Compile Include="Lexing\Transitions\Text\Characters.cs" />
+    <Compile Include="Lexing\Transitions\Text\Strings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -111,6 +113,7 @@
     <Folder Include="Parsing\" />
     <Folder Include="Lexing\Tools\" />
     <Folder Include="Lexing\Tokens\Constants\" />
+    <Folder Include="Lexing\Transitions\Text\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lexing\Tokens\Literals\README" />

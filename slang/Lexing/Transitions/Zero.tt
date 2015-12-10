@@ -40,6 +40,7 @@ namespace slang.Lexing.Transitions
                     case '7':
                     case '8':
                     case '9': return s.TransitionTo (State.S_number);
+                    case '\'': return s.TransitionTo (State.T_single_opening_quote);
 <#
     foreach(var transition in transitions) {
 

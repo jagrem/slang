@@ -22,7 +22,6 @@ namespace slang.Tests.Lexing
         static IEnumerable<TestCaseData> GetPunctuation()
         {
             yield return new TestCaseData ("&", typeof(Symbol), "&");
-            yield return new TestCaseData ("\'", typeof(Symbol), "\'");
             yield return new TestCaseData ("*", typeof(Symbol), "*");
             yield return new TestCaseData ("@", typeof(Symbol), "@");
             yield return new TestCaseData ("\\", typeof(Symbol), "\\");

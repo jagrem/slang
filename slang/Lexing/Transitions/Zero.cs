@@ -24,6 +24,7 @@ namespace slang.Lexing.Transitions
                     case '7':
                     case '8':
                     case '9': return s.TransitionTo (State.S_number);
+                    case '\'': return s.TransitionTo (State.C_single_opening_quote);
                     case 'a': return s.TransitionTo(State.M_a_abstract_or_as_or_async_or_await);
                     case 'b': return s.TransitionTo(State.M_b_base_or_bool_or_break_or_byte);
                     case 'c': return s.TransitionTo(State.M_c_case_or_catch_or_char_or_checked_or_class_or_continue);
@@ -43,7 +44,6 @@ namespace slang.Lexing.Transitions
                     case 'w': return s.TransitionTo(State.M_w_while_or_with);
                     case 'y': return s.TransitionTo(State.K_y_yield);
                     case '&': return s.TransitionTo(State.P_ampersand);
-                    case '\'': return s.TransitionTo(State.P_apostrophe);
                     case '*': return s.TransitionTo(State.P_asterisk);
                     case '@': return s.TransitionTo(State.P_at);
                     case '\\': return s.TransitionTo(State.P_back_slash);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using slang.Lexing.Transitions.Numbers;
 using System;
+using slang.Lexing.Transitions.Text;
 
 namespace slang.Lexing.Transitions
 {
@@ -20,6 +21,8 @@ namespace slang.Lexing.Transitions
                 .Concat (Real.Transitions)
                 .Concat (Punctuation.Transitions)
                 .Concat (Keywords.Transitions)
+                .Concat (Characters.Transitions)
+                .Concat (Strings.Transitions)
                 .ToDictionary (t => t.Key, t => t.Value);
         }
     }

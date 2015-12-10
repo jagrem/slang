@@ -262,7 +262,29 @@
         S_decimal_point_and_number,
         S_number_and_decimal_point,
 
-        //
+        // text
+        C_single_opening_quote,
+        C_single_closing_quote,
+        C_escape,
+        C_escape_hexadecimal_character,
+        C_hexadecimal_character_1,
+        C_hexadecimal_character_2,
+        C_hexadecimal_character_3,
+        C_hexadecimal_character_4,
+        C_escape_unicode_character_short,
+        C_unicode_character_short_1,
+        C_unicode_character_short_2,
+        C_unicode_character_short_3,
+        C_unicode_character_short_4,
+        C_escape_unicode_character_long,
+        C_unicode_character_long_1,
+        C_unicode_character_long_2,
+        C_unicode_character_long_3,
+        C_unicode_character_long_4,
+        C_unicode_character_long_5,
+        C_unicode_character_long_6,
+        C_unicode_character_long_7,
+        C_unicode_character_long_8,
 
         // punctuation
         P_ampersand,

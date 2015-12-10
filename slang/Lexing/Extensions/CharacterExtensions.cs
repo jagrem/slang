@@ -152,7 +152,12 @@ namespace slang.Lexing.Extensions
 
         public static bool IsEnd(this char c)
         {
-            return c == 0 || c == ' ';
+            return c.IsEndOfFile () || c == ' ';
+        }
+
+        public static bool IsEndOfFile(this char c)
+        {
+            return c == 0;
         }
 
         public static bool IsSign(this char c)

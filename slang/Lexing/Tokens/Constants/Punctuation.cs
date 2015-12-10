@@ -8,7 +8,6 @@ namespace slang.Lexing.Tokens.Constants
         {
             return new[] {
                 new TokenInfo("ampersand", "&"),
-                new TokenInfo("apostrophe", "'"),
                 new TokenInfo("asterisk", "*"),
                 new TokenInfo("at", "@"),
                 new TokenInfo("back_slash", "\\"),
