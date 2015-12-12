@@ -58,7 +58,6 @@
     <Compile Include="ParserTests.cs" />
     <Compile Include="..\slang.Tests\ParserTestCaseDataExtensions.cs" />
     <Compile Include="Lexing\Literals\BooleanLiteralTests.cs" />
-    <Compile Include="Lexing\Literals\IdentifierTests.cs" />
     <Compile Include="Lexing\Literals\IntegerLiteralTests.cs" />
     <Compile Include="Lexing\Literals\RealLiteralTests.cs" />
     <Compile Include="Lexing\Literals\CharacterLiteralTests.cs" />
@@ -66,6 +65,7 @@
     <Compile Include="Lexing\Punctuation\PunctuationTests.cs" />
     <Compile Include="Lexing\Keywords\KeywordTests.cs" />
     <Compile Include="Lexing\CodeGenerationTests.cs" />
+    <Compile Include="Lexing\IdentifierTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
