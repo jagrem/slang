@@ -11,11 +11,10 @@ namespace slang.Tests.Lexing.Literals
     public class StringLiteralTests
     {
         [TestCaseSource("GetLiterals")]
-        public void Given_a_literal_as_a_string_When_parsed_Then_a_literal_type_is_returned(string input, Type expectedType)
+        public void Given_a_literal_as_a_string_When_parsed_Then_a_literal_type_is_returned(string input)
         {
             var result = Lexer.Analyze (input).ToArray ();
             result.ShouldBeEquivalentTo (new[] { new { Value = "$" }, new { Value = input }, new { Value = "EOF" } });
-            result[1].Should ().BeOfType(expectedType);
         }
 
         static IEnumerable<TestCaseData> GetLiterals()
