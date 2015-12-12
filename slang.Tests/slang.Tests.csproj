@@ -62,10 +62,10 @@
     <Compile Include="Lexing\Literals\RealLiteralTests.cs" />
     <Compile Include="Lexing\Literals\CharacterLiteralTests.cs" />
     <Compile Include="Lexing\Literals\StringLiteralTests.cs" />
-    <Compile Include="Lexing\Punctuation\PunctuationTests.cs" />
     <Compile Include="Lexing\CodeGenerationTests.cs" />
     <Compile Include="Lexing\IdentifierTests.cs" />
     <Compile Include="Lexing\KeywordTests.cs" />
+    <Compile Include="Lexing\PunctuationTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,7 +77,6 @@
   <ItemGroup>
     <Folder Include="IL\" />
     <Folder Include="Lexing\" />
-    <Folder Include="Lexing\Punctuation\" />
   </ItemGroup>
 >>>>>>> fad5b5a... Simplify keyword tests
   <ItemGroup>
