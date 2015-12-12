@@ -262,7 +262,7 @@
         S_decimal_point_and_number,
         S_number_and_decimal_point,
 
-        // text
+        // characters
         C_single_opening_quote,
         C_single_closing_quote,
         C_escape,
