@@ -3,7 +3,7 @@ using FluentAssertions;
 using System.Linq;
 using slang.Lexing.Tools;
 
-namespace slang.Tests.Lexing
+namespace slang.Tests.Lexing.Tools
 {
     [TestFixture]
     public class CodeGenerationTests
