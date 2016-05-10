@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -63,15 +63,23 @@
     <Compile Include="Lexing\Literals\CharacterLiteralTests.cs" />
     <Compile Include="Lexing\Literals\StringLiteralTests.cs" />
     <Compile Include="Lexing\Punctuation\PunctuationTests.cs" />
-    <Compile Include="Lexing\Keywords\KeywordTests.cs" />
     <Compile Include="Lexing\CodeGenerationTests.cs" />
     <Compile Include="Lexing\IdentifierTests.cs" />
+    <Compile Include="Lexing\KeywordTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup />
+=======
+  <ItemGroup>
+    <Folder Include="IL\" />
+    <Folder Include="Lexing\" />
+    <Folder Include="Lexing\Punctuation\" />
+  </ItemGroup>
+>>>>>>> fad5b5a... Simplify keyword tests
   <ItemGroup>
     <ProjectReference Include="..\slang\slang.csproj">
       <Project>{50E93145-0804-4F2F-8E12-74978D4FE25F}</Project>
