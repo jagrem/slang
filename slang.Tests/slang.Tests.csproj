@@ -51,6 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="IL\" />
+    <Folder Include="Lexing\" />
+    <Folder Include="Lexing\Tools\" />
     <Compile Include="Lexing\Rules\Rule.cs" />
     <Compile Include="Lexing\Rules\RuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,15 +74,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-<<<<<<< HEAD
-  <ItemGroup />
-=======
-  <ItemGroup>
-    <Folder Include="IL\" />
-    <Folder Include="Lexing\" />
-    <Folder Include="Lexing\Tools\" />
-  </ItemGroup>
->>>>>>> fad5b5a... Simplify keyword tests
   <ItemGroup>
     <ProjectReference Include="..\slang\slang.csproj">
       <Project>{50E93145-0804-4F2F-8E12-74978D4FE25F}</Project>
