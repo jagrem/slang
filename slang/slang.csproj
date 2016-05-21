@@ -110,6 +110,10 @@
     <Compile Include="Lexing\Rules\OrRule.cs" />
     <Compile Include="Lexing\Rules\AndRule.cs" />
     <Compile Include="Lexing\Rules\LexicalNode.cs" />
+    <Compile Include="Lexing\Rules\StartNode.cs" />
+    <Compile Include="Lexing\Rules\LexicalTransition.cs" />
+    <Compile Include="Lexing\Rules\EndNode.cs" />
+    <Compile Include="Lexing\Rules\LexicalTreeBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

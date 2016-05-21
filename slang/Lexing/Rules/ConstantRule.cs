@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace slang.Lexing.Rules
+﻿namespace slang.Lexing.Rules
 {
     public class ConstantRule : Rule
     {
@@ -10,12 +8,6 @@ namespace slang.Lexing.Rules
         {
             Value = value;
         }
-
-        public override IEnumerable<LexicalNode> GetNodeList ()
-        {
-            return new [] { new LexicalNode () };
-        }
     }
-
 }
 

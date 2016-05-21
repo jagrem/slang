@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace slang.Lexing.Rules
+﻿namespace slang.Lexing.Rules
 {
     class OrRule : Rule
     {
@@ -12,13 +9,6 @@ namespace slang.Lexing.Rules
         {
             Right = right;
             Left = left;
-        }
-
-        public override IEnumerable<LexicalNode> GetNodeList ()
-        {
-            var left = Left.GetNodeList ();
-            var right = Right.GetNodeList ();
-            return left.Concat (right);
         }
     }
 }
