@@ -1,5 +1,4 @@
-﻿using System;
-namespace slang.Lexing.Rules
+﻿namespace slang.Lexing.Trees.Nodes
 {
     public class EndNode : LexicalNode
     {

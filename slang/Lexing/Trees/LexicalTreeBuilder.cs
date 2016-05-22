@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using slang.Lexing.Rules;
+using slang.Lexing.Trees.Nodes;
 
-namespace slang.Lexing.Rules
+namespace slang.Lexing.Trees
 {
     public static class LexicalTreeBuilder
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace slang.Lexing.Rules
+namespace slang.Lexing.Trees.Nodes
 {
     public class LexicalTransitions : Dictionary<char,LexicalNode>
     {
