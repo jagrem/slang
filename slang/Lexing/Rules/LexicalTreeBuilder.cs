@@ -44,7 +44,7 @@ namespace slang.Lexing.Rules
 
             foreach (var p in parents) {
                 if (!p.Transitions.ContainsKey (value)) {
-                    p.Transitions.Add (value, new LexicalTransition (value, node));
+                    p.Transitions.Add (value, node);
                 }
             }
 
@@ -65,10 +65,10 @@ namespace slang.Lexing.Rules
             }
 
             return node.Transitions.SelectMany (n => {
-                if (!n.Value.Target.Transitions.Any ()) {
-                    return new [] { n.Value.Target };
+                if (!n.Value.Transitions.Any ()) {
+                    return new [] { n.Value };
                 } else {
-                    return GetLeafNodes (n.Value.Target);
+                    return GetLeafNodes (n.Value);
                 }
             });
         }

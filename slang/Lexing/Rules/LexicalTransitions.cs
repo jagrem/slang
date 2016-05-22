@@ -2,7 +2,7 @@
 
 namespace slang.Lexing.Rules
 {
-    public class LexicalTransitions : Dictionary<char,LexicalTransition>
+    public class LexicalTransitions : Dictionary<char,LexicalNode>
     {
     }
 }
