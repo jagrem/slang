@@ -1,16 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace slang.Lexing.Rules
+﻿namespace slang.Lexing.Rules
 {
     public class LexicalNode
     {
-        public IList<LexicalNode> Children { get; set; }
+        public LexicalTransitions Transitions { get; set; }
 
-        public IList<LexicalTransition> Transitions { get; set; }
-        public LexicalNode (IList<LexicalNode> children = null)
+        public LexicalNode ()
         {
-            Children = children ?? new List<LexicalNode> ();
-            Transitions = new List<LexicalTransition> ();
+            Transitions = new LexicalTransitions ();
         }
     }
 }

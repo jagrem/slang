@@ -114,6 +114,7 @@
     <Compile Include="Lexing\Rules\LexicalTransition.cs" />
     <Compile Include="Lexing\Rules\EndNode.cs" />
     <Compile Include="Lexing\Rules\LexicalTreeBuilder.cs" />
+    <Compile Include="Lexing\Rules\LexicalTransitions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

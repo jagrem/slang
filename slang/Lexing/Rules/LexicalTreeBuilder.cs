@@ -8,18 +8,23 @@ namespace slang.Lexing.Rules
         public static LexicalNode Build (Rule rule)
         {
             var start = new StartNode ();
-            GetTreeForRule (rule, new [] { start });
+            BuildTreeForRule (rule, new [] { start });
             return start;
         }
 
-        static LexicalNode GetTreeForRule (Rule rule, IEnumerable<LexicalNode> parents)
+        static LexicalNode BuildTreeForRule(Rule rule, LexicalNode parent)
+        {
+            return BuildTreeForRule (rule, new [] { parent });
+        }
+
+        static LexicalNode BuildTreeForRule (Rule rule, IEnumerable<LexicalNode> parents)
         {
             if (rule is OrRule) {
-                return GetTreeForOrRule (rule as OrRule, parents.First ());
+                return GetTreeForOrRule (rule as OrRule, parents.Single ());
             }
 
             if (rule is AndRule) {
-                return GetTreeForAndRule (rule as AndRule, parents.First ());
+                return GetTreeForAndRule (rule as AndRule, parents.Single ());
             }
 
             return GetTreeForConstantRule (rule as ConstantRule, parents);
@@ -27,8 +32,9 @@ namespace slang.Lexing.Rules
 
         static LexicalNode GetTreeForAndRule (AndRule rule, LexicalNode parent)
         {
-            GetTreeForRule (rule.Right, GetLeafNodes (GetTreeForRule (rule.Left, new [] { parent })));
-            return parent;
+            var left = BuildTreeForRule (rule.Left, parent);
+            BuildTreeForRule (rule.Right, GetLeafNodes (left));
+            return left;
         }
 
         static LexicalNode GetTreeForConstantRule (ConstantRule rule, IEnumerable<LexicalNode> parents)
@@ -37,7 +43,9 @@ namespace slang.Lexing.Rules
             var value = rule.Value;
 
             foreach (var p in parents) {
-                p.Transitions.Add (new LexicalTransition (value, node));
+                if (!p.Transitions.ContainsKey (value)) {
+                    p.Transitions.Add (value, new LexicalTransition (value, node));
+                }
             }
 
             return node;
@@ -45,8 +53,8 @@ namespace slang.Lexing.Rules
 
         static LexicalNode GetTreeForOrRule (OrRule rule, LexicalNode parent)
         {
-            GetTreeForRule (rule.Left, new [] { parent });
-            GetTreeForRule (rule.Right, new [] { parent });
+            BuildTreeForRule (rule.Left, parent);
+            BuildTreeForRule (rule.Right, parent);
             return parent;
         }
 
@@ -57,15 +65,13 @@ namespace slang.Lexing.Rules
             }
 
             return node.Transitions.SelectMany (n => {
-                if (!n.Target.Transitions.Any ()) {
-                    return new [] { n.Target };
+                if (!n.Value.Target.Transitions.Any ()) {
+                    return new [] { n.Value.Target };
                 } else {
-                    return GetLeafNodes (n.Target);
+                    return GetLeafNodes (n.Value.Target);
                 }
             });
         }
-
-
     }
 }
 
