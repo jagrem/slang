@@ -27,7 +27,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (new StartNode () {
                 Transitions = new LexicalTransitions {
-                    { 'a', new EndNode () }
+                    { 'a', new TerminalNode () }
                 }
             });
         }
@@ -51,7 +51,7 @@ namespace slang.Tests.Lexing.Rules
             result.ShouldBeEquivalentTo (
                 new StartNode {
                     Transitions = new LexicalTransitions {
-                        { 'a', new LexicalNode { Transitions = new LexicalTransitions { { 'b', new EndNode() } } } }
+                        { 'a', new LexicalNode { Transitions = new LexicalTransitions { { 'b', new TerminalNode() } } } }
                     }
                 });
         }
@@ -74,8 +74,8 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    {'a', new LexicalNode { Transitions = new LexicalTransitions { { 'c', new EndNode () } } } },
-                    {'b', new LexicalNode { Transitions = new LexicalTransitions { { 'c', new EndNode () } } } }
+                    {'a', new LexicalNode { Transitions = new LexicalTransitions { { 'c', new TerminalNode () } } } },
+                    {'b', new LexicalNode { Transitions = new LexicalTransitions { { 'c', new TerminalNode () } } } }
                 }
             });
         }
@@ -102,8 +102,8 @@ namespace slang.Tests.Lexing.Rules
                         'a',
                         new LexicalNode {
                             Transitions = new LexicalTransitions {
-                                { 'b', new EndNode() },
-                                { 'c', new EndNode() }
+                                { 'b', new TerminalNode() },
+                                { 'c', new TerminalNode() }
                             }
                         }
                     }
@@ -137,7 +137,7 @@ namespace slang.Tests.Lexing.Rules
                                     'b',
                                     new LexicalNode {
                                         Transitions = new LexicalTransitions {
-                                            { 'c', new LexicalNode () }
+                                            { 'c', new TerminalNode () }
                                         }
                                     }
                                 }
@@ -203,8 +203,8 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    { 'a', new EndNode() },
-                    { 'd', new EndNode() }
+                    { 'a', new TerminalNode() },
+                    { 'd', new TerminalNode() }
                 }
             });
         }
@@ -223,8 +223,8 @@ namespace slang.Tests.Lexing.Rules
             var result = LexicalTreeBuilder.Build (rule);
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    { 'a', new LexicalNode { Transitions = new LexicalTransitions { { 'b', new EndNode() } } } },
-                    { 'c', new EndNode() }
+                    { 'a', new LexicalNode { Transitions = new LexicalTransitions { { 'b', new TerminalNode() } } } },
+                    { 'c', new TerminalNode() }
                 }
             });
         }
@@ -247,8 +247,8 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    {'a', new EndNode() },
-                    {'b', new LexicalNode { Transitions = new LexicalTransitions { {'c', new EndNode() } } } }
+                    {'a', new TerminalNode() },
+                    {'b', new LexicalNode { Transitions = new LexicalTransitions { {'c', new TerminalNode() } } } }
                 }
             });
         }
@@ -271,9 +271,9 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    { 'a',new EndNode() },
-                    { 'b',new EndNode() },
-                    { 'c',new EndNode() }
+                    { 'a',new TerminalNode() },
+                    { 'b',new TerminalNode() },
+                    { 'c',new TerminalNode() }
                 }
             });
         }
@@ -296,9 +296,9 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    { 'a', new EndNode() },
-                    { 'b', new EndNode() },
-                    { 'c', new EndNode() }
+                    { 'a', new TerminalNode() },
+                    { 'b', new TerminalNode() },
+                    { 'c', new TerminalNode() }
                 }
             });
         }
@@ -321,8 +321,31 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    { 'a', new EndNode () },
-                    { 'b', new EndNode () }
+                    { 'a', new TerminalNode () },
+                    { 'b', new TerminalNode () }
+                }
+            });
+        }
+
+        [Test]
+        public void Given_a_constant_and_an_optional_constant_When_converting_to_a_tree_Then_the_tree_two_terminal_nodes()
+        {
+            var rule = new AndRule ('a', new OptionRule ('b'));
+
+            var result = LexicalTreeBuilder.Build (rule);
+
+            result.ShouldBeEquivalentTo (new StartNode {
+                Transitions = new LexicalTransitions {
+                    {
+                        'a',
+                        new TerminalNode
+                        {
+                            Transitions = new LexicalTransitions
+                            {
+                                { 'b', new TerminalNode () }
+                            }
+                        }
+                    }
                 }
             });
         }
@@ -355,8 +378,8 @@ namespace slang.Tests.Lexing.Rules
                         'a',
                         new LexicalNode {
                             Transitions = new LexicalTransitions {
-                                { 'b', new EndNode() },
-                                { 'c', new EndNode() }
+                                { 'b', new TerminalNode() },
+                                { 'c', new TerminalNode() }
                             }
                         }
                     },
@@ -364,8 +387,8 @@ namespace slang.Tests.Lexing.Rules
                         'e',
                         new LexicalNode {
                             Transitions = new LexicalTransitions {
-                                { 'f', new LexicalNode { Transitions = new LexicalTransitions { { 'd', new EndNode() } } } },
-                                { 'g', new LexicalNode { Transitions = new LexicalTransitions { { 'd', new EndNode() } } } }
+                                { 'f', new LexicalNode { Transitions = new LexicalTransitions { { 'd', new TerminalNode() } } } },
+                                { 'g', new LexicalNode { Transitions = new LexicalTransitions { { 'd', new TerminalNode() } } } }
                             }
                         }
                     }

@@ -111,9 +111,10 @@
     <Compile Include="Lexing\Rules\AndRule.cs" />
     <Compile Include="Lexing\Trees\LexicalTreeBuilder.cs" />
     <Compile Include="Lexing\Trees\Nodes\LexicalNode.cs" />
-    <Compile Include="Lexing\Trees\Nodes\EndNode.cs" />
+    <Compile Include="Lexing\Trees\Nodes\TerminalNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\StartNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\LexicalTransitions.cs" />
+    <Compile Include="Lexing\Rules\OptionRule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
