@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using slang.Lexing.Rules;
+using slang.Lexing.Rules.Core;
+using slang.Lexing.Rules.Extensions;
 using slang.Lexing.Trees.Nodes;
 
 namespace slang.Lexing.Trees

@@ -1,4 +1,6 @@
-﻿namespace slang.Lexing.Rules
+﻿using slang.Lexing.Rules.Core;
+
+namespace slang.Lexing.Rules.Extensions
 {
     public class OptionRule : Rule
     {

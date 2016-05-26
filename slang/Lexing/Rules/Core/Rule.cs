@@ -1,4 +1,4 @@
-﻿namespace slang.Lexing.Rules
+﻿namespace slang.Lexing.Rules.Core
 {
     public abstract class Rule
     {

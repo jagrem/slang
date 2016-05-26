@@ -105,16 +105,18 @@
     <Compile Include="Lexing\Transitions\Text\Characters.cs" />
     <Compile Include="Lexing\Transitions\Text\Strings.cs" />
     <Compile Include="Lexing\Transitions\Identifiers.cs" />
-    <Compile Include="Lexing\Rules\Rule.cs" />
-    <Compile Include="Lexing\Rules\ConstantRule.cs" />
-    <Compile Include="Lexing\Rules\OrRule.cs" />
-    <Compile Include="Lexing\Rules\AndRule.cs" />
     <Compile Include="Lexing\Trees\LexicalTreeBuilder.cs" />
     <Compile Include="Lexing\Trees\Nodes\LexicalNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\TerminalNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\StartNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\LexicalTransitions.cs" />
-    <Compile Include="Lexing\Rules\OptionRule.cs" />
+    <Compile Include="Lexing\Rules\Core\AndRule.cs" />
+    <Compile Include="Lexing\Rules\Core\ConstantRule.cs" />
+    <Compile Include="Lexing\Rules\Core\EmptyRule.cs" />
+    <Compile Include="Lexing\Rules\Core\OrRule.cs" />
+    <Compile Include="Lexing\Rules\Core\RepeatRule.cs" />
+    <Compile Include="Lexing\Rules\Extensions\OptionRule.cs" />
+    <Compile Include="Lexing\Rules\Core\Rule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -128,6 +130,8 @@
     <Folder Include="Lexing\Rules\" />
     <Folder Include="Lexing\Trees\" />
     <Folder Include="Lexing\Trees\Nodes\" />
+    <Folder Include="Lexing\Rules\Core\" />
+    <Folder Include="Lexing\Rules\Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lexing\Tokens\Literals\README" />

@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
-using slang.Lexing.Rules;
 using slang.Lexing.Trees;
 using slang.Lexing.Trees.Nodes;
+using slang.Lexing.Rules.Core;
+using slang.Lexing.Rules.Extensions;
 
 namespace slang.Tests.Lexing.Rules
 {

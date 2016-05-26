@@ -1,11 +1,11 @@
-﻿namespace slang.Lexing.Rules
+﻿namespace slang.Lexing.Rules.Core
 {
-    class OrRule : Rule
+    public class AndRule : Rule
     {
         public Rule Left { get; set; }
         public Rule Right { get; set; }
 
-        public OrRule (Rule left, Rule right)
+        public AndRule (Rule left, Rule right)
         {
             Right = right;
             Left = left;

@@ -1,4 +1,4 @@
-﻿namespace slang.Lexing.Rules
+﻿namespace slang.Lexing.Rules.Core
 {
     public class ConstantRule : Rule
     {
