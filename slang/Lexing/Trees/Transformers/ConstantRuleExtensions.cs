@@ -7,9 +7,9 @@ namespace slang.Lexing.Trees.Transformers
 {
     public static class ConstantRuleExtensions
     {
-        public static LexicalNode Transform (this Constant rule, IEnumerable<LexicalNode> parents)
+        public static Node Transform (this Constant rule, IEnumerable<Node> parents)
         {
-            var node = new LexicalNode ();
+            var node = new Node ();
             var value = rule.Value;
             parents
                 .Where (parent => parent.Transitions.ContainsKey (value))

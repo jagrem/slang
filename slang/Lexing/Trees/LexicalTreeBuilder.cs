@@ -6,7 +6,7 @@ namespace slang.Lexing.Trees
 {
     public static class LexicalTreeBuilder
     {
-        public static LexicalNode Build (Rule rule)
+        public static Node Build (Rule rule)
         {
             var start = new StartNode ();
             rule.Transform (new [] { start });

@@ -8,12 +8,12 @@ namespace slang.Lexing.Trees.Transformers
 {
     public static class RuleExtensions
     {
-        public static LexicalNode Transform (this Rule rule, LexicalNode parent)
+        public static Node Transform (this Rule rule, Node parent)
         {
             return rule.Transform (new [] { parent });
         }
 
-        public static LexicalNode Transform (this Rule rule, IEnumerable<LexicalNode> parents)
+        public static Node Transform (this Rule rule, IEnumerable<Node> parents)
         {
             if (rule is IComplexRule) {
                 // Transform into less complex parts

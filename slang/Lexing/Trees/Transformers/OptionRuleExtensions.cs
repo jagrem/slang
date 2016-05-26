@@ -5,7 +5,7 @@ namespace slang.Lexing.Trees.Transformers
 {
     public static class OptionRuleExtensions
     {
-        public static LexicalNode Transform (this Option rule, LexicalNode parent)
+        public static Node Transform (this Option rule, Node parent)
         {
             var option = rule.Value.Transform (parent);
             return option;

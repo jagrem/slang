@@ -5,7 +5,7 @@ namespace slang.Lexing.Trees.Transformers
 {
     public static class OrRuleExtensions
     {
-        public static LexicalNode Transform (this Or rule, LexicalNode parent)
+        public static Node Transform (this Or rule, Node parent)
         {
             rule.Left.Transform (parent);
             rule.Right.Transform (parent);

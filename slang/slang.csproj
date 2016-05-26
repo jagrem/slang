@@ -106,10 +106,10 @@
     <Compile Include="Lexing\Transitions\Text\Strings.cs" />
     <Compile Include="Lexing\Transitions\Identifiers.cs" />
     <Compile Include="Lexing\Trees\LexicalTreeBuilder.cs" />
-    <Compile Include="Lexing\Trees\Nodes\LexicalNode.cs" />
-    <Compile Include="Lexing\Trees\Nodes\TerminalNode.cs" />
+    <Compile Include="Lexing\Trees\Nodes\Node.cs" />
+    <Compile Include="Lexing\Trees\Nodes\Terminal.cs" />
     <Compile Include="Lexing\Trees\Nodes\StartNode.cs" />
-    <Compile Include="Lexing\Trees\Nodes\LexicalTransitions.cs" />
+    <Compile Include="Lexing\Trees\Nodes\Transitions.cs" />
     <Compile Include="Lexing\Rules\Core\And.cs" />
     <Compile Include="Lexing\Rules\Core\Constant.cs" />
     <Compile Include="Lexing\Rules\Core\Empty.cs" />
