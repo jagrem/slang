@@ -26,7 +26,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode () {
+            result.ShouldBeEquivalentTo (new Node () {
                 Transitions = new Transitions {
                     { 'a', new Terminal () }
                 }
@@ -50,7 +50,7 @@ namespace slang.Tests.Lexing.Rules
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
             result.ShouldBeEquivalentTo (
-                new StartNode {
+                new Node {
                     Transitions = new Transitions {
                         { 'a', new Node { Transitions = new Transitions { { 'b', new Terminal() } } } }
                     }
@@ -73,7 +73,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     {'a', new Node { Transitions = new Transitions { { 'c', new Terminal () } } } },
                     {'b', new Node { Transitions = new Transitions { { 'c', new Terminal () } } } }
@@ -97,7 +97,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     {
                         'a',
@@ -128,7 +128,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     {
                         'a',
@@ -165,7 +165,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     {
                         'a',
@@ -202,7 +202,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'a', new Terminal() },
                     { 'd', new Terminal() }
@@ -222,7 +222,7 @@ namespace slang.Tests.Lexing.Rules
             // Act
             //-------------------------------------------------------------------------------------------------------------------
             var result = LexicalTreeBuilder.Build (rule);
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'a', new Node { Transitions = new Transitions { { 'b', new Terminal() } } } },
                     { 'c', new Terminal() }
@@ -246,7 +246,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     {'a', new Terminal() },
                     {'b', new Node { Transitions = new Transitions { {'c', new Terminal() } } } }
@@ -270,7 +270,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'a',new Terminal() },
                     { 'b',new Terminal() },
@@ -295,7 +295,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'a', new Terminal() },
                     { 'b', new Terminal() },
@@ -320,7 +320,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'a', new Terminal () },
                     { 'b', new Terminal () }
@@ -335,7 +335,7 @@ namespace slang.Tests.Lexing.Rules
 
             var result = LexicalTreeBuilder.Build (rule);
 
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'a',new Terminal{Transitions = new Transitions { { 'b', new Terminal () } } } }
                 }
@@ -349,7 +349,7 @@ namespace slang.Tests.Lexing.Rules
 
             var result = LexicalTreeBuilder.Build (rule);
 
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'b', new Node { Transitions = new Transitions { { 'a', new Terminal() } } } },
                     { 'a', new Terminal() }
@@ -364,7 +364,7 @@ namespace slang.Tests.Lexing.Rules
 
             var result = LexicalTreeBuilder.Build (rule);
 
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     { 'a',new Terminal{Transitions = new Transitions { { 'b', new Terminal () } } } }
                 }
@@ -393,7 +393,7 @@ namespace slang.Tests.Lexing.Rules
             //-------------------------------------------------------------------------------------------------------------------
             // Assert
             //-------------------------------------------------------------------------------------------------------------------
-            result.ShouldBeEquivalentTo (new StartNode {
+            result.ShouldBeEquivalentTo (new Node {
                 Transitions = new Transitions {
                     {
                         'a',

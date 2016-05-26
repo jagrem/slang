@@ -8,7 +8,7 @@ namespace slang.Lexing.Trees
     {
         public static Node Build (Rule rule)
         {
-            var start = new StartNode ();
+            var start = new Node ();
             rule.Transform (new [] { start });
             return start;
         }
