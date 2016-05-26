@@ -336,16 +336,36 @@ namespace slang.Tests.Lexing.Rules
 
             result.ShouldBeEquivalentTo (new StartNode {
                 Transitions = new LexicalTransitions {
-                    {
-                        'a',
-                        new TerminalNode
-                        {
-                            Transitions = new LexicalTransitions
-                            {
-                                { 'b', new TerminalNode () }
-                            }
-                        }
-                    }
+                    { 'a',new TerminalNode{Transitions = new LexicalTransitions { { 'b', new TerminalNode () } } } }
+                }
+            });
+        }
+
+        [Test]
+        public void Given_an_optional_constant_and_a_constant_When_converting_to_a_tree_Then_there_are_two_paths_to_the_final_constant ()
+        {
+            var rule = new AndRule (new OptionRule ('b'), 'a');
+
+            var result = LexicalTreeBuilder.Build (rule);
+
+            result.ShouldBeEquivalentTo (new StartNode {
+                Transitions = new LexicalTransitions {
+                    { 'b', new LexicalNode { Transitions = new LexicalTransitions { { 'a', new TerminalNode() } } } },
+                    { 'a', new TerminalNode() }
+                }
+            });
+        }
+
+        [Test]
+        public void Given_a_constant_or_an_optional_constant_When_converting_to_a_tree_Then_the_tree_two_terminal_nodes ()
+        {
+            var rule = new OrRule ('a', new OptionRule ('b'));
+
+            var result = LexicalTreeBuilder.Build (rule);
+
+            result.ShouldBeEquivalentTo (new StartNode {
+                Transitions = new LexicalTransitions {
+                    { 'a',new TerminalNode{Transitions = new LexicalTransitions { { 'b', new TerminalNode () } } } }
                 }
             });
         }

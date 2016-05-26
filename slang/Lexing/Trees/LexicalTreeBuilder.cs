@@ -53,6 +53,12 @@ namespace slang.Lexing.Trees
             return node;
         }
 
+        static LexicalNode GetTreeForOptionRule(OptionRule rule, LexicalNode parent)
+        {
+            var option = BuildTreeForRule (rule.Option, parent);
+            return option;
+        }
+
         static LexicalNode GetTreeForOrRule (OrRule rule, LexicalNode parent)
         {
             BuildTreeForRule (rule.Left, parent);
