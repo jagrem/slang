@@ -1,6 +1,6 @@
 ﻿namespace slang.Lexing.Rules.Core
 {
-    class Or : Rule
+    public class Or : Rule
     {
         public Rule Left { get; set; }
         public Rule Right { get; set; }
