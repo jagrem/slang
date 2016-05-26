@@ -118,6 +118,7 @@
     <Compile Include="Lexing\Rules\Extensions\Option.cs" />
     <Compile Include="Lexing\Rules\Core\Rule.cs" />
     <Compile Include="Lexing\Rules\Extensions\Star.cs" />
+    <Compile Include="Lexing\Rules\Extensions\IComplexRule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
