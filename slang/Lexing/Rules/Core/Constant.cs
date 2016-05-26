@@ -1,10 +1,10 @@
 ﻿namespace slang.Lexing.Rules.Core
 {
-    public class ConstantRule : Rule
+    public class Constant : Rule
     {
         public char Value { get; set; }
 
-        public ConstantRule (char value)
+        public Constant (char value)
         {
             Value = value;
         }

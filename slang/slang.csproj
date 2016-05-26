@@ -110,12 +110,12 @@
     <Compile Include="Lexing\Trees\Nodes\TerminalNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\StartNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\LexicalTransitions.cs" />
-    <Compile Include="Lexing\Rules\Core\AndRule.cs" />
-    <Compile Include="Lexing\Rules\Core\ConstantRule.cs" />
-    <Compile Include="Lexing\Rules\Core\EmptyRule.cs" />
-    <Compile Include="Lexing\Rules\Core\OrRule.cs" />
-    <Compile Include="Lexing\Rules\Core\RepeatRule.cs" />
-    <Compile Include="Lexing\Rules\Extensions\OptionRule.cs" />
+    <Compile Include="Lexing\Rules\Core\And.cs" />
+    <Compile Include="Lexing\Rules\Core\Constant.cs" />
+    <Compile Include="Lexing\Rules\Core\Empty.cs" />
+    <Compile Include="Lexing\Rules\Core\Or.cs" />
+    <Compile Include="Lexing\Rules\Core\Repeat.cs" />
+    <Compile Include="Lexing\Rules\Extensions\Option.cs" />
     <Compile Include="Lexing\Rules\Core\Rule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

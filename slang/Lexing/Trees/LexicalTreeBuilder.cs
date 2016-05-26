@@ -23,25 +23,25 @@ namespace slang.Lexing.Trees
 
         static LexicalNode BuildTreeForRule (Rule rule, IEnumerable<LexicalNode> parents)
         {
-            if (rule is OrRule) {
-                return GetTreeForOrRule (rule as OrRule, parents.Single ());
+            if (rule is Or) {
+                return GetTreeForOrRule (rule as Or, parents.Single ());
             }
 
-            if (rule is AndRule) {
-                return GetTreeForAndRule (rule as AndRule, parents.Single ());
+            if (rule is And) {
+                return GetTreeForAndRule (rule as And, parents.Single ());
             }
 
-            return GetTreeForConstantRule (rule as ConstantRule, parents);
+            return GetTreeForConstantRule (rule as Constant, parents);
         }
 
-        static LexicalNode GetTreeForAndRule (AndRule rule, LexicalNode parent)
+        static LexicalNode GetTreeForAndRule (And rule, LexicalNode parent)
         {
             var left = BuildTreeForRule (rule.Left, parent);
             BuildTreeForRule (rule.Right, GetLeafNodes (left));
             return left;
         }
 
-        static LexicalNode GetTreeForConstantRule (ConstantRule rule, IEnumerable<LexicalNode> parents)
+        static LexicalNode GetTreeForConstantRule (Constant rule, IEnumerable<LexicalNode> parents)
         {
             var node = new LexicalNode ();
             var value = rule.Value;
@@ -55,13 +55,13 @@ namespace slang.Lexing.Trees
             return node;
         }
 
-        static LexicalNode GetTreeForOptionRule(OptionRule rule, LexicalNode parent)
+        static LexicalNode GetTreeForOptionRule(Option rule, LexicalNode parent)
         {
-            var option = BuildTreeForRule (rule.Option, parent);
+            var option = BuildTreeForRule (rule.Value, parent);
             return option;
         }
 
-        static LexicalNode GetTreeForOrRule (OrRule rule, LexicalNode parent)
+        static LexicalNode GetTreeForOrRule (Or rule, LexicalNode parent)
         {
             BuildTreeForRule (rule.Left, parent);
             BuildTreeForRule (rule.Right, parent);
