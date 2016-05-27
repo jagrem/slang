@@ -20,14 +20,14 @@ namespace slang.Lexing.Trees.Transformers
             }
 
             if (rule is Or) {
-                return Transform (rule as Or, parents.Single ());
+                return (rule as Or).Transform(parents.Single ());
             }
 
             if (rule is And) {
-                return Transform (rule as And, parents.Single ());
+                return (rule as And).Transform (parents.Single ());
             }
 
-            return Transform (rule as Constant, parents);
+            return (rule as Constant).Transform (parents);
         }
     }
 }

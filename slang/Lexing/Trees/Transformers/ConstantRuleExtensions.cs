@@ -12,7 +12,7 @@ namespace slang.Lexing.Trees.Transformers
             var node = new Node ();
             var value = rule.Value;
             parents
-                .Where (parent => parent.Transitions.ContainsKey (value))
+                .Where (parent => !parent.Transitions.ContainsKey (value))
                 .ToList ().ForEach (parent => parent.Transitions.Add (rule.Value, node));
             return node;
         }
