@@ -2,7 +2,7 @@
 
 namespace slang.Lexing.Trees.Nodes
 {
-    public class Transitions : Dictionary<char,Node>
+    public class Transitions : Dictionary<Character,Transition>
     {
     }
 }
