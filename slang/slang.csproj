@@ -123,6 +123,12 @@
     <Compile Include="Lexing\Trees\Transformers\ConstantRuleExtensions.cs" />
     <Compile Include="Lexing\Trees\Transformers\OrRuleExtensions.cs" />
     <Compile Include="Lexing\Trees\Transformers\OptionRuleExtensions.cs" />
+    <Compile Include="Lexing\Lexer2.cs" />
+    <Compile Include="Lexing\Trees\Tree.cs" />
+    <Compile Include="Lexing\Trees\Transformers\RepeatRuleExtensions.cs" />
+    <Compile Include="Lexing\Trees\Nodes\Character.cs" />
+    <Compile Include="Lexing\Trees\Nodes\Transition.cs" />
+    <Compile Include="Lexing\Trees\TreeExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
