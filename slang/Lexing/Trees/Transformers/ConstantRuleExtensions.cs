@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using slang.Lexing.Rules.Core;
+﻿using slang.Lexing.Rules.Core;
 using slang.Lexing.Trees.Nodes;
-using System.Linq;
 
 namespace slang.Lexing.Trees.Transformers
 {
     public static class ConstantRuleExtensions
     {
-        public static Node Transform (this Constant rule, IEnumerable<Node> parents)
+        public static Tree Transform(this Constant rule)
         {
-            var node = new Node ();
-            var value = rule.Value;
-            parents
-                .Where (parent => !parent.Transitions.ContainsKey (value))
-                .ToList ().ForEach (parent => parent.Transitions.Add (rule.Value, node));
-            return node;
+            var root = new Node ();
+            var key = Character.FromChar (rule.Value);
+            var value = new Node ();
+            value.Transitions.Add (Character.Any, new Transition (null, rule.TokenCreator));
+            root.Transitions.Add (key, new Transition(value));
+            return new Tree (root);
         }
     }
 }

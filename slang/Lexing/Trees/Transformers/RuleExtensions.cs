@@ -1,33 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using slang.Lexing.Rules.Core;
-using slang.Lexing.Rules.Extensions;
-using slang.Lexing.Trees.Nodes;
+﻿using slang.Lexing.Rules.Core;
 
 namespace slang.Lexing.Trees.Transformers
 {
     public static class RuleExtensions
     {
-        public static Node Transform (this Rule rule, Node parent)
+        public static Tree Transform(this Rule rule)
         {
-            return rule.Transform (new [] { parent });
-        }
-
-        public static Node Transform (this Rule rule, IEnumerable<Node> parents)
-        {
-            if (rule is IComplexRule) {
-                // Transform into less complex parts
-            }
-
             if (rule is Or) {
-                return (rule as Or).Transform(parents.Single ());
+                return (rule as Or).Transform ();
             }
 
             if (rule is And) {
-                return (rule as And).Transform (parents.Single ());
+                return (rule as And).Transform ();
             }
 
-            return (rule as Constant).Transform (parents);
+            if (rule is Repeat) {
+                return (rule as Repeat).Transform ();
+            }
+
+            return (rule as Constant).Transform ();
         }
     }
 }

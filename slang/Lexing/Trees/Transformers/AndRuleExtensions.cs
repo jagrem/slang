@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using slang.Lexing.Rules.Core;
 using slang.Lexing.Trees.Nodes;
 
@@ -7,26 +6,19 @@ namespace slang.Lexing.Trees.Transformers
 {
     public static class AndRuleExtensions
     {
-        public static Node Transform (this And rule, Node parent)
+        public static Tree Transform (this And rule)
         {
-            var left = rule.Left.Transform (parent);
-            rule.Right.Transform (GetLeafNodes (left));
-            return left;
-        }
+            var left = rule.Left.Transform ();
+            var right = rule.Right.Transform ();
+            var tree = left.AttachChild (right);
 
-        static IEnumerable<Node> GetLeafNodes (Node node)
-        {
-            if (!node.Transitions.Any ()) {
-                return new [] { node };
+            if(rule.TokenCreator != null) {
+                tree.Leaves
+                    .ToList ()
+                    .ForEach (node => node.Transitions [Character.Any] = new Transition (null, rule.TokenCreator));
             }
 
-            return node.Transitions.SelectMany (n => {
-                if (!n.Value.Transitions.Any ()) {
-                    return new [] { n.Value };
-                } else {
-                    return GetLeafNodes (n.Value);
-                }
-            });
+            return tree;
         }
     }
 }
