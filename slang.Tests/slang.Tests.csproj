@@ -67,6 +67,7 @@
     <Compile Include="Lexing\KeywordTests.cs" />
     <Compile Include="Lexing\PunctuationTests.cs" />
     <Compile Include="Lexing\Tools\CodeGenerationTests.cs" />
+    <Compile Include="Lexing\Rules\LexingTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
