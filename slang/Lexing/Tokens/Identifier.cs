@@ -2,10 +2,7 @@
 {
     public class Identifier : Token
     {
-        public Identifier (string value)
-        {
-            Value = value;
-        }
+        public Identifier (string value) : base(value) {}
     }
 }
 

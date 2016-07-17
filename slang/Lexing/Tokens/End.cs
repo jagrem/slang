@@ -2,9 +2,8 @@
 {
     public class End : Token
     {
-        public End ()
+        public End () : base("EOF")
         {
-            Value = "EOF";
         }
     }
 }

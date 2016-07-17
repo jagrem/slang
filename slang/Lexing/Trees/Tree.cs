@@ -5,17 +5,17 @@ namespace slang.Lexing.Trees
 {
     public class Tree
     {
-        public Tree() : this(new Node())
+        public Tree() : this(new TreeNode())
         {
         }
 
-        public Tree(Node root)
+        public Tree(TreeNode root)
         {
             Root = root;
         }
 
-        public Node Root { get; }
+        public TreeNode Root { get; }
 
-        public IEnumerable<Node> Leaves { get { return TreeBuilder.GetLeafNodes (Root); } }
+        public IEnumerable<TreeNode> Leaves { get { return TreeBuilder.GetLeafNodes (Root); } }
     }
 }

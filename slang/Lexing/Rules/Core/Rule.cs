@@ -1,10 +1,11 @@
 ﻿using slang.Lexing.Tokens;
 using System;
+
 namespace slang.Lexing.Rules.Core
 {
     public abstract class Rule
     {
-        public Func<Token> TokenCreator { get; set; }
+        public Func<string,Token> TokenCreator { get; set; }
 
         public static Rule operator | (Rule left, Rule right)
         {
@@ -21,9 +22,9 @@ namespace slang.Lexing.Rules.Core
             return new Constant (value);
         }
 
-        public Rule Returns(Func<Token> tokenCreator = null)
+        public Rule Returns(Func<string,Token> tokenCreator = null)
         {
-            TokenCreator = tokenCreator ?? new Func<Token>(() => Token.Empty);
+            TokenCreator = tokenCreator ?? new Func<string,Token>(context => Token.Empty);
             return this;
         }
     }

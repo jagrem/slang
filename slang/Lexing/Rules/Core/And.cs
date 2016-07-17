@@ -1,14 +1,9 @@
 ﻿namespace slang.Lexing.Rules.Core
 {
-    public class And : Rule
+    public class And : BinaryRule
     {
-        public Rule Left { get; set; }
-        public Rule Right { get; set; }
-
-        public And (Rule left, Rule right)
+        public And (Rule left, Rule right) : base(left, right)
         {
-            Right = right;
-            Left = left;
         }
     }
 }

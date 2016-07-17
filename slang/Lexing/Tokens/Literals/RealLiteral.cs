@@ -2,10 +2,7 @@
 {
     public class RealLiteral : Token
     {
-        public RealLiteral (string value)
-        {
-            Value = value;
-        }
+        public RealLiteral (string value) : base (value) {}
     }
 }
 

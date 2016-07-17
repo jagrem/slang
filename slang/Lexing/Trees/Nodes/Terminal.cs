@@ -1,6 +1,6 @@
 ﻿namespace slang.Lexing.Trees.Nodes
 {
-    public class Terminal : Node
+    public class Terminal : TreeNode
     {
     }
 }

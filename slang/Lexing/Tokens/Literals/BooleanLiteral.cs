@@ -2,10 +2,7 @@
 {
     public class BooleanLiteral : Token
     {
-        public BooleanLiteral (string value)
-        {
-            Value = value;
-        }
+        public BooleanLiteral (string value) : base(value) {}
     }
 }
 

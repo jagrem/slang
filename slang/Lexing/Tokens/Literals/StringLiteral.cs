@@ -2,10 +2,7 @@
 {
     public class StringLiteral : Token
     {
-        public StringLiteral (string value)
-        {
-            Value = value;
-        }
+        public StringLiteral (string value) : base(value) {}
     }
 }
 

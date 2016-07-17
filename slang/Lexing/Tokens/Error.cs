@@ -2,9 +2,8 @@
 {
     public class Error : Token
     {
-        public Error (string value)
+        public Error (string value) : base(value)
         {
-            Value = value;
         }
     }
 }

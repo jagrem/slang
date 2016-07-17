@@ -106,7 +106,7 @@
     <Compile Include="Lexing\Transitions\Text\Strings.cs" />
     <Compile Include="Lexing\Transitions\Identifiers.cs" />
     <Compile Include="Lexing\Trees\TreeBuilder.cs" />
-    <Compile Include="Lexing\Trees\Nodes\Node.cs" />
+    <Compile Include="Lexing\Trees\Nodes\TreeNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\Terminal.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transitions.cs" />
     <Compile Include="Lexing\Rules\Core\And.cs" />
@@ -129,6 +129,9 @@
     <Compile Include="Lexing\Trees\Nodes\Character.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transition.cs" />
     <Compile Include="Lexing\Trees\TreeExtensions.cs" />
+    <Compile Include="Lexing\Trees\Nodes\TreeContainerNode.cs" />
+    <Compile Include="Lexing\Rules\Core\BinaryRule.cs" />
+    <Compile Include="Lexing\Trees\TreeDescriber.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

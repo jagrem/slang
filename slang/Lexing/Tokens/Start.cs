@@ -2,10 +2,7 @@
 {
     public class Start : Token
     {
-        public Start ()
-        {
-            Value = "$";
-        }
+        public Start () : base("$") {}
     }
 }
 

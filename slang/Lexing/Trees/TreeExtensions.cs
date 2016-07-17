@@ -8,11 +8,11 @@ namespace slang.Lexing.Trees
             var parentLeaves = parent.Leaves.ToList ();
             var childTransitions = child.Root.Transitions.ToList ();
 
-            parentLeaves.ForEach (parentLeaf =>
-                                  childTransitions.ForEach (childTransition =>
-                                          parentLeaf
-                                              .Transitions
-                                              .Add (childTransition.Key, childTransition.Value)));
+            parentLeaves.ForEach (parentLeaf => {
+                parentLeaf.IsTerminal = false;
+                childTransitions.ForEach (childTransition => parentLeaf.Transitions [childTransition.Key] = childTransition.Value);
+            });
+
             return parent;
         }
 

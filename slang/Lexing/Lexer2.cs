@@ -4,13 +4,12 @@ using slang.Lexing.Tokens;
 using slang.Lexing.Trees;
 using slang.Lexing.Trees.Nodes;
 using System.Linq;
-using System;
 
 namespace slang.Lexing
 {
     public class Lexer2
     {
-        readonly Node root;
+        readonly TreeNode root;
 
         public Lexer2 (Rule rule)
         {
@@ -22,21 +21,33 @@ namespace slang.Lexing
             return ScanInternal (input).Where (token => token != null);
         }
 
+        public override string ToString()
+        {
+            return TreeDescriber.Describe(root);
+        }
+
         IEnumerable<Token> ScanInternal(string input)
         {
             var current = root;
+            var context = string.Empty;
 
             foreach (char c in input) {
+                
                 var character = Character.FromChar (c);
 
                 if (current.Transitions.ContainsKey (character)) {
+                    context += c;
                     var transition = current.Transitions [character];
-                    yield return transition.GetToken ();
+                    var token = transition.GetToken (context);
+                    if (token != null) context = string.Empty;
+                    yield return token;
                     current = transition.Target;
                 } else {
                     if(current.Transitions.ContainsKey (Character.Any)) {
                         var transition = current.Transitions [Character.Any];
-                        yield return transition.GetToken ();
+                        var token = transition.GetToken (context);
+                        if (token != null) context = string.Empty;
+                        yield return token;
 
                         if(transition.Target != null) {
                             current = transition.Target;
@@ -48,15 +59,20 @@ namespace slang.Lexing
                     }
 
                     if (current.Transitions.ContainsKey (character)) {
+                        context += c;
                         var transition = current.Transitions [character];
-                        yield return transition.GetToken ();
+                        var token = transition.GetToken (context);
+                        if (token != null) context = string.Empty;
+                        yield return token;
                         current = transition.Target;
                     }
                 }
             }
 
             // EOF
-            if (current.Transitions.ContainsKey (Character.Any)) yield return current.Transitions [Character.Any].GetToken ();
+            if (current.Transitions.ContainsKey (Character.Any)) {
+                yield return current.Transitions [Character.Any].GetToken (context);   
+            }
         }
     }
 }

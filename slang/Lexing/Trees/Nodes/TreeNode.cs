@@ -1,10 +1,11 @@
 ﻿namespace slang.Lexing.Trees.Nodes
 {
-    public class Node
+    public class TreeNode
     {
+        public bool IsTerminal { get; set; }
         public Transitions Transitions { get; set; }
 
-        public Node ()
+        public TreeNode ()
         {
             Transitions = new Transitions ();
         }

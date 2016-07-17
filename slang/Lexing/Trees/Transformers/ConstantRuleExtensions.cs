@@ -7,9 +7,9 @@ namespace slang.Lexing.Trees.Transformers
     {
         public static Tree Transform(this Constant rule)
         {
-            var root = new Node ();
+            var root = new TreeNode ();
             var key = Character.FromChar (rule.Value);
-            var value = new Node ();
+            var value = new TreeNode ();
             value.Transitions.Add (Character.Any, new Transition (null, rule.TokenCreator));
             root.Transitions.Add (key, new Transition(value));
             return new Tree (root);

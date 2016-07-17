@@ -2,10 +2,7 @@
 {
     public class Symbol : Token
     {
-        public Symbol (string value)
-        {
-            Value = value;
-        }
+        public Symbol (string value) : base(value) {}
     }
 }
 
