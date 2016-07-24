@@ -7,7 +7,7 @@ namespace slang.Lexing.Trees.Transformers
     {
         public static Tree Transform (this Option rule, TreeNode parent)
         {
-            return new Tree ();
+            return new Tree (0);
         }
     }
 }

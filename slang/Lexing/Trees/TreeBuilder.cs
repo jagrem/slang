@@ -8,6 +8,8 @@ namespace slang.Lexing.Trees
 {
     public static class TreeBuilder
     {
+        static int index = 0;
+
         public static Tree Build (Rule rule)
         {
             var ruleStack = new Stack<Rule> ();
@@ -113,7 +115,7 @@ namespace slang.Lexing.Trees
                 .ToList ()
                 .ForEach (leaf => {
                     leaf.IsTerminal = true;
-                    transitions.ToList ().ForEach (transition => leaf.Transitions[transition.Key] = transition.Value);
+                    transitions.ToList ().ForEach (transition => leaf.Transitions [transition.Key] = transition.Value);
                     if (rule.TokenCreator != null) {
                         leaf.Transitions [Character.Any] = new Transition (null, rule.TokenCreator);
                     }
@@ -128,9 +130,9 @@ namespace slang.Lexing.Trees
 
         static Tree Evaluate(Constant rule)
         {
-            var root = new TreeNode ();
+            var root = new TreeNode (index++);
             var key = Character.FromChar (rule.Value);
-            var value = new TreeNode { IsTerminal = true };
+            var value = new TreeNode(index++) { IsTerminal = true };
 
             if (rule.TokenCreator != null) {
                 value.Transitions.Add (Character.Any, new Transition (null, rule.TokenCreator));

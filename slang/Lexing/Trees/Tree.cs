@@ -5,7 +5,7 @@ namespace slang.Lexing.Trees
 {
     public class Tree
     {
-        public Tree() : this(new TreeNode())
+        public Tree(int index) : this(new TreeNode(index))
         {
         }
 

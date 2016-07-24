@@ -9,16 +9,37 @@ namespace slang.Lexing.Trees
     {
         public static string Describe(TreeNode node)
         {
-            int count = 0;
-            return string.Join(
-                Environment.NewLine, 
+            return string.Join (
+                Environment.NewLine + Environment.NewLine,
                 GetAllNodes (node)
+                .OrderBy (n => n.Index)
                 .Select (n => string.Format (
-                    "Node {0}{1} [{2}]",
-                    count++,
+                    "Node {0}{1}{2} [{3}]",
+                    n.Name,
                     n.IsTerminal ? "(terminal)" : string.Empty,
-                    string.Join(",", n.Transitions.Select(t => "[" + t.Key.Value + "]"))
-                                  )));
+                    n.Transitions.Any (t => t.Value.TokenProducer != null) ? " => Token " : string.Empty,
+                    string.Join(Environment.NewLine, GetNodeDescriptions (n))
+                )));
+        }
+                         
+        static IEnumerable<string> GetNodeDescriptions(TreeNode node)
+        {
+            return string
+                .Join (",", GetTransitionDescriptions (node))
+                .Select ((x, i) => new { Index = i, Value = x })
+                .GroupBy (x => x.Index / 160)
+                .Select (x => new string (x.Select (v => v.Value).ToArray ()));
+        }
+
+        static IEnumerable<string> GetTransitionDescriptions(TreeNode node)
+        {
+            return node
+                .Transitions
+                .Select (t => {
+                    var key = t.Key != Character.Any ? t.Key.Value.ToString () : "Any";
+                    var value = t.Value != null && t.Value.Target != null ? t.Value.Target.Name : "Undefined";
+                    return string.Format ("[{0} => {1}]", key, value);
+            });
         }
 
         static IEnumerable<TreeNode> GetAllNodes(TreeNode node)

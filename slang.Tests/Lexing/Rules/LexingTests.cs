@@ -5,6 +5,7 @@ using FluentAssertions;
 using slang.Lexing.Tokens;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace slang.Tests.Lexing.Rules
 {
@@ -15,14 +16,16 @@ namespace slang.Tests.Lexing.Rules
         class FunctionName : Token { public FunctionName (string value) : base (value) { } }
         class Identifier : Token { public Identifier (string value) : base(value) {} }
         class IntegerLiteral : Token { public  IntegerLiteral(string value) : base (value) { } }
-        class Symbol : Token { public Symbol (string value) : base (value) { } }
+        class Operator : Token { public Operator (string value) : base (value) { } }
         class Whitespace : Token { public Whitespace () : base (" ") { } }
 
         [TestCaseSource("GetTestCases")]
         public void Given_valid_input_and_a_constant_rule_When_lexed_Then_the_correct_tokens_are_returned(Rule rule, string input, IEnumerable<Token> expectedTokens)
         {
             var lexer = new Lexer2 (rule);
+            Console.WriteLine (lexer);
             var result = lexer.Scan (input);
+            Console.WriteLine (string.Join ("\n", result.Select (r => "[" + r.GetType ().Name + " '" + r.Value + "']")));
             result.ShouldBeEquivalentTo (expectedTokens);
         }
 
@@ -105,19 +108,18 @@ namespace slang.Tests.Lexing.Rules
                     new [] { new FunctionName ("A-Function-Name-01"), new FunctionName ("Function_Number_2"), new FunctionName("function+03") }
                 )
                     .SetName ("Literal := initial { medial }");
-            
-            var whitespace = new Repeat(((Rule)' ' | '\t')).Returns (context => new Whitespace());
-            var identifier = (initial + new Repeat (medial)).Returns (context => new Identifier (context));
-            var integerLiteral = new Repeat (numeric).Returns (context => new IntegerLiteral(context));
-            var symbol = ((Rule)'!' | '@' | '#' | '$' | '%' | '^' | '&' | '*' | '(' | ')' | '{' | '}' | '[' | ']' | '|').Returns (context => new Symbol(context));
+
+            var op = ((Rule)'!' | '@' | '#' | '$' | '%' | '^' | '&' | '*' | '(' | ')' | '{' | '}' | '[' | ']' | '|' | '=').Returns (context => new Operator(context));
+            var identifier = lowercase + new Repeat (lowercase | numeric).Returns (context => new Identifier(context));
+            var integerLiteral = new Repeat (numeric).Returns (context => new IntegerLiteral (context));
 
             yield return
                 new TestCaseData (
-                    new Repeat(identifier | integerLiteral | symbol | whitespace),
-                    "abc 1 2 adfbsd = x y 45",
-                    new Token[] { new Identifier("abc"), new Whitespace(), new IntegerLiteral("1"), new IntegerLiteral("2"), new Identifier("adfbsd") }
+                    identifier | integerLiteral | op,
+                    "abc 1 2 adfbsd = xs ys 45",
+                    new Token[] { new Identifier("abc"), new IntegerLiteral("1"), new IntegerLiteral("2"), new Identifier("adfbsd"), new Operator("="), new Identifier("xs"), new Identifier("ys"), new IntegerLiteral("45") }
                 )
-                    .SetName ("Lexer := { identifier | integer-literal | symbol }");
+                    .SetName ("Lexer := { identifier | integer-literal | operator }");
         }
     }
 }

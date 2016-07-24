@@ -107,7 +107,6 @@
     <Compile Include="Lexing\Transitions\Identifiers.cs" />
     <Compile Include="Lexing\Trees\TreeBuilder.cs" />
     <Compile Include="Lexing\Trees\Nodes\TreeNode.cs" />
-    <Compile Include="Lexing\Trees\Nodes\Terminal.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transitions.cs" />
     <Compile Include="Lexing\Rules\Core\And.cs" />
     <Compile Include="Lexing\Rules\Core\Constant.cs" />

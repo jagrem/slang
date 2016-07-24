@@ -18,7 +18,7 @@ namespace slang.Lexing.Trees
 
         public static Tree Merge (this Tree left, Tree right)
         {
-            var tree = new Tree ();
+            var tree = new Tree (0);
             var leftTransitions = left.Root.Transitions.ToList() ;
             var rightTransitions = right.Root.Transitions.ToList();
             var transitions = leftTransitions.Concat (rightTransitions);
