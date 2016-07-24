@@ -3,6 +3,7 @@ using System.Linq;
 using slang.Lexing.Rules.Core;
 using slang.Lexing.Trees.Nodes;
 using System;
+using slang.Lexing.Rules.Extensions;
 
 namespace slang.Lexing.Trees
 {
@@ -69,6 +70,14 @@ namespace slang.Lexing.Trees
                     }
                 }
 
+                if(rule is Range)
+                {
+                    seen.Add (tree);
+                    tree.Tree = Evaluate ((Range)rule);
+                    tree = treeStack.Pop ();
+                    rule = ruleStack.Pop ();
+                }
+
                 if (rule is Constant) {
                     seen.Add (tree);
                     tree.Tree = Evaluate ((Constant)rule);
@@ -126,6 +135,24 @@ namespace slang.Lexing.Trees
 
         static void MapLeaves(Tree tree, Action<TreeNode> action) {
             tree.Leaves.ToList ().ForEach (action);
+        }
+
+        static Tree Evaluate(Range rule)
+        {
+            var root = new TreeNode (index++);
+
+            rule.Characters.ToList ().ForEach(c => {
+                var key = Character.FromChar (c);
+                var value = new TreeNode (index++) { IsTerminal = true };
+
+                if (rule.TokenCreator != null) {
+                    value.Transitions.Add (Character.Any, new Transition (null, rule.TokenCreator));
+                }
+
+                root.Transitions.Add (key, new Transition (value));
+            });
+
+            return new Tree (root);
         }
 
         static Tree Evaluate(Constant rule)

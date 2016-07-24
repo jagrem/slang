@@ -131,6 +131,7 @@
     <Compile Include="Lexing\Trees\Nodes\TreeContainerNode.cs" />
     <Compile Include="Lexing\Rules\Core\BinaryRule.cs" />
     <Compile Include="Lexing\Trees\TreeDescriber.cs" />
+    <Compile Include="Lexing\Rules\Extensions\Range.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

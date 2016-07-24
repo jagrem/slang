@@ -6,6 +6,7 @@ using slang.Lexing.Tokens;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using slang.Lexing.Rules.Extensions;
 
 namespace slang.Tests.Lexing.Rules
 {
@@ -76,6 +77,12 @@ namespace slang.Tests.Lexing.Rules
                 new [] { new Literal ("abab") })
                     .SetName ("Literal := { 'a' | 'b' }");
 
+            yield return new TestCaseData (
+                new Repeat(new Range ('a', 'z')).Returns (literal),
+                "acserzq",
+                new [] { new Literal ("acserzq") })
+                    .SetName ("Literal := { 'a'..'z' }");
+
             var digits = (Rule)'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
             var upperCaseHexadecimal = (Rule)'A' | 'B' | 'C' | 'D' | 'E' | 'F';
             var lowerCaseHexadecimal = (Rule)'a' | 'b' | 'c' | 'd' | 'e' | 'f';
@@ -91,10 +98,10 @@ namespace slang.Tests.Lexing.Rules
                 )
                 .SetName ("Literal := hex");
 
-            var uppercase = (Rule) 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
-            var lowercase = (Rule)'a' | 'b' | 'c' | 'd' | 'e' | 'f'| 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
+            var uppercase = new Range('A', 'Z');
+            var lowercase = new Range('a', 'z');
             var alpha = uppercase | lowercase;
-            var numeric = (Rule)'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+            var numeric = new Range('0', '9');
             var alphanumeric = alpha | numeric;
             var symbols = (Rule)'-' | '_' | '+';
             var initial = alpha;
