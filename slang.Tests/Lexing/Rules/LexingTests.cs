@@ -19,6 +19,7 @@ namespace slang.Tests.Lexing.Rules
         class IntegerLiteral : Token { public  IntegerLiteral(string value) : base (value) { } }
         class Operator : Token { public Operator (string value) : base (value) { } }
         class Whitespace : Token { public Whitespace () : base (" ") { } }
+        class Keyword : Token { public Keyword(string value) : base(value) { } }
 
         [TestCaseSource("GetTestCases")]
         public void Given_valid_input_and_a_constant_rule_When_lexed_Then_the_correct_tokens_are_returned(Rule rule, string input, IEnumerable<Token> expectedTokens)
@@ -82,6 +83,12 @@ namespace slang.Tests.Lexing.Rules
                 "acserzq",
                 new [] { new Literal ("acserzq") })
                     .SetName ("Literal := { 'a'..'z' }");
+
+            yield return new TestCaseData (
+                new Repeat(new ConstantString("abstract")).Returns (context => new Keyword(context)),
+                "abstract abstract xyz",
+                new [] { new Keyword ("abstract"), new Keyword ("abstract") })
+                    .SetName ("Keyword := { 'abstract' }");
 
             var digits = (Rule)'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
             var upperCaseHexadecimal = (Rule)'A' | 'B' | 'C' | 'D' | 'E' | 'F';
