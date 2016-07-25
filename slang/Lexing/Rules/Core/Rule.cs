@@ -1,5 +1,6 @@
 ﻿using slang.Lexing.Tokens;
 using System;
+using slang.Lexing.Rules.Extensions;
 
 namespace slang.Lexing.Rules.Core
 {
@@ -20,6 +21,11 @@ namespace slang.Lexing.Rules.Core
         public static implicit operator Rule (char value)
         {
             return new Constant (value);
+        }
+
+        public static implicit operator Rule (string value)
+        {
+            return new ConstantString (value);
         }
 
         public Rule Returns(Func<string,Token> tokenCreator = null)

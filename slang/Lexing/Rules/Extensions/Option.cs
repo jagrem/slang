@@ -2,7 +2,7 @@
 
 namespace slang.Lexing.Rules.Extensions
 {
-    public class Option : Rule, IComplexRule
+    public class Option : Rule
     {
         public Rule Value { get; set; }
 
@@ -10,11 +10,5 @@ namespace slang.Lexing.Rules.Extensions
         {
             Value = option;
         }
-
-        public Rule Transform()
-        {
-            return new Or (Value, new Empty ());
-        }
     }
 }
-

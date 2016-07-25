@@ -115,8 +115,6 @@
     <Compile Include="Lexing\Rules\Core\Repeat.cs" />
     <Compile Include="Lexing\Rules\Extensions\Option.cs" />
     <Compile Include="Lexing\Rules\Core\Rule.cs" />
-    <Compile Include="Lexing\Rules\Extensions\Star.cs" />
-    <Compile Include="Lexing\Rules\Extensions\IComplexRule.cs" />
     <Compile Include="Lexing\Trees\Transformers\RuleExtensions.cs" />
     <Compile Include="Lexing\Trees\Transformers\AndRuleExtensions.cs" />
     <Compile Include="Lexing\Trees\Transformers\ConstantRuleExtensions.cs" />
@@ -133,6 +131,7 @@
     <Compile Include="Lexing\Trees\TreeDescriber.cs" />
     <Compile Include="Lexing\Rules\Extensions\Range.cs" />
     <Compile Include="Lexing\Rules\Extensions\ConstantString.cs" />
+    <Compile Include="Lexing\SlangGrammar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
