@@ -1,12 +1,11 @@
 ﻿using NUnit.Framework;
 using slang.Lexing;
-using slang.Lexing.Rules.Core;
+using slang.Lexing.Rules;
 using FluentAssertions;
 using slang.Lexing.Tokens;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using slang.Lexing.Rules.Extensions;
 
 namespace slang.Tests.Lexing.Rules
 {

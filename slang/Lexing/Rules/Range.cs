@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using slang.Lexing.Rules.Core;
 
-namespace slang.Lexing.Rules.Extensions
+namespace slang.Lexing.Rules
 {
     public class Range : Rule
     {

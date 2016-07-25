@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using slang.Lexing.Rules.Core;
+using slang.Lexing.Rules;
 using slang.Lexing.Tokens;
 using slang.Lexing.Trees;
 using slang.Lexing.Trees.Nodes;

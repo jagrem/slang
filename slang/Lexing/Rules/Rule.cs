@@ -1,8 +1,7 @@
 ﻿using slang.Lexing.Tokens;
 using System;
-using slang.Lexing.Rules.Extensions;
 
-namespace slang.Lexing.Rules.Core
+namespace slang.Lexing.Rules
 {
     public abstract class Rule
     {

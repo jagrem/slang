@@ -1,6 +1,6 @@
-﻿using slang.Lexing.Rules.Core;
+﻿using slang.Lexing.Rules;
 using slang.Lexing.Tokens.Literals;
-using slang.Lexing.Rules.Extensions;
+
 namespace slang.Lexing
 {
     public static class SlangGrammar

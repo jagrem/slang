@@ -108,24 +108,23 @@
     <Compile Include="Lexing\Trees\TreeBuilder.cs" />
     <Compile Include="Lexing\Trees\Nodes\TreeNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transitions.cs" />
-    <Compile Include="Lexing\Rules\Core\And.cs" />
-    <Compile Include="Lexing\Rules\Core\Constant.cs" />
-    <Compile Include="Lexing\Rules\Core\Empty.cs" />
-    <Compile Include="Lexing\Rules\Core\Or.cs" />
-    <Compile Include="Lexing\Rules\Core\Repeat.cs" />
-    <Compile Include="Lexing\Rules\Extensions\Option.cs" />
-    <Compile Include="Lexing\Rules\Core\Rule.cs" />
     <Compile Include="Lexing\Lexer2.cs" />
     <Compile Include="Lexing\Trees\Tree.cs" />
     <Compile Include="Lexing\Trees\Nodes\Character.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transition.cs" />
     <Compile Include="Lexing\Trees\TreeExtensions.cs" />
     <Compile Include="Lexing\Trees\Nodes\TreeContainerNode.cs" />
-    <Compile Include="Lexing\Rules\Core\BinaryRule.cs" />
     <Compile Include="Lexing\Trees\TreeDescriber.cs" />
-    <Compile Include="Lexing\Rules\Extensions\Range.cs" />
-    <Compile Include="Lexing\Rules\Extensions\ConstantString.cs" />
     <Compile Include="Lexing\SlangGrammar.cs" />
+    <Compile Include="Lexing\Rules\And.cs" />
+    <Compile Include="Lexing\Rules\Constant.cs" />
+    <Compile Include="Lexing\Rules\BinaryRule.cs" />
+    <Compile Include="Lexing\Rules\Empty.cs" />
+    <Compile Include="Lexing\Rules\Repeat.cs" />
+    <Compile Include="Lexing\Rules\Rule.cs" />
+    <Compile Include="Lexing\Rules\Or.cs" />
+    <Compile Include="Lexing\Rules\Option.cs" />
+    <Compile Include="Lexing\Rules\Range.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -139,8 +138,6 @@
     <Folder Include="Lexing\Rules\" />
     <Folder Include="Lexing\Trees\" />
     <Folder Include="Lexing\Trees\Nodes\" />
-    <Folder Include="Lexing\Rules\Core\" />
-    <Folder Include="Lexing\Rules\Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lexing\Tokens\Literals\README" />
