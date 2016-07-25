@@ -23,7 +23,7 @@ namespace slang.Tests.Lexing.Rules
         [TestCaseSource("GetTestCases")]
         public void Given_valid_input_and_a_constant_rule_When_lexed_Then_the_correct_tokens_are_returned(Rule rule, string input, IEnumerable<Token> expectedTokens)
         {
-            var lexer = new Lexer2 (rule);
+            var lexer = new Lexer (rule);
             Console.WriteLine (lexer);
             var result = lexer.Scan (input);
             Console.WriteLine (string.Join ("\n", result.Select (r => "[" + r.GetType ().Name + " '" + r.Value + "']")));

@@ -1,9 +1,8 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using slang.Lexing;
-using System.Linq;
 using FluentAssertions;
 using System.Collections.Generic;
+using slang.Lexing.Tokens;
 
 namespace slang.Tests.Lexing.Literals
 {
@@ -11,10 +10,11 @@ namespace slang.Tests.Lexing.Literals
     public class StringLiteralTests
     {
         [TestCaseSource("GetLiterals")]
-        public void Given_a_literal_as_a_string_When_parsed_Then_a_literal_type_is_returned(string input)
+        public void Given_a_literal_as_a_string_When_parsed_Then_a_literal_type_is_returned(string input, IEnumerable<Token> expected)
         {
-            var result = Lexer.Analyze (input).ToArray ();
-            result.ShouldBeEquivalentTo (new[] { new { Value = "$" }, new { Value = input }, new { Value = "EOF" } });
+            var lexer = new Lexer (SlangGrammar.ToRule ());
+            var result = lexer.Scan (input);
+            result.ShouldBeEquivalentTo (expected);
         }
 
         static IEnumerable<TestCaseData> GetLiterals()

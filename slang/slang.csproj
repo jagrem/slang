@@ -63,52 +63,16 @@
     <Compile Include="Compilation\CompilationUnit.cs" />
     <Compile Include="Compilation\CompilationMetadata.cs" />
     <Compile Include="Parsing\NewParser.cs" />
-    <Compile Include="Lexing\Extensions\CharacterExtensions.cs" />
-    <Compile Include="Lexing\Extensions\LexerStateExtensions.cs" />
-    <Compile Include="Lexing\Lexer.cs" />
-    <Compile Include="Lexing\LexerState.cs" />
-    <Compile Include="Lexing\Tokens\End.cs" />
-    <Compile Include="Lexing\Tokens\Error.cs" />
     <Compile Include="Lexing\Tokens\Identifier.cs" />
-    <Compile Include="Lexing\Tokens\Literals\BooleanLiteral.cs" />
-    <Compile Include="Lexing\Tokens\Literals\CharacterLiteral.cs" />
-    <Compile Include="Lexing\Tokens\Literals\IntegerLiteral.cs" />
-    <Compile Include="Lexing\Tokens\Literals\RealLiteral.cs" />
-    <Compile Include="Lexing\Tokens\Start.cs" />
     <Compile Include="Lexing\Tokens\Token.cs" />
-    <Compile Include="Lexing\Transitions\Constants\Specifiers.cs" />
-    <Compile Include="Lexing\Transitions\Numbers\DecimalInteger.cs" />
-    <Compile Include="Lexing\Transitions\Numbers\HexadecimalInteger.cs" />
-    <Compile Include="Lexing\Transitions\Numbers\Number.cs" />
-    <Compile Include="Lexing\Transitions\Numbers\Real.cs" />
-    <Compile Include="Lexing\Tokens\Symbol.cs" />
-    <Compile Include="Lexing\Tokens\Literals\StringLiteral.cs" />
-    <Compile Include="Lexing\Transitions\Punctuation.cs">
-      <DependentUpon>Punctuation.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Lexing\Transitions\Keywords.cs">
-      <DependentUpon>Keywords.tt</DependentUpon>
-    </Compile>
     <Compile Include="Lexing\State.cs">
       <DependentUpon>State.tt</DependentUpon>
     </Compile>
-    <Compile Include="Lexing\Tools\CodeGeneration.cs" />
-    <Compile Include="Lexing\Transitions\TerminalTransition.cs" />
-    <Compile Include="Lexing\Transitions\Transition.cs" />
-    <Compile Include="Lexing\Tokens\TokenInfo.cs" />
-    <Compile Include="Lexing\Transitions\Zero.cs">
-      <DependentUpon>Zero.tt</DependentUpon>
-    </Compile>
     <Compile Include="Lexing\Tokens\Keyword.cs" />
-    <Compile Include="Lexing\Tokens\Constants\Keywords.cs" />
-    <Compile Include="Lexing\Tokens\Constants\Punctuation.cs" />
-    <Compile Include="Lexing\Transitions\Text\Characters.cs" />
-    <Compile Include="Lexing\Transitions\Text\Strings.cs" />
-    <Compile Include="Lexing\Transitions\Identifiers.cs" />
     <Compile Include="Lexing\Trees\TreeBuilder.cs" />
     <Compile Include="Lexing\Trees\Nodes\TreeNode.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transitions.cs" />
-    <Compile Include="Lexing\Lexer2.cs" />
+    <Compile Include="Lexing\Lexer.cs" />
     <Compile Include="Lexing\Trees\Tree.cs" />
     <Compile Include="Lexing\Trees\Nodes\Character.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transition.cs" />
@@ -125,6 +89,11 @@
     <Compile Include="Lexing\Rules\Or.cs" />
     <Compile Include="Lexing\Rules\Option.cs" />
     <Compile Include="Lexing\Rules\Range.cs" />
+    <Compile Include="Lexing\Tokens\BooleanLiteral.cs" />
+    <Compile Include="Lexing\Tokens\CharacterLiteral.cs" />
+    <Compile Include="Lexing\Tokens\IntegerLiteral.cs" />
+    <Compile Include="Lexing\Tokens\RealLiteral.cs" />
+    <Compile Include="Lexing\Tokens\StringLiteral.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -132,31 +101,16 @@
     <Folder Include="AST\" />
     <Folder Include="Compilation\" />
     <Folder Include="Parsing\" />
-    <Folder Include="Lexing\Tools\" />
-    <Folder Include="Lexing\Tokens\Constants\" />
-    <Folder Include="Lexing\Transitions\Text\" />
     <Folder Include="Lexing\Rules\" />
     <Folder Include="Lexing\Trees\" />
     <Folder Include="Lexing\Trees\Nodes\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lexing\Tokens\Literals\README" />
     <None Include="Lexing\State.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>State.cs</LastGenOutput>
     </None>
-    <None Include="Lexing\Transitions\Keywords.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Keywords.cs</LastGenOutput>
-    </None>
-    <None Include="Lexing\Transitions\Punctuation.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Punctuation.cs</LastGenOutput>
-    </None>
-    <None Include="Lexing\Transitions\Zero.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Zero.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
+    <None Include="Lexing\Tokens\README" />
   </ItemGroup>
 </Project>

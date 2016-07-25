@@ -1,4 +1,4 @@
-﻿namespace slang.Lexing.Tokens.Literals
+﻿namespace slang.Lexing.Tokens
 {
     public class IntegerLiteral : Token
     {

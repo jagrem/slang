@@ -1,43 +1,78 @@
 ﻿using System.Collections.Generic;
-using System;
-using System.Linq;
+using slang.Lexing.Rules;
 using slang.Lexing.Tokens;
-using slang.Lexing.Transitions;
+using slang.Lexing.Trees;
+using slang.Lexing.Trees.Nodes;
+using System.Linq;
 
 namespace slang.Lexing
 {
-    public static class Lexer
+    public class Lexer
     {
-        static readonly Dictionary<State,Func<LexerState,LexerState>> transitions = Transition.GetTransitions();
-        
-        public static IEnumerable<Token> Analyze(string input)
+        readonly TreeNode root;
+
+        public Lexer (Rule rule)
         {
-            return Scan (input).Where (t => t != Token.Empty);
+            root = TreeBuilder.Build (rule).Root;
         }
 
-        static IEnumerable<Token> Scan(string input) {
-            yield return new Start ();
+        public IEnumerable<Token> Scan(string input)
+        {
+            return ScanInternal (input).Where (token => token != null);
+        }
 
-            var buffer = input.ToCharArray ();
-            var state = new LexerState { Token = Token.Empty, State = State.Zero, Buffer = string.Empty, Value = (char)0 };
+        public override string ToString()
+        {
+            return TreeDescriber.Describe(root);
+        }
 
-            foreach (char c in buffer) {
-                state.Value = c;
+        IEnumerable<Token> ScanInternal(string input)
+        {
+            var current = root;
+            var context = string.Empty;
 
-                if(transitions.ContainsKey (state.State)) {
-                    state = transitions [state.State] (state);
-                    yield return state.Token;
+            foreach (char c in input) {
+                
+                var character = Character.FromChar (c);
+
+                if (current.Transitions.ContainsKey (character)) {
+                    context += c;
+                    var transition = current.Transitions [character];
+                    var token = transition.GetToken (context);
+                    if (token != null) context = string.Empty;
+                    yield return token;
+                    current = transition.Target;
+                } else {
+                    if(current.Transitions.ContainsKey (Character.Any)) {
+                        var transition = current.Transitions [Character.Any];
+                        var token = transition.GetToken (context);
+                        if (token != null) context = string.Empty;
+                        yield return token;
+
+                        if(transition.Target != null) {
+                            current = transition.Target;
+                        } else {
+                            current = root;
+                        }
+                    } else {
+                        current = root;
+                    }
+
+                    if (current.Transitions.ContainsKey (character)) {
+                        context += c;
+                        var transition = current.Transitions [character];
+                        var token = transition.GetToken (context);
+                        if (token != null) context = string.Empty;
+                        yield return token;
+                        current = transition.Target;
+                    }
                 }
             }
 
-            // EOF 
-            if(transitions.ContainsKey (state.State)) {
-                state.Value = (char)0;
-                state = transitions [state.State] (state);
-                yield return state.Token;
+            // EOF
+            if (current.Transitions.ContainsKey (Character.Any)) {
+                yield return current.Transitions [Character.Any].GetToken (context);   
             }
-
-            yield return new End();
         }
     }
 }

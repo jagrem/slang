@@ -1,5 +1,5 @@
 ﻿using slang.Lexing.Rules;
-using slang.Lexing.Tokens.Literals;
+using slang.Lexing.Tokens;
 
 namespace slang.Lexing
 {
