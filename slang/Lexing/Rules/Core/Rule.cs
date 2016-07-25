@@ -25,7 +25,7 @@ namespace slang.Lexing.Rules.Core
 
         public static implicit operator Rule (string value)
         {
-            return new ConstantString (value);
+            return new Constant (value);
         }
 
         public Rule Returns(Func<string,Token> tokenCreator = null)

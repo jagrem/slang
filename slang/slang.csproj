@@ -115,14 +115,8 @@
     <Compile Include="Lexing\Rules\Core\Repeat.cs" />
     <Compile Include="Lexing\Rules\Extensions\Option.cs" />
     <Compile Include="Lexing\Rules\Core\Rule.cs" />
-    <Compile Include="Lexing\Trees\Transformers\RuleExtensions.cs" />
-    <Compile Include="Lexing\Trees\Transformers\AndRuleExtensions.cs" />
-    <Compile Include="Lexing\Trees\Transformers\ConstantRuleExtensions.cs" />
-    <Compile Include="Lexing\Trees\Transformers\OrRuleExtensions.cs" />
-    <Compile Include="Lexing\Trees\Transformers\OptionRuleExtensions.cs" />
     <Compile Include="Lexing\Lexer2.cs" />
     <Compile Include="Lexing\Trees\Tree.cs" />
-    <Compile Include="Lexing\Trees\Transformers\RepeatRuleExtensions.cs" />
     <Compile Include="Lexing\Trees\Nodes\Character.cs" />
     <Compile Include="Lexing\Trees\Nodes\Transition.cs" />
     <Compile Include="Lexing\Trees\TreeExtensions.cs" />
@@ -147,7 +141,6 @@
     <Folder Include="Lexing\Trees\Nodes\" />
     <Folder Include="Lexing\Rules\Core\" />
     <Folder Include="Lexing\Rules\Extensions\" />
-    <Folder Include="Lexing\Trees\Transformers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lexing\Tokens\Literals\README" />

@@ -85,7 +85,7 @@ namespace slang.Tests.Lexing.Rules
                     .SetName ("Literal := { 'a'..'z' }");
 
             yield return new TestCaseData (
-                new Repeat(new ConstantString("abstract")).Returns (context => new Keyword(context)),
+                new Repeat("abstract").Returns (context => new Keyword(context)),
                 "abstract abstract xyz",
                 new [] { new Keyword ("abstract"), new Keyword ("abstract") })
                     .SetName ("Keyword := { 'abstract' }");

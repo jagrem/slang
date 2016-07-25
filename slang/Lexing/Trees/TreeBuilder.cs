@@ -78,14 +78,6 @@ namespace slang.Lexing.Trees
                     rule = ruleStack.Pop ();
                 }
 
-                if(rule is ConstantString)
-                {
-                    seen.Add (tree);
-                    tree.Tree = Evaluate ((ConstantString)rule);
-                    tree = treeStack.Pop ();
-                    rule = ruleStack.Pop ();
-                }
-
                 if (rule is Constant) {
                     seen.Add (tree);
                     tree.Tree = Evaluate ((Constant)rule);
@@ -163,7 +155,7 @@ namespace slang.Lexing.Trees
             return new Tree (root);
         }
 
-        static Tree Evaluate(ConstantString rule)
+        static Tree Evaluate(Constant rule)
         {
             var root = new TreeNode (index++);
             TreeNode node = root;
@@ -184,20 +176,6 @@ namespace slang.Lexing.Trees
                 node.Transitions.Add (Character.Any, new Transition (null, rule.TokenCreator));
             }
 
-            return new Tree (root);
-        }
-
-        static Tree Evaluate(Constant rule)
-        {
-            var root = new TreeNode (index++);
-            var key = Character.FromChar (rule.Value);
-            var value = new TreeNode(index++) { IsTerminal = true };
-
-            if (rule.TokenCreator != null) {
-                value.Transitions.Add (Character.Any, new Transition (null, rule.TokenCreator));
-            }
-
-            root.Transitions.Add (key, new Transition (value));
             return new Tree (root);
         }
 

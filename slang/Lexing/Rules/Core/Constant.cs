@@ -2,9 +2,14 @@
 {
     public class Constant : Rule
     {
-        public char Value { get; set; }
+        public string Value { get; set; }
 
         public Constant (char value)
+        {
+            Value = new string (new char [] { value });
+        }
+
+        public Constant(string value)
         {
             Value = value;
         }
