@@ -1,0 +1,59 @@
+COMPILER Slang
+
+   public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
+
+CHARACTERS
+   upper = 'A'..'Z'.
+   lower = 'a'..'z'.
+   letter = upper + lower.
+   digit = "0123456789".
+   cr = '\r'.
+   lf = '\n'.
+
+TOKENS
+   ident = lower { letter | digit }.
+   type = upper {letter | digit }.
+   number = digit {digit}.
+
+COMMENTS FROM "/*" TO "*/" NESTED
+COMMENTS FROM "//" TO lf
+
+IGNORE cr + lf
+
+PRODUCTIONS
+
+Slang =                                                                                                    (. slang.Compiler.Core.Parsing.Ast.ModuleDeclaration m;                                                     .)
+                                                                                                           (. var bindings = new System.Collections.Generic.List<slang.Compiler.Core.Parsing.Ast.Binding>(); .) 
+    ModuleDeclaration<out m>
+    {                                                                                                      (. slang.Compiler.Core.Parsing.Ast.Binding b;                                                               .)
+        Binding<out b>                                                                                     (. bindings.Add(b);                                                                                         .)
+    }
+                                                                                                           (. Module = new slang.Compiler.Core.Parsing.Ast.Module(m, bindings);                                        .).
+
+ModuleDeclaration <out slang.Compiler.Core.Parsing.Ast.ModuleDeclaration m>  = "module" type               (. m = new slang.Compiler.Core.Parsing.Ast.ModuleDeclaration(t.val);                                        .).
+
+Binding<out slang.Compiler.Core.Parsing.Ast.Binding b> =                                                   (. slang.Compiler.Core.Parsing.Ast.BindingDeclaration d = null;                                             .)
+                                                                                                           (. var parameters = new System.Collections.Generic.List<slang.Compiler.Core.Parsing.Ast.TypeDeclaration>(); .)
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.Expression body;                                                         .)
+    "let" ident                                                                                            (. string name = t.val;                                                                                     .)
+    [(
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.TypeDeclaration r;                                                       .)
+            "->" TypeDeclaration<out r>                                                                    (. parameters.Add(r);                                                                                       .)
+        |
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.TypeDeclaration f;                                                       .)
+            TypeDeclaration<out f>                                                                         (. parameters.Add(f);                                                                                       .)
+            {
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.TypeDeclaration p;                                                       .)
+                "->" TypeDeclaration<out p>                                                                (. parameters.Add(p);                                                                                       .)
+            }
+    )]
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.TypeDeclaration returnType = System.Linq.Enumerable.LastOrDefault(parameters); .)
+                                                                                                           (. d = new slang.Compiler.Core.Parsing.Ast.FunctionDeclaration(name, parameters, returnType);               .)
+    "=" Expression<out body>                                                                               (. b = new slang.Compiler.Core.Parsing.Ast.Binding(d, body);                                                .).
+
+TypeDeclaration<out slang.Compiler.Core.Parsing.Ast.TypeDeclaration td> = 
+    (type | ident)                                                                                         (. td = new slang.Compiler.Core.Parsing.Ast.TypeDeclaration(t.val);                                         .).
+
+Expression<out slang.Compiler.Core.Parsing.Ast.Expression e> = number                                      (. e = new slang.Compiler.Core.Parsing.Ast.Expression();                                                    .).
+
+END Slang.

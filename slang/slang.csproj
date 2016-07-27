@@ -29,88 +29,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Irony">
-      <HintPath>..\packages\Irony.0.9.1\lib\net40\Irony.dll</HintPath>
-    </Reference>
-    <Reference Include="Irony.Interpreter">
-      <HintPath>..\packages\Irony.Interpreter.0.9.1\lib\net40\Irony.Interpreter.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IL\Generator.cs" />
-    <Compile Include="AST\PackagesNode.cs" />
-    <Compile Include="AST\PackageNode.cs" />
-    <Compile Include="AST\DeclarationsNode.cs" />
-    <Compile Include="AST\DeclarationNode.cs" />
-    <Compile Include="AST\ClassDeclarationNode.cs" />
-    <Compile Include="AST\InterfaceDeclarationNode.cs" />
-    <Compile Include="AST\TraitDeclarationNode.cs" />
-    <Compile Include="AST\ObjectDeclarationNode.cs" />
-    <Compile Include="AST\FunctionsNode.cs" />
-    <Compile Include="AST\FunctionNode.cs" />
-    <Compile Include="Compilation\Compiler.cs" />
-    <Compile Include="Compilation\AssemblyDefinition.cs" />
-    <Compile Include="Compilation\AssemblyDefinitionBuilder.cs" />
-    <Compile Include="Compilation\ClassDefinition.cs" />
-    <Compile Include="Compilation\ClassDefinitionBuilder.cs" />
-    <Compile Include="Compilation\FunctionDefinition.cs" />
-    <Compile Include="Compilation\FunctionDefinitionBuilder.cs" />
-    <Compile Include="Compilation\ModuleDefinition.cs" />
-    <Compile Include="Parsing\SlangGrammar.cs" />
-    <Compile Include="Parsing\SlangParser.cs" />
     <Compile Include="Compilation\CompilationRoot.cs" />
     <Compile Include="Compilation\CompilationUnit.cs" />
     <Compile Include="Compilation\CompilationMetadata.cs" />
-    <Compile Include="Parsing\NewParser.cs" />
-    <Compile Include="Lexing\Tokens\Identifier.cs" />
-    <Compile Include="Lexing\Tokens\Token.cs" />
-    <Compile Include="Lexing\State.cs">
-      <DependentUpon>State.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Lexing\Tokens\Keyword.cs" />
-    <Compile Include="Lexing\Trees\TreeBuilder.cs" />
-    <Compile Include="Lexing\Trees\Nodes\TreeNode.cs" />
-    <Compile Include="Lexing\Trees\Nodes\Transitions.cs" />
-    <Compile Include="Lexing\Lexer.cs" />
-    <Compile Include="Lexing\Trees\Tree.cs" />
-    <Compile Include="Lexing\Trees\Nodes\Character.cs" />
-    <Compile Include="Lexing\Trees\Nodes\Transition.cs" />
-    <Compile Include="Lexing\Trees\TreeExtensions.cs" />
-    <Compile Include="Lexing\Trees\Nodes\TreeContainerNode.cs" />
-    <Compile Include="Lexing\Trees\TreeDescriber.cs" />
-    <Compile Include="Lexing\SlangGrammar.cs" />
-    <Compile Include="Lexing\Rules\And.cs" />
-    <Compile Include="Lexing\Rules\Constant.cs" />
-    <Compile Include="Lexing\Rules\BinaryRule.cs" />
-    <Compile Include="Lexing\Rules\Empty.cs" />
-    <Compile Include="Lexing\Rules\Repeat.cs" />
-    <Compile Include="Lexing\Rules\Rule.cs" />
-    <Compile Include="Lexing\Rules\Or.cs" />
-    <Compile Include="Lexing\Rules\Option.cs" />
-    <Compile Include="Lexing\Rules\Range.cs" />
-    <Compile Include="Lexing\Tokens\BooleanLiteral.cs" />
-    <Compile Include="Lexing\Tokens\CharacterLiteral.cs" />
-    <Compile Include="Lexing\Tokens\IntegerLiteral.cs" />
-    <Compile Include="Lexing\Tokens\RealLiteral.cs" />
-    <Compile Include="Lexing\Tokens\StringLiteral.cs" />
+    <Compile Include="Translation\AstTranslator.cs" />
+    <Compile Include="Compilation\SlangCompiler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="IL\" />
-    <Folder Include="AST\" />
     <Folder Include="Compilation\" />
-    <Folder Include="Parsing\" />
-    <Folder Include="Lexing\Rules\" />
-    <Folder Include="Lexing\Trees\" />
-    <Folder Include="Lexing\Trees\Nodes\" />
+    <Folder Include="Translation\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lexing\State.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>State.cs</LastGenOutput>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Lexing\Tokens\README" />
+    <ProjectReference Include="..\slang.Compiler.Clr\slang.Compiler.Clr.csproj">
+      <Project>{1FD3686D-2F43-4F03-A5D7-E815C04E75D7}</Project>
+      <Name>slang.Compiler.Clr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\slang.Compiler.Core\slang.Compiler.Core.csproj">
+      <Project>{CD5F4801-1226-4330-B16A-098BC7661E26}</Project>
+      <Name>slang.Compiler.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\slang.Compiler.Coco\slang.Compiler.Coco.csproj">
+      <Project>{AF868F5F-0895-4B24-81D9-012D63A93FE4}</Project>
+      <Name>slang.Compiler.Coco</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

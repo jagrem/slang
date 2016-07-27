@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
-using slang.Parsing;
 using slang.Compilation;
-using slang.IL;
-using slang.AST;
 
 namespace sc
 {
@@ -35,32 +32,32 @@ namespace sc
 
                 try {
                     WriteInfo ("Parsing {0}...", arg);
-                    var parser = new SlangParser ();
-                    var root = parser.Parse (File.ReadAllText (arg));
-                    compilationRoot.CompilationUnits.Add(new CompilationUnit(arg, root));
+                    //var parser = new SlangParser ();
+                    //var root = parser.Parse (File.ReadAllText (arg));
+                    //compilationRoot.CompilationUnits.Add(new CompilationUnit(arg, root));
                 } catch(Exception e) {
                     WriteError ("Parse error: {0}.", e);
                     Environment.Exit (3);
                 }
             }
 
-            AssemblyDefinition assemblyDefinition = null;
+            //AssemblyDefinition assemblyDefinition = null;
 
-            try {
-                    WriteInfo ("Compiling {0}...", projectName);
-                var compiler = new Compiler ();
-                assemblyDefinition = compiler.Compile (compilationRoot);
-            } catch(Exception e) {
-                WriteError ("Compile error: {0}.", e);
-                Environment.Exit (4);
-            }
+            //try {
+            //        WriteInfo ("Compiling {0}...", projectName);
+            //    var compiler = new Compiler ();
+            //    assemblyDefinition = compiler.Compile (compilationRoot);
+            //} catch(Exception e) {
+            //    WriteError ("Compile error: {0}.", e);
+            //    Environment.Exit (4);
+            //}
 
-            try {
-                Generator.GenerateAssembly (assemblyDefinition);
-            } catch(Exception e) {
-                WriteError ("IL generation error: {0}.", e);
-                Environment.Exit (5);
-            }
+            //try {
+            //    Generator.GenerateAssembly (assemblyDefinition);
+            //} catch(Exception e) {
+            //    WriteError ("IL generation error: {0}.", e);
+            //    Environment.Exit (5);
+            //}
 
             Environment.Exit (0);
         }

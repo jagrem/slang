@@ -52,17 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IL\" />
-    <Folder Include="Lexing\" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IL\GeneratorTests.cs" />
-    <Compile Include="ParserTests.cs" />
     <Compile Include="..\slang.Tests\ParserTestCaseDataExtensions.cs" />
-    <Compile Include="Lexing\Literals\BooleanLiteralTests.cs" />
-    <Compile Include="Lexing\Literals\IntegerLiteralTests.cs" />
-    <Compile Include="Lexing\Literals\RealLiteralTests.cs" />
-    <Compile Include="Lexing\Literals\CharacterLiteralTests.cs" />
-    <Compile Include="Lexing\Literals\StringLiteralTests.cs" />
-    <Compile Include="Lexing\Rules\LexingTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
