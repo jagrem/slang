@@ -24,7 +24,7 @@ namespace slang.Tests.IL
         }
 
         [Test]
-        public void Given_an_assembly_definition_When_generating_Then_a_dll_file_is_created()
+        public void Given_an_assembly_definition_for_a_library_When_generating_Then_a_dll_file_is_created()
         {
             var assemblyDefinition = AssemblyDefinitionBuilder
                 .Create (_assemblyName)
@@ -38,7 +38,7 @@ namespace slang.Tests.IL
         }
 
         [Test]
-        public void Given_an_assembly_definition_When_generating_Then_an_executable_is_created()
+        public void Given_an_assembly_definition_for_an_executable_When_generating_Then_an_executable_is_created()
         {
             var assemblyDefinition = AssemblyDefinitionBuilder
                 .Create (_assemblyName)
@@ -89,12 +89,15 @@ namespace slang.Tests.IL
         public void Given_a_class_definition_When_generating_Then_a_public_class_is_created()
         {
             var className = _fixture.Create<string>();
-            var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
+            var classNamespace = _fixture.Create<string> ();
+            var assemblyDefinition = AssemblyDefinitionBuilder
+                .Create (_assemblyName)
                 .AsLibrary ()
                 .AddClass (c => c
-                    .WithName (className)
-                    .Public ())
-                .Build();
+                           .WithName (className)
+                           .WithNamespace (classNamespace)
+                           .Public ())
+                .Build ();
 
             Generator.GenerateAssembly (assemblyDefinition);
 
@@ -102,7 +105,7 @@ namespace slang.Tests.IL
                 .Should ()
                     .HaveCount(1)
                 .And
-                    .Contain (t => t.Name == className && t.IsPublic);
+                .Contain (t => t.Name == className && t.IsPublic && t.Namespace == classNamespace);
         }
 
         [Test]
@@ -110,14 +113,16 @@ namespace slang.Tests.IL
         {
             var methodName = _fixture.Create<string> ();
             var className = _fixture.Create<string> ();
+            var classNamespace = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
                 .AddClass (c => c
                     .WithName (className)
-                    .Public()
-                    .AddFunction(f => f
-                        .WithName(methodName)
-                        .Public ()))
+                           .WithNamespace (classNamespace)
+                           .Public()
+                           .AddFunction(f => f
+                                        .WithName(methodName)
+                                        .Public ()))
                 .Build();
 
             Generator.GenerateAssembly (assemblyDefinition);
