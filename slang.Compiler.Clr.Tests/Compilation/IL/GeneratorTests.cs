@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.IO;
 using FluentAssertions;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
@@ -52,7 +50,7 @@ namespace slang.Tests.IL
         }
 
         [Test]
-        public void Given_an_assembly_definition_When_generating_Then_a_valid_assembly_is_created()
+        public void Given_an_empty_assembly_definition_When_generating_Then_an_assembly_with_the_desired_name_is_created()
         {
             var assemblyDefinition = AssemblyDefinitionBuilder
                 .Create (_assemblyName)
@@ -61,15 +59,15 @@ namespace slang.Tests.IL
 
             Generator.GenerateAssembly (assemblyDefinition);
 
-            var result = LoadAssembly(_assemblyName);
-            result
+            assemblyDefinition
+                .LoadAssembly ()
                 .FullName
                 .Should ()
                 .StartWith (assemblyDefinition.Name);
         }
 
         [Test]
-        public void Given_an_assembly_with_a_module_When_generating_Then_the_module_is_created()
+        public void Given_an_assembly_with_a_module_When_generating_Then_the_assembly_contains_a_module_with_the_same_name_as_the_assembly()
         {
             var assemblyDefinition = AssemblyDefinitionBuilder
                 .Create (_assemblyName)
@@ -78,8 +76,8 @@ namespace slang.Tests.IL
 
             Generator.GenerateAssembly (assemblyDefinition);
 
-            var result = LoadAssembly(_assemblyName);
-            result
+            assemblyDefinition
+                .LoadAssembly ()
                 .Modules
                 .Should ()
                 .Contain (m => m.Name == assemblyDefinition.Filename);
@@ -101,11 +99,13 @@ namespace slang.Tests.IL
 
             Generator.GenerateAssembly (assemblyDefinition);
 
-            TypesDefinedInAssembly
+            var assembly = assemblyDefinition.LoadAssembly ();
+            assembly
+                .GetTypes ()
                 .Should ()
                     .HaveCount(1)
                 .And
-                .Contain (t => t.Name == className && t.IsPublic && t.Namespace == classNamespace);
+                    .Contain (t => t.Name == className && t.IsPublic && t.Namespace == classNamespace);
         }
 
         [Test]
@@ -127,21 +127,13 @@ namespace slang.Tests.IL
 
             Generator.GenerateAssembly (assemblyDefinition);
 
-            TypesDefinedInAssembly
+            assemblyDefinition
+                .LoadAssembly ()
+                .GetTypes()
                 .Should ()
                     .HaveCount (1)
                 .And
                     .Contain (t => t.GetMethod(methodName) != null);
-        }
-
-        Type[] TypesDefinedInAssembly
-        {
-            get { return LoadAssembly (_assemblyName).GetTypes (); }
-        }
-
-        static Assembly LoadAssembly(string assemblyName)
-        {
-            return AppDomain.CurrentDomain.Load (new AssemblyName (assemblyName));
         }
 
         static void DeleteFilesIfTheyExist(params string[] assemblyNames)
@@ -157,19 +149,6 @@ namespace slang.Tests.IL
         public void TearDown()
         {
             DeleteFilesIfTheyExist (_assemblyName.WithLibraryExtension (), _assemblyName.WithExecutableExtension ());
-        }
-    }
-
-    static class StringExtensions
-    {
-        public static string WithLibraryExtension(this string assemblyName)
-        {
-            return assemblyName + ".dll";
-        }
-
-        public static string WithExecutableExtension(this string assemblyName)
-        {
-            return assemblyName + ".exe";
         }
     }
 }

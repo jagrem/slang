@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Compilation\IL\GeneratorTests.cs" />
+    <Compile Include="Compilation\IL\AssemblyDefinitionExtensions.cs" />
+    <Compile Include="Compilation\IL\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Compilation\" />
