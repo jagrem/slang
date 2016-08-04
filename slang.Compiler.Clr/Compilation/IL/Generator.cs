@@ -16,11 +16,13 @@ namespace slang.Compiler.Clr.Compilation.IL
 
                 foreach (var classDefinition in module.ClassDefinitions) {
                     var visibility = classDefinition.AccessModifier == AccessModifierType.Public ? TypeAttributes.Public : TypeAttributes.NotPublic;
-                    var typeBuilder = moduleBuilder.DefineType (classDefinition.Name, TypeAttributes.Class | visibility);
+                    var typeBuilder = moduleBuilder.DefineType (
+                        classDefinition.Namespace + "." + classDefinition.Name,
+                        TypeAttributes.Class | TypeAttributes.AnsiClass | TypeAttributes.AutoLayout | TypeAttributes.Abstract | TypeAttributes.Sealed | visibility);
 
                     foreach(var function in classDefinition.FunctionDefinitions) {
                         var functionVisibility = function.AccessModifier == AccessModifierType.Public ? MethodAttributes.Public : MethodAttributes.Private;
-                        var methodBuilder = typeBuilder.DefineMethod (function.Name, functionVisibility);
+                        var methodBuilder = typeBuilder.DefineMethod (function.Name, functionVisibility | MethodAttributes.Static | MethodAttributes.HideBySig);
                         var functionGenerator = methodBuilder.GetILGenerator ();
                         functionGenerator.ThrowException (typeof(NotImplementedException));
                     }
