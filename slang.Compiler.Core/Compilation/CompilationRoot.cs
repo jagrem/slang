@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace slang.Compilation
+namespace slang.Compiler.Core.Compilation
 {
     public class CompilationRoot
     {

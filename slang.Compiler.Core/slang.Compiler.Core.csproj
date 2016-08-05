@@ -38,10 +38,15 @@
     <Compile Include="Parsing\Ast\ModuleDeclaration.cs" />
     <Compile Include="Parsing\Ast\BindingDeclaration.cs" />
     <Compile Include="Parsing\Ast\TypeDeclaration.cs" />
+    <Compile Include="Compilation\CompilationRoot.cs" />
+    <Compile Include="Compilation\CompilationUnit.cs" />
+    <Compile Include="Compilation\CompilationMetadata.cs" />
+    <Compile Include="Compilation\CompilationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Parsing\" />
     <Folder Include="Parsing\Ast\" />
+    <Folder Include="Compilation\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

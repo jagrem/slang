@@ -1,4 +1,4 @@
-﻿namespace slang.Compilation
+﻿namespace slang.Compiler.Core.Compilation
 {
     public class CompilationMetadata
     {

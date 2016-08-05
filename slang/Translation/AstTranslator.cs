@@ -22,5 +22,10 @@ namespace slang.Translation
 
             return builder.Build ();
         }
+
+        public static AssemblyDefinitionBuilder AddModule (this AssemblyDefinitionBuilder builder, Module module)
+        {
+            return builder.AddClass (c => c.WithName (module.ModuleDeclaration.Name));
+        }
     }
 }
