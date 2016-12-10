@@ -4,64 +4,52 @@ A toy .NET language.
 
 # Syntax #
 
-Symbols are the atomic units from which the grammar of Slang is composed. A symbol is made up of one or more characters and is usually delimited by whitespace.
-
-## Identifiers ##
-Identifiers are user-defined symbols.
-
-* Identifiers starting with a lower case letter can be used for names that are bound to _values_ such as functions, constants and variables.
-* Identifiers starting with an upper case character are used for names that are bound to _types_.
-* Identifiers can include upper and lower case characters, digits or one of the following connecting characters, '-', '_', or '+'.
-* Identifiers can also optionally end in '?'
+## Symbols ##
+* A symbol can be a type or a variable or an operator
 
 ```
-uppercase := 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
-
-lowercase := 'a' | 'b' | 'c' | 'd' | 'e' | 'f'| 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
-
-numeric = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-
-identifier-symbol := '-' | '_' | '+'
-
-identifier-coda := { uppercase | lowercase | numeric | identifier-symbol } ['?']
-
-value-identifier := lowercase [ identifier-coda ]
-
-type-identifier := uppercase [ identifier-coda ]
+symbol := type-name | variable-name | operator
 ```
 
-## Operators ##
-Operators are symbols that are defined as part of the language and represent core concepts in Slang. They cannot be redefined or overridden by users.
+### Types ###
+#### Type name ####
+* Type names must start with an uppercase letter.
+* A type name can contain a namespace.
 
 ```
-operator := '=' | '->' | '[' | ']'
+simple-type-name := uppercase { alphanumeric | special-symbol }
+type-name := { simple-type-name "." } simple-type-name
 ```
 
-### Bind or '=' ###
-The character '=' is used to indicate a binding of an expression to an identifier.
+### Variables ###
+#### Variable name ####
+* Must start with a lowercase letter.
 
 ```
-bind := (value-identifier | type-identifier) '=' expression
+variable-name := lowercase { alphanumeric | special-symbol }
 ```
 
-### Produces or '->' ###
-The character combination '->' is used to denote that the preceding term produces the following term.
+## Module ##
+A module starts with a type name declaration. All bindings until the next module declaration or the end of the file are considered to be part of the same module.
 
-### List or '[]' ###
-The characters '[' and ']' denote the beginning and end of list definition respectively.
+### Module declaration ###
+```
+module-declaration := "module" type-name { binding }
+```
 
-## Literals ##
-A literal represents a constant value written in a standard format.
-
-### Character ###
-A character literal is a single character surrounded by inverted commas. It defines a unicode character value.
+## Bindings ##
+* A binding maps a symbol to an expression.
 
 ```
-single-character := /* Any character except ' (U+0027), \ (U+005C), and new-line-character */
-
-simple-escape-sequence := '\'' | '\"' | '\\' | '\0' | '\a' | '\b' | '\f' | '\n' | '\r' | '\t' | '\v'
-
-character := single-character | simple-escape-sequence | hexadecimal-escape-sequence | unicode-escape-sequence
-
-character-literal := ''' character '''
+binding := "let" symbol [type-declaration] "=" expression
 ```
+
+## Type declaration ##
+* A type declaration is used to express a type constraint.
+
+```
+type-declaration := "->" type-name { "->" type-name }
+```
+
+## Expressions ##
+The simplest expressions are literals or function invocations
