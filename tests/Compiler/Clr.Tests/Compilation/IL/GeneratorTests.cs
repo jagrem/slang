@@ -125,11 +125,11 @@ namespace slang.Tests.IL
                 .AsLibrary ()
                 .AddType (c => c
                     .WithName (_className)
-                           .WithNamespace (_classNamespace)
-                           .Public()
-                           .AddFunction(f => f
-                                        .WithName(methodName)
-                                        .Public ()))
+                    .WithNamespace (_classNamespace)
+                    .Public()
+                    .AddFunction(f => f
+                        .WithName(methodName)
+                        .Public ()))
                 .Build();
 
             Generator.GenerateAssembly (assemblyDefinition);
@@ -147,11 +147,11 @@ namespace slang.Tests.IL
                 .AsLibrary ()
                 .AddType (c => c
                     .WithName (_className)
-                           .WithNamespace (_classNamespace)
-                           .Public ()
-                           .AddFunction (f => f
-                                         .WithName (methodName)
-                                         .Public ()))
+                    .WithNamespace (_classNamespace)
+                    .Public ()
+                    .AddFunction (f => f
+                        .WithName (methodName)
+                        .Public ()))
                 .Build ();
 
             Generator.GenerateAssembly (assemblyDefinition);
@@ -170,12 +170,12 @@ namespace slang.Tests.IL
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
                 .AddType (c => c
-                    .WithName (_className)
-                           .WithNamespace (_classNamespace)
-                           .Public ()
-                           .AddFunction (f => f
-                                         .WithName (methodName)
-                                         .Public ()))
+					.WithName (_className)
+					.WithNamespace (_classNamespace)
+					.Public ()
+					.AddFunction (f => f
+					     .WithName (methodName)
+					     .Public ()))
                 .Build ();
 
             Generator.GenerateAssembly (assemblyDefinition);
@@ -202,9 +202,9 @@ namespace slang.Tests.IL
                 .Create (_assemblyName)
                 .AsLibrary ()
                 .AddType (c => c
-                           .WithName (_className)
-                           .WithNamespace (_classNamespace)
-                           .Public ())
+					.WithName (_className)
+					.WithNamespace (_classNamespace)
+					.Public ())
                 .Build ();
         }
 
