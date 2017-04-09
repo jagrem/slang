@@ -30,10 +30,13 @@ namespace slang.Tests.IL
         [Test]
         public void Given_an_assembly_definition_for_a_library_When_generating_Then_a_dll_file_is_created()
         {
+            // Arrange
             var assemblyDefinition = GetEmptyLibraryDefinition ();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             var result = new FileInfo (_assemblyName.WithLibraryExtension ());
             result.Exists.Should ().BeTrue ();
         }
@@ -42,13 +45,16 @@ namespace slang.Tests.IL
         [Test]
         public void Given_an_assembly_definition_for_an_executable_When_generating_Then_an_executable_is_created()
         {
+            // Arrange
             var assemblyDefinition = AssemblyDefinitionBuilder
                 .Create (_assemblyName)
                 .AsExecutable ()
                 .Build();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             var result = new FileInfo (_assemblyName.WithExecutableExtension ());
             result.Exists.Should ().BeTrue ();
         }
@@ -56,10 +62,13 @@ namespace slang.Tests.IL
         [Test]
         public void Given_an_empty_assembly_definition_When_generating_Then_an_assembly_with_the_desired_name_is_created()
         {
+            // Arrange
             var assemblyDefinition = GetEmptyLibraryDefinition ();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             assemblyDefinition
                 .LoadAssembly ()
                 .FullName
@@ -70,10 +79,13 @@ namespace slang.Tests.IL
         [Test]
         public void Given_an_assembly_with_a_module_When_generating_Then_the_assembly_contains_a_module_with_the_same_name_as_the_assembly()
         {
+            // Arrange
             var assemblyDefinition = GetEmptyLibraryDefinition ();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             assemblyDefinition
                 .LoadAssembly ()
                 .Modules
@@ -84,10 +96,13 @@ namespace slang.Tests.IL
         [Test]
         public void Given_a_class_definition_When_generating_Then_a_class_with_the_correct_name_is_created()
         {
+            // Arrange
             var assemblyDefinition = GetAssemblyWithEmptyClassDefinition ();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             var assembly = assemblyDefinition.LoadAssembly ();
             assembly
                 .GetTypes ()
@@ -101,10 +116,13 @@ namespace slang.Tests.IL
         [Test]
         public void Given_a_class_definition_When_generating_Then_a_public_static_class_is_created ()
         {
+            // Arrange
             var assemblyDefinition = GetAssemblyWithEmptyClassDefinition ();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             var assembly = assemblyDefinition.LoadAssembly ();
             assembly.GetTypes ().Should ().HaveCount (1);
 
@@ -120,6 +138,7 @@ namespace slang.Tests.IL
         [Test]
         public void Given_a_function_definition_When_generating_Then_a_method_with_correct_name_is_created()
         {
+            // Arrange
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
@@ -132,8 +151,10 @@ namespace slang.Tests.IL
                         .Public ()))
                 .Build();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             var type = assemblyDefinition.LoadAssembly ().GetTypes ().First ();
             var method = type.GetMethod (methodName);
             method.Should ().NotBeNull ();
@@ -142,6 +163,7 @@ namespace slang.Tests.IL
         [Test]
         public void Given_a_function_definition_When_generating_Then_a_public_static_method_is_created ()
         {
+            // Arrange
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
@@ -154,8 +176,10 @@ namespace slang.Tests.IL
                         .Public ()))
                 .Build ();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             var type = assemblyDefinition.LoadAssembly ().GetTypes ().First ();
             var method = type.GetMethod (methodName);
             method.IsPublic.Should ().BeTrue ("method must be public");
@@ -166,6 +190,7 @@ namespace slang.Tests.IL
         [Test]
         public void Given_a_function_definition_When_generating_Then_a_simple_method_is_generated()
         {
+            // Arrange
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
@@ -178,8 +203,10 @@ namespace slang.Tests.IL
 					     .Public ()))
                 .Build ();
 
+            // Act
             Generator.GenerateAssembly (assemblyDefinition);
 
+            // Assert
             var type = assemblyDefinition.LoadAssembly ().GetTypes ().First ();
             var method = type.GetMethod (methodName);
             var result = method.Invoke (null, null);
