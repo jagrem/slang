@@ -2,8 +2,8 @@
 {
     public class FunctionDefinition
     {
-        public string Name { get; private set; }
-        public AccessModifierType AccessModifier { get; private set; }
+        public string Name { get; }
+        public AccessModifierType AccessModifier { get; }
 
         public FunctionDefinition (string name, AccessModifierType accessModifier)
         {
