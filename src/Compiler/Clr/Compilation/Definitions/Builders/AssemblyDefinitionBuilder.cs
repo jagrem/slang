@@ -9,7 +9,7 @@ namespace slang.Compiler.Clr.Compilation.Definitions.Builders
         enum ExtensionType { None, Executable, Library }
 
         string _assemblyName;
-        readonly List<ClassDefinitionBuilder> _classDefinitionBuilders = new List<ClassDefinitionBuilder>();
+        readonly List<TypeDefinitionBuilder> _classDefinitionBuilders = new List<TypeDefinitionBuilder>();
         ExtensionType _extensionType = ExtensionType.None;
 
         AssemblyDefinitionBuilder()
@@ -40,9 +40,9 @@ namespace slang.Compiler.Clr.Compilation.Definitions.Builders
             return this;
         }
 
-        public AssemblyDefinitionBuilder AddClass(Func<ClassDefinitionBuilder, ClassDefinitionBuilder> classDefinitionConfigurator)
+        public AssemblyDefinitionBuilder AddType(Func<TypeDefinitionBuilder, TypeDefinitionBuilder> classDefinitionConfigurator)
         {
-            _classDefinitionBuilders.Add(classDefinitionConfigurator(ClassDefinitionBuilder.Create()));
+            _classDefinitionBuilders.Add(classDefinitionConfigurator(TypeDefinitionBuilder.Create()));
             return this;
         }
 

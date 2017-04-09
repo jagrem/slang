@@ -123,7 +123,7 @@ namespace slang.Tests.IL
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
-                .AddClass (c => c
+                .AddType (c => c
                     .WithName (_className)
                            .WithNamespace (_classNamespace)
                            .Public()
@@ -145,7 +145,7 @@ namespace slang.Tests.IL
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
-                .AddClass (c => c
+                .AddType (c => c
                     .WithName (_className)
                            .WithNamespace (_classNamespace)
                            .Public ()
@@ -169,7 +169,7 @@ namespace slang.Tests.IL
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
-                .AddClass (c => c
+                .AddType (c => c
                     .WithName (_className)
                            .WithNamespace (_classNamespace)
                            .Public ()
@@ -201,7 +201,7 @@ namespace slang.Tests.IL
             return AssemblyDefinitionBuilder
                 .Create (_assemblyName)
                 .AsLibrary ()
-                .AddClass (c => c
+                .AddType (c => c
                            .WithName (_className)
                            .WithNamespace (_classNamespace)
                            .Public ())

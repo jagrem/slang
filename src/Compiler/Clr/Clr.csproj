@@ -33,10 +33,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Compilation\Definitions\ModuleDefinition.cs" />
     <Compile Include="Compilation\Definitions\AssemblyDefinition.cs" />
-    <Compile Include="Compilation\Definitions\ClassDefinition.cs" />
+    <Compile Include="Compilation\Definitions\TypeDefinition.cs" />
     <Compile Include="Compilation\Definitions\FunctionDefinition.cs" />
     <Compile Include="Compilation\Definitions\Builders\AssemblyDefinitionBuilder.cs" />
-    <Compile Include="Compilation\Definitions\Builders\ClassDefinitionBuilder.cs" />
+    <Compile Include="Compilation\Definitions\Builders\TypeDefinitionBuilder.cs" />
     <Compile Include="Compilation\Definitions\Builders\FunctionDefinitionBuilder.cs" />
     <Compile Include="Compilation\Definitions\AccessModifierType.cs" />
     <Compile Include="Compilation\Definitions\MalformedDefinitionException.cs" />

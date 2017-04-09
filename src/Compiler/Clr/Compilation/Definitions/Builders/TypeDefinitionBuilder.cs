@@ -4,45 +4,45 @@ using System.Linq;
 
 namespace slang.Compiler.Clr.Compilation.Definitions
 {
-    public class ClassDefinitionBuilder
+    public class TypeDefinitionBuilder
     {
         string _className;
         string _namespace;
         AccessModifierType _accessModifier;
         readonly List<FunctionDefinitionBuilder> _functionDefinitionBuilders = new List<FunctionDefinitionBuilder>();
 
-        ClassDefinitionBuilder() {}
+        TypeDefinitionBuilder() {}
 
-        public static ClassDefinitionBuilder Create()
+        public static TypeDefinitionBuilder Create()
         {
-            return new ClassDefinitionBuilder ();
+            return new TypeDefinitionBuilder ();
         }
 
-        public ClassDefinitionBuilder WithName(string className)
+        public TypeDefinitionBuilder WithName(string className)
         {
             _className = className;   
             return this;
         }
 
-        public ClassDefinitionBuilder WithNamespace(string @namespace)
+        public TypeDefinitionBuilder WithNamespace(string @namespace)
         {
             _namespace = @namespace;
             return this;
         }
 
-        public ClassDefinitionBuilder Public()
+        public TypeDefinitionBuilder Public()
         {
             _accessModifier = AccessModifierType.Public;
             return this;
         }
 
-        public ClassDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder,FunctionDefinitionBuilder> functionConfigurator)
+        public TypeDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder,FunctionDefinitionBuilder> functionConfigurator)
         {
             _functionDefinitionBuilders.Add(functionConfigurator (new FunctionDefinitionBuilder ()));
             return this;
         }
 
-        public ClassDefinition Build()
+        public TypeDefinition Build()
         {
             if (_accessModifier == AccessModifierType.Undefined)
                 throw new MalformedDefinitionException ("No access modifier has been defined for this class.");
@@ -56,7 +56,7 @@ namespace slang.Compiler.Clr.Compilation.Definitions
             }
  
             var functionDefinitions = _functionDefinitionBuilders.Select (f => f.Build ());
-            return new ClassDefinition(_accessModifier,_className, _namespace, functionDefinitions);
+            return new TypeDefinition(_accessModifier,_className, _namespace, functionDefinitions);
         }
     }
 }

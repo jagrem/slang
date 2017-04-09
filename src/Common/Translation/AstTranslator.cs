@@ -15,7 +15,7 @@ namespace slang.Translation
                 .AsLibrary ();
 
             modules.ToList ().ForEach (m => {
-                builder.AddClass (c => c
+                builder.AddType (c => c
                                   .WithName (m.ModuleDeclaration.Name)
                                   .Public ());
             });
@@ -25,7 +25,7 @@ namespace slang.Translation
 
         public static AssemblyDefinitionBuilder AddModule (this AssemblyDefinitionBuilder builder, Module module)
         {
-            return builder.AddClass (c => c.WithName (module.ModuleDeclaration.Name));
+            return builder.AddType (c => c.WithName (module.ModuleDeclaration.Name));
         }
     }
 }

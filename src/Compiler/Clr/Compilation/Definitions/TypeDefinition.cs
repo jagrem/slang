@@ -2,14 +2,14 @@
 
 namespace slang.Compiler.Clr.Compilation.Definitions
 {
-    public class ClassDefinition
+    public class TypeDefinition
     {
         public AccessModifierType AccessModifier { get; }
         public string Name { get; }
         public string Namespace { get; }
         public IEnumerable<FunctionDefinition> FunctionDefinitions { get; }
 
-        public ClassDefinition(AccessModifierType accessModifier, string name, string @namespace, IEnumerable<FunctionDefinition> functionDefinitions)
+        public TypeDefinition(AccessModifierType accessModifier, string name, string @namespace, IEnumerable<FunctionDefinition> functionDefinitions)
         {
             AccessModifier = accessModifier;
             Name = name;
