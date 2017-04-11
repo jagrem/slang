@@ -14,18 +14,14 @@ namespace slang.Translation
                 .Create ("MyAssembly")
                 .AsLibrary ();
 
-            modules.ToList ().ForEach (m => {
-                builder.AddType (c => c
-                                  .WithName (m.ModuleDeclaration.Name)
-                                  .Public ());
-            });
+            modules.ToList ().ForEach (m => builder.AddModule (c => c.WithName (m.ModuleDeclaration.Name)));
 
             return builder.Build ();
         }
 
         public static AssemblyDefinitionBuilder AddModule (this AssemblyDefinitionBuilder builder, Module module)
         {
-            return builder.AddType (c => c.WithName (module.ModuleDeclaration.Name));
+            return builder.AddModule (c => c.WithName (module.ModuleDeclaration.Name));
         }
     }
 }

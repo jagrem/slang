@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace slang.Compiler.Clr.Compilation.Definitions.Builders
 {
@@ -9,7 +9,7 @@ namespace slang.Compiler.Clr.Compilation.Definitions.Builders
         enum ExtensionType { None, Executable, Library }
 
         string _assemblyName;
-        readonly List<TypeDefinitionBuilder> _classDefinitionBuilders = new List<TypeDefinitionBuilder>();
+        readonly List<ModuleDefinitionBuilder> _moduleDefinitionBuilders = new List<ModuleDefinitionBuilder>();
         ExtensionType _extensionType = ExtensionType.None;
 
         AssemblyDefinitionBuilder()
@@ -40,9 +40,9 @@ namespace slang.Compiler.Clr.Compilation.Definitions.Builders
             return this;
         }
 
-        public AssemblyDefinitionBuilder AddType(Func<TypeDefinitionBuilder, TypeDefinitionBuilder> classDefinitionConfigurator)
+        public AssemblyDefinitionBuilder AddModule(Func<ModuleDefinitionBuilder,ModuleDefinitionBuilder> moduleDefinitionConfigurator)
         {
-            _classDefinitionBuilders.Add(classDefinitionConfigurator(TypeDefinitionBuilder.Create()));
+            _moduleDefinitionBuilders.Add(moduleDefinitionConfigurator(ModuleDefinitionBuilder.Create()));
             return this;
         }
 
@@ -53,11 +53,11 @@ namespace slang.Compiler.Clr.Compilation.Definitions.Builders
             }
 
             var assemblyFilename = _assemblyName + (_extensionType == ExtensionType.Executable ? ".exe" : ".dll");
-            var classDefinitions = _classDefinitionBuilders.Select (c => c.Build ());
+
             return new AssemblyDefinition(
                 _assemblyName,
                 assemblyFilename,
-                new[] { new ModuleDefinition(_assemblyName, assemblyFilename, classDefinitions) });
+                _moduleDefinitionBuilders.Select(moduleDefinitionBuilder => moduleDefinitionBuilder.Build()));
         }
     }
 }

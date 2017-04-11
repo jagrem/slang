@@ -5,6 +5,15 @@
         string _name;
         AccessModifierType _accessModifier = AccessModifierType.Undefined;
 
+        FunctionDefinitionBuilder()
+        {
+        }
+
+        public static FunctionDefinitionBuilder Create()
+        {
+            return new FunctionDefinitionBuilder();
+        }
+
         public FunctionDefinitionBuilder WithName(string name)
         {
             _name = name;

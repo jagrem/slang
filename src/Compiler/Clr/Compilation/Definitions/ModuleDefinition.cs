@@ -5,14 +5,16 @@ namespace slang.Compiler.Clr.Compilation.Definitions
     public class ModuleDefinition
     {
         public string Name { get; }
-        public string FileName { get; }
-        public IEnumerable<TypeDefinition> ClassDefinitions { get; }
+        public string Namespace { get; }
+        public IEnumerable<TypeDefinition> TypeDefinitions { get; }
+        public IEnumerable<FunctionDefinition> FunctionDefinitions { get; }
 
-        public ModuleDefinition (string name, string fileName, IEnumerable<TypeDefinition> classDefinitions)
+        public ModuleDefinition (string name, string @namespace, IEnumerable<TypeDefinition> typeDefinitions, IEnumerable<FunctionDefinition> functionDefinitions)
         {
             Name = name;
-            FileName = fileName;
-            ClassDefinitions = classDefinitions;
+            Namespace = @namespace;
+            TypeDefinitions = typeDefinitions;
+            FunctionDefinitions = functionDefinitions;
         }
     }
 }

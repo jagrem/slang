@@ -41,6 +41,7 @@
     <Compile Include="Compilation\Definitions\AccessModifierType.cs" />
     <Compile Include="Compilation\Definitions\MalformedDefinitionException.cs" />
     <Compile Include="Compilation\IL\Generator.cs" />
+    <Compile Include="Compilation\Definitions\Builders\ModuleDefinitionBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Compilation\" />
