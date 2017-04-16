@@ -9,7 +9,7 @@ namespace slang.Compiler.Clr.Compilation.IL
     {
         public static void GenerateAssembly(AssemblyDefinition definition)
         {
-            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly (new AssemblyName(definition.Name), AssemblyBuilderAccess.Save);
+            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly (new AssemblyName(definition.Name), AssemblyBuilderAccess.Run);
 
             //var moduleBuilder = assemblyBuilder.DefineDynamicModule (definition.Name, definition.Filename);
 
@@ -29,8 +29,9 @@ namespace slang.Compiler.Clr.Compilation.IL
             //        generator.Emit(OpCodes.Ret);
             //    }
             //}
-                 
-            assemblyBuilder.Save (definition.Filename);
+
+            // NOTE: Dynamic assemblies cannot be saved to disk in .NET Core yet
+            //assemblyBuilder.Save (definition.Filename);
         }
     }
 }

@@ -1,53 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1FD3686D-2F43-4F03-A5D7-E815C04E75D7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>slang.Compiler.Clr</RootNamespace>
-    <AssemblyName>slang.Compiler.Clr</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFramework>netstandard1.4</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+
+  <PropertyGroup>
+    <Version>0.0.0.0</Version>
+    <Author>James G. McAuley</Author>
+    <Copyright>James G. McAuley 2014-2017</Copyright>
+   <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Compilation\Definitions\ModuleDefinition.cs" />
-    <Compile Include="Compilation\Definitions\AssemblyDefinition.cs" />
-    <Compile Include="Compilation\Definitions\TypeDefinition.cs" />
-    <Compile Include="Compilation\Definitions\FunctionDefinition.cs" />
-    <Compile Include="Compilation\Definitions\Builders\AssemblyDefinitionBuilder.cs" />
-    <Compile Include="Compilation\Definitions\Builders\TypeDefinitionBuilder.cs" />
-    <Compile Include="Compilation\Definitions\Builders\FunctionDefinitionBuilder.cs" />
-    <Compile Include="Compilation\Definitions\AccessModifierType.cs" />
-    <Compile Include="Compilation\Definitions\MalformedDefinitionException.cs" />
-    <Compile Include="Compilation\IL\Generator.cs" />
-    <Compile Include="Compilation\Definitions\Builders\ModuleDefinitionBuilder.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Compilation\" />
-    <Folder Include="Compilation\IL\" />
-    <Folder Include="Compilation\Definitions\" />
-    <Folder Include="Compilation\Definitions\Builders\" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
