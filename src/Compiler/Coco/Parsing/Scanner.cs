@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.IO;
 using System.Collections;
@@ -69,7 +69,7 @@ public class Buffer {
 	
 	protected void Close() {
 		if (!isUserStream && stream != null) {
-			stream.Close();
+			stream.Dispose();
 			stream = null;
 		}
 	}
