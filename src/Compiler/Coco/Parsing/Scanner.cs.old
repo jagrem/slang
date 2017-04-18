@@ -69,7 +69,7 @@ public class Buffer {
 	
 	protected void Close() {
 		if (!isUserStream && stream != null) {
-			stream.Close();
+			stream.Dispose();
 			stream = null;
 		}
 	}

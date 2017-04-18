@@ -11,6 +11,11 @@
    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
+  <Target Name="GenerateParser" BeforeTargets="CoreCompile">
+      <Exec Command="build/generateCompiler.sh" />
+      <Exec Command="ruby build/migrateBrokenCode.rb" />
+  </Target>
+
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
