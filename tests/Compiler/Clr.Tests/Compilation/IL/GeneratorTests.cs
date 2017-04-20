@@ -142,10 +142,9 @@ namespace slang.Tests.IL
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
-                .AddType (c => c
+                .AddModule (c => c
                     .WithName (_className)
                     .WithNamespace (_classNamespace)
-                    .Public()
                     .AddFunction(f => f
                         .WithName(methodName)
                         .Public ()))
@@ -167,10 +166,9 @@ namespace slang.Tests.IL
             var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
-                .AddType (c => c
+                .AddModule (c => c
                     .WithName (_className)
                     .WithNamespace (_classNamespace)
-                    .Public ()
                     .AddFunction (f => f
                         .WithName (methodName)
                         .Public ()))
@@ -191,13 +189,12 @@ namespace slang.Tests.IL
         public void Given_a_function_definition_When_generating_Then_a_simple_method_is_generated()
         {
             // Arrange
-            var methodName = _fixture.Create<string> ();
-            var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
+            var assemblyDefinition = AssemblyDefinitionBuilder
+                .Create (_assemblyName)
                 .AsLibrary ()
-                .AddType (c => c
+                .AddModule (c => c
 					.WithName (_className)
 					.WithNamespace (_classNamespace)
-					.Public ()
 					.AddFunction (f => f
 					     .WithName (methodName)
 					     .Public ()))
@@ -228,10 +225,9 @@ namespace slang.Tests.IL
             return AssemblyDefinitionBuilder
                 .Create (_assemblyName)
                 .AsLibrary ()
-                .AddType (c => c
+                .AddModule (c => c
 					.WithName (_className)
-					.WithNamespace (_classNamespace)
-					.Public ())
+					.WithNamespace (_classNamespace))
                 .Build ();
         }
 
