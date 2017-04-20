@@ -13,18 +13,18 @@ namespace slang.Tests.IL
     [TestFixture]
     public class GeneratorTests
     {
-        Fixture _fixture;
-        string _assemblyName;
-        string _className;
-        string _classNamespace;
+        readonly string _assemblyName;
+        readonly string _className;
+        readonly string _classNamespace;
+        readonly string _methodName;
 
         [SetUp]
         public void SetUp()
         {
-            _fixture = new Fixture ();
-            _assemblyName = _fixture.Create<string> ();
-            _className = _fixture.Create<string> ();
-            _classNamespace = _fixture.Create<string> ();
+            _assemblyName = $"assembly_{Guid.NewGuid ().ToString ()}";
+            _className = $"type_{Guid.NewGuid ().ToString ()}";
+            _classNamespace = $"namespace_{Guid.NewGuid ().ToString ()}";
+            _methodName = $"method_{Guid.NewGuid ().ToString ()}";
         }
 
         [Test]
@@ -139,14 +139,13 @@ namespace slang.Tests.IL
         public void Given_a_function_definition_When_generating_Then_a_method_with_correct_name_is_created()
         {
             // Arrange
-            var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
                 .AddModule (c => c
                     .WithName (_className)
                     .WithNamespace (_classNamespace)
                     .AddFunction(f => f
-                        .WithName(methodName)
+                        .WithName(_methodName)
                         .Public ()))
                 .Build();
 
@@ -155,7 +154,7 @@ namespace slang.Tests.IL
 
             // Assert
             var type = assemblyDefinition.LoadAssembly ().GetTypes ().First ();
-            var method = type.GetMethod (methodName);
+            var method = type.GetMethod (_methodName);
             method.Should ().NotBeNull ();
         }
 
@@ -163,14 +162,13 @@ namespace slang.Tests.IL
         public void Given_a_function_definition_When_generating_Then_a_public_static_method_is_created ()
         {
             // Arrange
-            var methodName = _fixture.Create<string> ();
             var assemblyDefinition = AssemblyDefinitionBuilder.Create (_assemblyName)
                 .AsLibrary ()
                 .AddModule (c => c
                     .WithName (_className)
                     .WithNamespace (_classNamespace)
                     .AddFunction (f => f
-                        .WithName (methodName)
+                        .WithName (_methodName)
                         .Public ()))
                 .Build ();
 
@@ -179,7 +177,7 @@ namespace slang.Tests.IL
 
             // Assert
             var type = assemblyDefinition.LoadAssembly ().GetTypes ().First ();
-            var method = type.GetMethod (methodName);
+            var method = type.GetMethod (_methodName);
             method.IsPublic.Should ().BeTrue ("method must be public");
             method.IsStatic.Should ().BeTrue ("method must be static");
             method.IsHideBySig.Should ().BeTrue ("method must be hidebysig");
@@ -196,7 +194,7 @@ namespace slang.Tests.IL
 					.WithName (_className)
 					.WithNamespace (_classNamespace)
 					.AddFunction (f => f
-					     .WithName (methodName)
+					     .WithName (_methodName)
 					     .Public ()))
                 .Build ();
 
@@ -205,7 +203,7 @@ namespace slang.Tests.IL
 
             // Assert
             var type = assemblyDefinition.LoadAssembly ().GetTypes ().First ();
-            var method = type.GetMethod (methodName);
+            var method = type.GetMethod (_methodName);
             var result = method.Invoke (null, null);
             result.Should ().BeOfType<int> ();
             result.Should ().Be (1);
