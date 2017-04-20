@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reflection;
 using slang.Compiler.Clr.Compilation.Definitions;
 
@@ -14,7 +14,7 @@ namespace slang.Tests.IL
 
         public static Assembly LoadAssembly (this AssemblyDefinition assemblyDefinition)
         {
-            return AppDomain.CurrentDomain.Load (new AssemblyName (assemblyDefinition.Name));
+            throw new InvalidOperationException("We will no longer be loading dynamic assemblies for disk so this operation is no longer possible.");
         }
     }    
 }
