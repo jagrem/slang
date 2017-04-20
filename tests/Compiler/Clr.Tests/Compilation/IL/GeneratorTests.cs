@@ -124,13 +124,13 @@ namespace slang.Tests.IL
             var assembly = assemblyDefinition.LoadAssembly ();
             assembly.GetTypes ().Should ().HaveCount (1);
 
-            var type = assembly.GetTypes ().First ();
+            var type = assembly.GetTypes ().Select (t => t.GetTypeInfo()).First ();
             type.IsPublic.Should ().BeTrue ("type must be public");
             type.IsAutoLayout.Should ().BeTrue ("type must be have auto layout");
             type.IsAnsiClass.Should ().BeTrue ("type must be an Ansi class");
             type.IsAbstract.Should ().BeTrue("type must be an abstract class");
             type.IsSealed.Should ().BeTrue ("type must be a sealed class");
-            type.Should ().BeDerivedFrom <Object> ("type must extend System.Object");
+            type.IsSubclassOf (typeof (object)).Should ().BeTrue ("type must extend System.Object");
         }
 
         [Fact]
