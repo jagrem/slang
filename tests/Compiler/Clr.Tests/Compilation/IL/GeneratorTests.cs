@@ -1,25 +1,23 @@
 ﻿using System.IO;
 using FluentAssertions;
-using NUnit.Framework;
-using Ploeh.AutoFixture;
 using System.Linq;
 using slang.Compiler.Clr.Compilation.Definitions.Builders;
 using slang.Compiler.Clr.Compilation.IL;
 using System;
 using slang.Compiler.Clr.Compilation.Definitions;
+using Xunit;
+using System.Reflection;
 
 namespace slang.Tests.IL
 {
-    [TestFixture]
-    public class GeneratorTests
+    public class GeneratorTests : IDisposable
     {
         readonly string _assemblyName;
         readonly string _className;
         readonly string _classNamespace;
         readonly string _methodName;
 
-        [SetUp]
-        public void SetUp()
+        public GeneratorTests()
         {
             _assemblyName = $"assembly_{Guid.NewGuid ().ToString ()}";
             _className = $"type_{Guid.NewGuid ().ToString ()}";
@@ -27,7 +25,7 @@ namespace slang.Tests.IL
             _methodName = $"method_{Guid.NewGuid ().ToString ()}";
         }
 
-        [Test]
+        [Fact]
         public void Given_an_assembly_definition_for_a_library_When_generating_Then_a_dll_file_is_created()
         {
             // Arrange
@@ -42,7 +40,7 @@ namespace slang.Tests.IL
         }
 
 
-        [Test]
+        [Fact]
         public void Given_an_assembly_definition_for_an_executable_When_generating_Then_an_executable_is_created()
         {
             // Arrange
@@ -59,7 +57,7 @@ namespace slang.Tests.IL
             result.Exists.Should ().BeTrue ();
         }
 
-        [Test]
+        [Fact]
         public void Given_an_empty_assembly_definition_When_generating_Then_an_assembly_with_the_desired_name_is_created()
         {
             // Arrange
@@ -76,7 +74,7 @@ namespace slang.Tests.IL
                 .StartWith (assemblyDefinition.Name);
         }
 
-        [Test]
+        [Fact]
         public void Given_an_assembly_with_a_module_When_generating_Then_the_assembly_contains_a_module_with_the_same_name_as_the_assembly()
         {
             // Arrange
@@ -93,7 +91,7 @@ namespace slang.Tests.IL
                 .Contain (m => m.Name == assemblyDefinition.Filename);
         }
 
-        [Test]
+        [Fact]
         public void Given_a_class_definition_When_generating_Then_a_class_with_the_correct_name_is_created()
         {
             // Arrange
@@ -113,7 +111,7 @@ namespace slang.Tests.IL
         }
 
 
-        [Test]
+        [Fact]
         public void Given_a_class_definition_When_generating_Then_a_public_static_class_is_created ()
         {
             // Arrange
@@ -135,7 +133,7 @@ namespace slang.Tests.IL
             type.Should ().BeDerivedFrom <Object> ("type must extend System.Object");
         }
 
-        [Test]
+        [Fact]
         public void Given_a_function_definition_When_generating_Then_a_method_with_correct_name_is_created()
         {
             // Arrange
@@ -158,7 +156,7 @@ namespace slang.Tests.IL
             method.Should ().NotBeNull ();
         }
 
-        [Test]
+        [Fact]
         public void Given_a_function_definition_When_generating_Then_a_public_static_method_is_created ()
         {
             // Arrange
@@ -183,7 +181,7 @@ namespace slang.Tests.IL
             method.IsHideBySig.Should ().BeTrue ("method must be hidebysig");
         }
 
-        [Test]
+        [Fact]
         public void Given_a_function_definition_When_generating_Then_a_simple_method_is_generated()
         {
             // Arrange
@@ -237,10 +235,22 @@ namespace slang.Tests.IL
                 .Build ();
         }
 
-        [TearDown]
-        public void TearDown()
+        bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose (bool disposing)
         {
-            DeleteFilesIfTheyExist (_assemblyName.WithLibraryExtension (), _assemblyName.WithExecutableExtension ());
+            if (!disposedValue) {
+                if (disposing) {
+                    DeleteFilesIfTheyExist (_assemblyName.WithLibraryExtension (), _assemblyName.WithExecutableExtension ());
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose ()
+        {
+            Dispose (true);
         }
     }
 }
