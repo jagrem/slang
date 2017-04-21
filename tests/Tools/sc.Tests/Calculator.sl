@@ -1,6 +1,8 @@
-﻿package Test {
-	class Calculator {
-		def Add(x:int, y:int) = x + y
-		def Subtract(x:int, y:int) = x - y
-	}
-}
+﻿module Calculator
+
+    Add x => int, x -> x -> x
+    Add x y = + x y
+
+	Subtract x => int, x -> x -> x
+    Subtract x y = - x y
+	
