@@ -3,4 +3,4 @@ slang
 A toy .NET language.
 
 ## Contents ##
-[Syntax](Syntax.markdown)
+[Syntax](docs/Syntax.markdown)
