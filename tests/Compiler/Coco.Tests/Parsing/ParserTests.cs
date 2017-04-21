@@ -1,16 +1,15 @@
 ﻿using System.IO;
-using NUnit.Framework;
 using slang.Compiler.Coco.Parsing;
 using FluentAssertions;
 using slang.Compiler.Core.Parsing.Ast;
 using System.Collections.Generic;
+using Xunit;
 
 namespace slang.Compiler.Coco.Tests.Parsing
 {
-    [TestFixture]
     public class ParserTests
     {
-        [Test]
+        [Fact]
         public void Given_a_simple_module_When_parsed_Then_there_are_no_errors()
         {
             using (var fileStream = File.OpenRead ("./Resources/SimpleModule.sl"))
@@ -21,7 +20,7 @@ namespace slang.Compiler.Coco.Tests.Parsing
             }
         }
 
-        [Test]
+        [Fact]
         public void Given_a_simple_module_When_parsed_Then_a_module_called_with_the_correct_module_name_is_created ()
         {
             using (var fileStream = File.OpenRead ("./Resources/SimpleModule.sl")) {
@@ -33,7 +32,7 @@ namespace slang.Compiler.Coco.Tests.Parsing
             }
         }
 
-        [Test]
+        [Fact]
         public void Given_a_module_with_bindings_When_parsed_Then_the_correct_bindings_are_created ()
         {
             using (var fileStream = File.OpenRead ("./Resources/ModuleWithBindings.sl")) {
