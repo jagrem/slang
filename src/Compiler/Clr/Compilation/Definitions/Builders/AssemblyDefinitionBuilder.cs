@@ -52,11 +52,8 @@ namespace slang.Compiler.Clr.Compilation.Definitions.Builders
                 throw new MalformedDefinitionException ("You must choose whether the assembly is an executable or a library.");
             }
 
-            var assemblyFilename = _assemblyName + (_extensionType == ExtensionType.Executable ? ".exe" : ".dll");
-
             return new AssemblyDefinition(
                 _assemblyName,
-                assemblyFilename,
                 _moduleDefinitionBuilders.Select(moduleDefinitionBuilder => moduleDefinitionBuilder.Build()));
         }
     }
