@@ -14,7 +14,9 @@ namespace Clr.Tests.Compilation.CSharp
             var assemblyDefinition = AssemblyDefinitionBuilder
                 .Create("slang")
                 .AsLibrary()
-                .AddModule(m => m.WithName("CSharpAssemblyGeneratorTestModule").WithNamespace("slang.Clr.Tests"))
+                .AddModule(m => m
+                    .WithName("CSharpAssemblyGeneratorTestModule")
+                    .WithNamespace("slang.Clr.Tests"))
                 .Build();
 
             // Act

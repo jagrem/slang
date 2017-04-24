@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Text;
 using slang.Compiler.Clr.Compilation.Core;
 
 namespace slang.Compiler.Clr.Compilation.CSharp
@@ -7,25 +8,25 @@ namespace slang.Compiler.Clr.Compilation.CSharp
     {
         public Assembly GenerateDynamicAssembly(AssemblyDefinition assemblyDefinition)
         {
-            const string codeToCompile = @"
-            using System;
+            var sourceCode = new StringBuilder();
 
-            namespace RoslynCompileSample
+            foreach (var moduleDefinition in assemblyDefinition.Modules)
             {
-                public class Writer
-                {
-                    public void Write(string message)
-                    {
-                        Console.WriteLine($""you said '{message}!'"");
-                    }
-                }
-            }";
+                sourceCode.Append($@"
+                    namespace {moduleDefinition.Namespace}
+                    {{
+                        public static class {moduleDefinition.Name}
+                        {{
+                        }}
+                    }}
+                ");
+            }
 
             return CSharpCompiler.CompileToInMemoryAssembly(
                 new CSharpCompilationParameters(
                     assemblyDefinition.Name,
                     OutputType.DynamicallyLinkedLibrary,
-                    codeToCompile));
+                    sourceCode.ToString()));
         }
     }
 }
