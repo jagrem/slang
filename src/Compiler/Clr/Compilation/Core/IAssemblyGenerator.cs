@@ -1,7 +1,9 @@
+﻿using System.Reflection;
+
 namespace slang.Compiler.Clr.Compilation.Core
 {
     public interface IAssemblyGenerator
     {
-        void GenerateDynamicAssembly(AssemblyDefinition assemblyDefinition);
+        Assembly GenerateDynamicAssembly(AssemblyDefinition assemblyDefinition);
     }
 }
