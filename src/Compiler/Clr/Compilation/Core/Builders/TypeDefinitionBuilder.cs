@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace slang.Compiler.Clr.Compilation.Definitions
+namespace slang.Compiler.Clr.Compilation.Core.Builders
 {
     public class TypeDefinitionBuilder
     {
@@ -20,7 +20,7 @@ namespace slang.Compiler.Clr.Compilation.Definitions
 
         public TypeDefinitionBuilder WithName(string className)
         {
-            _className = className;   
+            _className = className;
             return this;
         }
 
@@ -54,10 +54,9 @@ namespace slang.Compiler.Clr.Compilation.Definitions
             if(string.IsNullOrEmpty (_namespace)) {
                 throw new MalformedDefinitionException ("No namespace has been set for this class definition.");
             }
- 
+
             var functionDefinitions = _functionDefinitionBuilders.Select (f => f.Build ());
             return new TypeDefinition(_accessModifier,_className, _namespace, functionDefinitions);
         }
     }
 }
-

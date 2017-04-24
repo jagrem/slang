@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace slang.Compiler.Clr.Compilation.Definitions.Builders
+namespace slang.Compiler.Clr.Compilation.Core.Builders
 {
     public class ModuleDefinitionBuilder
     {

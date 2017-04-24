@@ -1,9 +1,9 @@
 ﻿using slang.Compiler.Core.Compilation;
 using System.Linq;
-using slang.Compiler.Clr.Compilation.Definitions.Builders;
-using slang.Compiler.Clr.Compilation.IL;
 using slang.Translation;
 using slang.Parsing;
+using slang.Compiler.Clr.Compilation.Core.Builders;
+using slang.Compiler.Clr.Compilation.IL;
 
 namespace slang.Compilation
 {
@@ -16,10 +16,12 @@ namespace slang.Compilation
                 .AsParallel ()
                 .Select (sourceFile => SlangParser.Parse (sourceFile))
                 .ToList ()
-                .Aggregate (GetAssemblyDefinitionBuilder (compilationUnit), (builder, module) => builder.AddModule (module))
+                .Aggregate (
+                    GetAssemblyDefinitionBuilder (compilationUnit),
+                    (builder, module) => builder.AddModule (module))
                 .Build ();
 
-            Generator.GenerateAssembly (assemblyDefinition);
+            new MsilAssemblyGenerator().GenerateDynamicAssembly (assemblyDefinition);
         }
 
         static AssemblyDefinitionBuilder GetAssemblyDefinitionBuilder (CompilationUnit compilationUnit)

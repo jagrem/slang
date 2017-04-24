@@ -1,9 +1,9 @@
 ﻿using System;
-using slang.Compiler.Clr.Compilation.Definitions;
+using slang.Compiler.Clr.Compilation.Core;
 
 namespace slang.Compiler.Clr.Compilation.IL
 {
-    public class MsilGenerator : IAssemblyGenerator
+    public class MsilAssemblyGenerator : IAssemblyGenerator
     {
         public void GenerateDynamicAssembly(AssemblyDefinition assemblyDefinition)
         {
@@ -11,4 +11,3 @@ namespace slang.Compiler.Clr.Compilation.IL
         }
     }
 }
-

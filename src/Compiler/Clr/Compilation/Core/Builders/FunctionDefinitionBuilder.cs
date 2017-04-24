@@ -1,4 +1,4 @@
-﻿namespace slang.Compiler.Clr.Compilation.Definitions
+﻿namespace slang.Compiler.Clr.Compilation.Core.Builders
 {
     public class FunctionDefinitionBuilder
     {
@@ -28,12 +28,11 @@
 
         public FunctionDefinition Build()
         {
-            if(_accessModifier == AccessModifierType.Undefined) { 
-                throw new MalformedDefinitionException ("Function definition requires an access modifier."); 
+            if(_accessModifier == AccessModifierType.Undefined) {
+                throw new MalformedDefinitionException ("Function definition requires an access modifier.");
             }
 
             return new FunctionDefinition (_name, _accessModifier);
         }
     }
 }
-

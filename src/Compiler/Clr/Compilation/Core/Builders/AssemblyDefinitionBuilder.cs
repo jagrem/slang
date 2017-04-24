@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace slang.Compiler.Clr.Compilation.Definitions.Builders
+namespace slang.Compiler.Clr.Compilation.Core.Builders
 {
     public class AssemblyDefinitionBuilder
     {
@@ -15,7 +15,7 @@ namespace slang.Compiler.Clr.Compilation.Definitions.Builders
         AssemblyDefinitionBuilder()
         {
         }
-            
+
         public static AssemblyDefinitionBuilder Create(string name)
         {
             return new AssemblyDefinitionBuilder ()

@@ -1,4 +1,4 @@
-﻿namespace slang.Compiler.Clr.Compilation.Definitions
+﻿namespace slang.Compiler.Clr.Compilation.Core
 {
     public class FunctionDefinition
     {

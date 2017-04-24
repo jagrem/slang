@@ -1,7 +1,7 @@
 ﻿using slang.Compiler.Core.Parsing.Ast;
-using slang.Compiler.Clr.Compilation.Definitions;
+using slang.Compiler.Clr.Compilation.Core;
 using System.Collections.Generic;
-using slang.Compiler.Clr.Compilation.Definitions.Builders;
+using slang.Compiler.Clr.Compilation.Core.Builders;
 using System.Linq;
 
 namespace slang.Translation
