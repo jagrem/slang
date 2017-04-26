@@ -40,7 +40,7 @@ namespace slang.Compiler.Clr.Compilation.Core.Builders
 
         public ModuleDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder,FunctionDefinitionBuilder> functionBuilderConfigurator)
         {
-            _functionBuilders.Add(functionBuilderConfigurator(FunctionDefinitionBuilder.Create()));
+            _functionBuilders.Add(functionBuilderConfigurator(new FunctionDefinitionBuilder()));
             return this;
         }
 

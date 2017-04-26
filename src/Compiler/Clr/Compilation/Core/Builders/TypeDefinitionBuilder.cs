@@ -38,7 +38,7 @@ namespace slang.Compiler.Clr.Compilation.Core.Builders
 
         public TypeDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder,FunctionDefinitionBuilder> functionConfigurator)
         {
-            _functionDefinitionBuilders.Add(functionConfigurator (FunctionDefinitionBuilder.Create()));
+            _functionDefinitionBuilders.Add(functionConfigurator (new FunctionDefinitionBuilder()));
             return this;
         }
 
