@@ -57,11 +57,11 @@ namespace Clr.Tests.Compilation.CSharp
             var methodInfo = typeInfo.GetMethod("Add");
             methodInfo.Should().NotBeNull("because the Add method should be created");
 
-			var parameters = methodInfo.GetParameters();
-			parameters.Should().BeEmpty("because the Add method should have no parameters");
+            var parameters = methodInfo.GetParameters();
+            parameters.Should().BeEmpty("because the Add method should have no parameters");
 
             var returnType = methodInfo.ReturnType;
-			returnType.Should().Be<int>("because the Add method should return an integer");
+            returnType.Should().Be<int>("because the Add method should return an integer");
         }
     }
 }
