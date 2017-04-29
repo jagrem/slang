@@ -5,6 +5,7 @@
         string _name;
         string _returnType;
         AccessModifierType _accessModifier = AccessModifierType.Undefined;
+        string _body;
 
         public FunctionDefinitionBuilder WithName(string name)
         {
@@ -24,13 +25,19 @@
             return this;
         }
 
+        public FunctionDefinitionBuilder WithBody(string body)
+        {
+            _body = body;
+            return this;
+        }
+
         public FunctionDefinition Build()
         {
             if(_accessModifier == AccessModifierType.Undefined) {
                 throw new MalformedDefinitionException ("Function definition requires an access modifier.");
             }
 
-            return new FunctionDefinition (_name, _returnType, _accessModifier);
+            return new FunctionDefinition (_name, _returnType, _accessModifier, _body);
         }
     }
 }

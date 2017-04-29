@@ -3,7 +3,7 @@ using slang.Compiler.Clr.Compilation.Core;
 
 namespace slang.Compiler.Clr.Compilation.CSharp
 {
-    public class SlangToCSharpTranspiler
+    public static class SlangToCSharpTranspiler
     {
         public static string Transpile(AssemblyDefinition assemblyDefinition)
         {
@@ -12,16 +12,36 @@ namespace slang.Compiler.Clr.Compilation.CSharp
             foreach (var moduleDefinition in assemblyDefinition.Modules)
             {
                 sourceCode.Append($@"
-                    namespace { moduleDefinition.Namespace }
-                    {{
-                        public static class { moduleDefinition.Name }
+                namespace { moduleDefinition.Namespace }
+                {{
+                    public static class { moduleDefinition.Name }
+                    {{");
+
+                foreach (var function in moduleDefinition.FunctionDefinitions)
+                {
+                    sourceCode.Append($@"
+                        { GetAccessModifier(function.AccessModifier) } static { function.ReturnType } { function.Name }()
                         {{
+                            { function.Body }
                         }}
+                    ");
+                }
+
+                sourceCode.Append($@"
                     }}
-                ");
+                }}");
             }
 
             return sourceCode.ToString();
+        }
+
+        static string GetAccessModifier(AccessModifierType accessModifierType)
+        {
+            switch (accessModifierType)
+            {
+                default:
+                    return "public";
+            }
         }
     }
 }
