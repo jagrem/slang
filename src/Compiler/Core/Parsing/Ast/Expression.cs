@@ -2,9 +2,11 @@
 {
     public class Expression
     {
-        public Expression ()
+        public string Type { get; }
+        
+        public Expression (Literal literal)
         {
+            Type = literal.Type;
         }
     }
 }
-

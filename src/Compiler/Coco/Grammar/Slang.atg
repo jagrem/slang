@@ -9,11 +9,15 @@ CHARACTERS
    digit = "0123456789".
    cr = '\r'.
    lf = '\n'.
+   char = ANY - "'".
+   stringChar = ANY - "\"".
 
 TOKENS
    ident = lower { letter | digit }.
    type = upper {letter | digit }.
    number = digit {digit}.
+   character = "'" char "'".
+   string = "\"" { stringChar } "\"".
 
 COMMENTS FROM "/*" TO "*/" NESTED
 COMMENTS FROM "//" TO lf
@@ -28,9 +32,12 @@ Slang =                                                                         
     {                                                                                                      (. slang.Compiler.Core.Parsing.Ast.Binding b;                                                               .)
         Binding<out b>                                                                                     (. bindings.Add(b);                                                                                         .)
     }
-                                                                                                           (. Module = new slang.Compiler.Core.Parsing.Ast.Module(m, bindings);                                        .).
+                                                                                                           (. Module = new slang.Compiler.Core.Parsing.Ast.Module(m, bindings);                                        .)
+.
 
-ModuleDeclaration <out slang.Compiler.Core.Parsing.Ast.ModuleDeclaration m>  = "module" type               (. m = new slang.Compiler.Core.Parsing.Ast.ModuleDeclaration(t.val);                                        .).
+ModuleDeclaration <out slang.Compiler.Core.Parsing.Ast.ModuleDeclaration m>  =
+    "module" type                                                                                          (. m = new slang.Compiler.Core.Parsing.Ast.ModuleDeclaration(t.val);                                        .)
+.
 
 Binding<out slang.Compiler.Core.Parsing.Ast.Binding b> =                                                   (. slang.Compiler.Core.Parsing.Ast.BindingDeclaration d = null;                                             .)
                                                                                                            (. var parameters = new System.Collections.Generic.List<slang.Compiler.Core.Parsing.Ast.TypeDeclaration>(); .)
@@ -49,11 +56,36 @@ Binding<out slang.Compiler.Core.Parsing.Ast.Binding b> =                        
     )]
                                                                                                            (. slang.Compiler.Core.Parsing.Ast.TypeDeclaration returnType = System.Linq.Enumerable.LastOrDefault(parameters); .)
                                                                                                            (. d = new slang.Compiler.Core.Parsing.Ast.FunctionDeclaration(name, parameters, returnType);               .)
-    "=" Expression<out body>                                                                               (. b = new slang.Compiler.Core.Parsing.Ast.Binding(d, body);                                                .).
+    "=" Expression<out body>                                                                               (. b = new slang.Compiler.Core.Parsing.Ast.Binding(d, body);                                                .)
+.
 
-TypeDeclaration<out slang.Compiler.Core.Parsing.Ast.TypeDeclaration td> = 
-    (type | ident)                                                                                         (. td = new slang.Compiler.Core.Parsing.Ast.TypeDeclaration(t.val);                                         .).
+TypeDeclaration<out slang.Compiler.Core.Parsing.Ast.TypeDeclaration td> =
+    (type | ident)                                                                                         (. td = new slang.Compiler.Core.Parsing.Ast.TypeDeclaration(t.val);                                         .)
+.
 
-Expression<out slang.Compiler.Core.Parsing.Ast.Expression e> = number                                      (. e = new slang.Compiler.Core.Parsing.Ast.Expression();                                                    .).
+Expression<out slang.Compiler.Core.Parsing.Ast.Expression e> =
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.Literal l;                                                               .)
+    Literal<out l>                                                                                         (. e = new slang.Compiler.Core.Parsing.Ast.Expression(l);                                                   .)
+.
+
+Literal<out slang.Compiler.Core.Parsing.Ast.Literal l> =
+                                                                                                           (. l = null;                                                                                                .)
+    (
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.IntegerLiteral i;                                                        .)
+        IntegerLiteral<out i>                                                                              (. l = i;                                                                                                   .)
+
+        |
+                                                                                                           (. slang.Compiler.Core.Parsing.Ast.StringLiteral s;                                                        .)
+        StringLiteral<out s>                                                                               (. l = s;                                                                                                   .)
+    )
+.
+
+IntegerLiteral<out slang.Compiler.Core.Parsing.Ast.IntegerLiteral i> =
+    number                                                                                                 (. i = new slang.Compiler.Core.Parsing.Ast.IntegerLiteral(t.val);                                           .)
+.
+
+StringLiteral<out slang.Compiler.Core.Parsing.Ast.StringLiteral s> =
+    string                                                                                                 (. s = new slang.Compiler.Core.Parsing.Ast.StringLiteral(t.val);                                            .)
+.
 
 END Slang.

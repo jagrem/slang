@@ -35,10 +35,10 @@ public class Buffer {
 	int bufPos;         // current position in buffer
 	Stream stream;      // input stream (seekable)
 	bool isUserStream;  // was the stream opened by the user?
-	
+
 	public Buffer (Stream s, bool isUserStream) {
 		stream = s; this.isUserStream = isUserStream;
-		
+
 		if (stream.CanSeek) {
 			fileLen = (int) stream.Length;
 			bufLen = Math.Min(fileLen, MAX_BUFFER_LENGTH);
@@ -52,7 +52,7 @@ public class Buffer {
 		else bufPos = 0; // index 0 is already after the file, thus Pos = 0 is invalid
 		if (bufLen == fileLen && stream.CanSeek) Close();
 	}
-	
+
 	protected Buffer(Buffer b) { // called in UTF8Buffer constructor
 		buf = b.buf;
 		bufStart = b.bufStart;
@@ -66,14 +66,14 @@ public class Buffer {
 	}
 
 	~Buffer() { Close(); }
-	
+
 	protected void Close() {
 		if (!isUserStream && stream != null) {
 			stream.Dispose();
 			stream = null;
 		}
 	}
-	
+
 	public virtual int Read () {
 		if (bufPos < bufLen) {
 			return buf[bufPos++];
@@ -93,7 +93,7 @@ public class Buffer {
 		Pos = curPos;
 		return ch;
 	}
-	
+
 	// beg .. begin, zero-based, inclusive, in byte
 	// end .. end, zero-based, exclusive, in byte
 	public string GetString (int beg, int end) {
@@ -133,7 +133,7 @@ public class Buffer {
 			}
 		}
 	}
-	
+
 	// Read the next chunk of bytes from the stream, increases the buffer
 	// if needed and updates the fields fileLen and bufLen.
 	// Returns the number of bytes read.
@@ -203,12 +203,12 @@ public class UTF8Buffer: Buffer {
 public class Scanner {
 	const char EOL = '\n';
 	const int eofSym = 0; /* pdt */
-	const int maxT = 8;
-	const int noSym = 8;
+	const int maxT = 10;
+	const int noSym = 10;
 
 
 	public Buffer buffer; // scanner buffer
-	
+
 	Token t;          // current token
 	int ch;           // current input character
 	int pos;          // byte position of current character
@@ -220,21 +220,23 @@ public class Scanner {
 
 	Token tokens;     // list of tokens already peeked (first token is a dummy)
 	Token pt;         // current peek token
-	
+
 	char[] tval = new char[128]; // text of current token
 	int tlen;         // length of current token
-	
+
 	static Scanner() {
 		start = new Hashtable(128);
 		for (int i = 97; i <= 122; ++i) start[i] = 1;
 		for (int i = 65; i <= 90; ++i) start[i] = 2;
 		for (int i = 48; i <= 57; ++i) start[i] = 3;
-		start[45] = 4; 
-		start[61] = 6; 
+		start[39] = 4; 
+		start[34] = 7; 
+		start[45] = 9; 
+		start[61] = 11; 
 		start[Buffer.EOF] = -1;
 
 	}
-	
+
 	public Scanner (string fileName) {
 		try {
 			Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -244,12 +246,12 @@ public class Scanner {
 			throw new FatalError("Cannot open file " + fileName);
 		}
 	}
-	
+
 	public Scanner (Stream s) {
 		buffer = new Buffer(s, true);
 		Init();
 	}
-	
+
 	void Init() {
 		pos = -1; line = 1; col = 0; charPos = -1;
 		oldEols = 0;
@@ -265,9 +267,9 @@ public class Scanner {
 		}
 		pt = tokens = new Token();  // first token is a dummy
 	}
-	
+
 	void NextCh() {
-		if (oldEols > 0) { ch = EOL; oldEols--; } 
+		if (oldEols > 0) { ch = EOL; oldEols--; }
 		else {
 			pos = buffer.Pos;
 			// buffer reads unicode chars, if UTF8 has been detected
@@ -343,8 +345,8 @@ public class Scanner {
 
 	void CheckLiteral() {
 		switch (t.val) {
-			case "module": t.kind = 4; break;
-			case "let": t.kind = 5; break;
+			case "module": t.kind = 6; break;
+			case "let": t.kind = 7; break;
 			default: break;
 		}
 	}
@@ -362,7 +364,7 @@ public class Scanner {
 		if (start.ContainsKey(ch)) { state = (int) start[ch]; }
 		else { state = 0; }
 		tlen = 0; AddCh();
-		
+
 		switch (state) {
 			case -1: { t.kind = eofSym; break; } // NextCh already done
 			case 0: {
@@ -385,25 +387,39 @@ public class Scanner {
 				if (ch >= '0' && ch <= '9') {AddCh(); goto case 3;}
 				else {t.kind = 3; break;}
 			case 4:
-				if (ch == '>') {AddCh(); goto case 5;}
+				if (ch <= '&' || ch >= '(' && ch <= 65535) {AddCh(); goto case 5;}
 				else {goto case 0;}
 			case 5:
-				{t.kind = 6; break;}
+				if (ch == 39) {AddCh(); goto case 6;}
+				else {goto case 0;}
 			case 6:
-				{t.kind = 7; break;}
+				{t.kind = 4; break;}
+			case 7:
+				if (ch <= '!' || ch >= '#' && ch <= 65535) {AddCh(); goto case 7;}
+				else if (ch == '"') {AddCh(); goto case 8;}
+				else {goto case 0;}
+			case 8:
+				{t.kind = 5; break;}
+			case 9:
+				if (ch == '>') {AddCh(); goto case 10;}
+				else {goto case 0;}
+			case 10:
+				{t.kind = 8; break;}
+			case 11:
+				{t.kind = 9; break;}
 
 		}
 		t.val = new String(tval, 0, tlen);
 		return t;
 	}
-	
+
 	private void SetScannerBehindT() {
 		buffer.Pos = t.pos;
 		NextCh();
 		line = t.line; col = t.col; charPos = t.charPos;
 		for (int i = 0; i < tlen; i++) NextCh();
 	}
-	
+
 	// get the next token (possibly a token already seen during peeking)
 	public Token Scan () {
 		if (tokens.next == null) {
@@ -422,7 +438,7 @@ public class Scanner {
 			}
 			pt = pt.next;
 		} while (pt.kind > maxT); // skip pragmas
-	
+
 		return pt;
 	}
 

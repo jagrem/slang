@@ -40,8 +40,8 @@ namespace slang.Compiler.Coco.Tests.Parsing
                 parser.Parse ();
                 var module = parser.Module;
                 module.Bindings.ShouldBeEquivalentTo (new [] {
-                    new Binding(new FunctionDeclaration("a", new List<TypeDeclaration> (), null), new Expression()),
-                    new Binding(new FunctionDeclaration("b", new List<TypeDeclaration> (), new TypeDeclaration("Int")), new Expression())
+                    new Binding(new FunctionDeclaration("a", new List<TypeDeclaration> (), null), new Expression(new Literal("123", "System.Int32"))),
+                    new Binding(new FunctionDeclaration("b", new List<TypeDeclaration> (), new TypeDeclaration("Int")), new Expression(new Literal("234", "System.Int32")))
                 });
             }
         }

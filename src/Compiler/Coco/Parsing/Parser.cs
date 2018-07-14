@@ -10,7 +10,9 @@ public class Parser {
 	public const int _ident = 1;
 	public const int _type = 2;
 	public const int _number = 3;
-	public const int maxT = 8;
+	public const int _character = 4;
+	public const int _string = 5;
+	public const int maxT = 10;
 
 	const bool _T = true;
 	const bool _x = false;
@@ -88,7 +90,7 @@ public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
 		slang.Compiler.Core.Parsing.Ast.ModuleDeclaration m;                                                     
 		var bindings = new System.Collections.Generic.List<slang.Compiler.Core.Parsing.Ast.Binding>(); 
 		ModuleDeclaration(out m);
-		while (la.kind == 5) {
+		while (la.kind == 7) {
 			slang.Compiler.Core.Parsing.Ast.Binding b;                                                               
 			Binding(out b);
 			bindings.Add(b);                                                                                         
@@ -97,7 +99,7 @@ public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
 	}
 
 	void ModuleDeclaration(out slang.Compiler.Core.Parsing.Ast.ModuleDeclaration m) {
-		Expect(4);
+		Expect(6);
 		Expect(2);
 		m = new slang.Compiler.Core.Parsing.Ast.ModuleDeclaration(t.val);                                        
 	}
@@ -106,11 +108,11 @@ public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
 		slang.Compiler.Core.Parsing.Ast.BindingDeclaration d = null;                                             
 		var parameters = new System.Collections.Generic.List<slang.Compiler.Core.Parsing.Ast.TypeDeclaration>(); 
 		slang.Compiler.Core.Parsing.Ast.Expression body;                                                         
-		Expect(5);
+		Expect(7);
 		Expect(1);
 		string name = t.val;                                                                                     
-		if (la.kind == 1 || la.kind == 2 || la.kind == 6) {
-			if (la.kind == 6) {
+		if (la.kind == 1 || la.kind == 2 || la.kind == 8) {
+			if (la.kind == 8) {
 				slang.Compiler.Core.Parsing.Ast.TypeDeclaration r;                                                       
 				Get();
 				TypeDeclaration(out r);
@@ -119,7 +121,7 @@ public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
 				slang.Compiler.Core.Parsing.Ast.TypeDeclaration f;                                                       
 				TypeDeclaration(out f);
 				parameters.Add(f);                                                                                       
-				while (la.kind == 6) {
+				while (la.kind == 8) {
 					slang.Compiler.Core.Parsing.Ast.TypeDeclaration p;                                                       
 					Get();
 					TypeDeclaration(out p);
@@ -129,7 +131,7 @@ public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
 		}
 		slang.Compiler.Core.Parsing.Ast.TypeDeclaration returnType = System.Linq.Enumerable.LastOrDefault(parameters); 
 		d = new slang.Compiler.Core.Parsing.Ast.FunctionDeclaration(name, parameters, returnType);               
-		Expect(7);
+		Expect(9);
 		Expression(out body);
 		b = new slang.Compiler.Core.Parsing.Ast.Binding(d, body);                                                
 	}
@@ -139,13 +141,37 @@ public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
 			Get();
 		} else if (la.kind == 1) {
 			Get();
-		} else SynErr(9);
+		} else SynErr(11);
 		td = new slang.Compiler.Core.Parsing.Ast.TypeDeclaration(t.val);                                         
 	}
 
 	void Expression(out slang.Compiler.Core.Parsing.Ast.Expression e) {
+		slang.Compiler.Core.Parsing.Ast.Literal l;                                                               
+		Literal(out l);
+		e = new slang.Compiler.Core.Parsing.Ast.Expression(l);                                                   
+	}
+
+	void Literal(out slang.Compiler.Core.Parsing.Ast.Literal l) {
+		l = null;                                                                                                
+		if (la.kind == 3) {
+			slang.Compiler.Core.Parsing.Ast.IntegerLiteral i;                                                        
+			IntegerLiteral(out i);
+			l = i;                                                                                                   
+		} else if (la.kind == 5) {
+			slang.Compiler.Core.Parsing.Ast.StringLiteral s;                                                        
+			StringLiteral(out s);
+			l = s;                                                                                                   
+		} else SynErr(12);
+	}
+
+	void IntegerLiteral(out slang.Compiler.Core.Parsing.Ast.IntegerLiteral i) {
 		Expect(3);
-		e = new slang.Compiler.Core.Parsing.Ast.Expression();                                                    
+		i = new slang.Compiler.Core.Parsing.Ast.IntegerLiteral(t.val);                                           
+	}
+
+	void StringLiteral(out slang.Compiler.Core.Parsing.Ast.StringLiteral s) {
+		Expect(5);
+		s = new slang.Compiler.Core.Parsing.Ast.StringLiteral(t.val);                                            
 	}
 
 
@@ -160,7 +186,7 @@ public slang.Compiler.Core.Parsing.Ast.Module Module { get; set; }
 	}
 	
 	static readonly bool[,] set = {
-		{_T,_x,_x,_x, _x,_x,_x,_x, _x,_x}
+		{_T,_x,_x,_x, _x,_x,_x,_x, _x,_x,_x,_x}
 
 	};
 } // end Parser
@@ -178,12 +204,15 @@ public class Errors {
 			case 1: s = "ident expected"; break;
 			case 2: s = "type expected"; break;
 			case 3: s = "number expected"; break;
-			case 4: s = "\"module\" expected"; break;
-			case 5: s = "\"let\" expected"; break;
-			case 6: s = "\"->\" expected"; break;
-			case 7: s = "\"=\" expected"; break;
-			case 8: s = "??? expected"; break;
-			case 9: s = "invalid TypeDeclaration"; break;
+			case 4: s = "character expected"; break;
+			case 5: s = "string expected"; break;
+			case 6: s = "\"module\" expected"; break;
+			case 7: s = "\"let\" expected"; break;
+			case 8: s = "\"->\" expected"; break;
+			case 9: s = "\"=\" expected"; break;
+			case 10: s = "??? expected"; break;
+			case 11: s = "invalid TypeDeclaration"; break;
+			case 12: s = "invalid Literal"; break;
 
 			default: s = "error " + n; break;
 		}
