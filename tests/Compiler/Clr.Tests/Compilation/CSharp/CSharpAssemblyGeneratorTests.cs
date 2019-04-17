@@ -12,7 +12,7 @@ namespace Clr.Tests.Compilation.CSharp
         string CreateAnonymousAssemblyName() => "slang" + Guid.NewGuid().ToString();
 
         [Fact]
-        public void Given_a_defined_module_When_compiled_Then_a_corresponding_public_class_is_created()
+        public void Given_a_defined_module_When_compiled_Then_a_corresponding_public_static_class_is_created()
         {
             // Arrange
             var subject = new CSharpAssemblyGenerator();
@@ -30,6 +30,8 @@ namespace Clr.Tests.Compilation.CSharp
             // Assert
             var typeInfo = result.GetType("slang.Clr.Tests.CSharpAssemblyGeneratorTestModule", true).GetTypeInfo();
             typeInfo.IsPublic.Should().BeTrue();
+            typeInfo.IsAbstract.Should().BeTrue();
+            typeInfo.IsSealed.Should().BeTrue();
         }
 
         [Fact]
