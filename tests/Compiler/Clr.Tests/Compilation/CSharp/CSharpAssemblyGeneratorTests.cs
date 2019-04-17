@@ -67,7 +67,7 @@ namespace Clr.Tests.Compilation.CSharp
         }
 
         [Fact]
-        public void Given_a_type_with_a_property_When_compiled_Then_a_corresponding_class_is_created()
+        public void Given_a_type_When_compiled_Then_a_corresponding_public_nested_class_is_created()
         {
             var assemblyDefinition = AssemblyDefinitionBuilder
                 .Create(CreateAnonymousAssemblyName())
