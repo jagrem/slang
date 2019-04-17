@@ -27,6 +27,15 @@ namespace slang.Compiler.Clr.Compilation.CSharp
                     ");
                 }
 
+                foreach (var type in moduleDefinition.TypeDefinitions)
+                {
+                    sourceCode.Append($@"
+                        { GetAccessModifier(type.AccessModifier) } class { type.Name }
+                        {{
+                        }}
+                    ");
+                }
+
                 sourceCode.Append($@"
                     }}
                 }}");

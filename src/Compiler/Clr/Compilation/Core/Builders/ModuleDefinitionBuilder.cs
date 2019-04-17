@@ -32,13 +32,13 @@ namespace slang.Compiler.Clr.Compilation.Core.Builders
             return this;
         }
 
-        public ModuleDefinitionBuilder AddType(TypeDefinitionBuilder typeBuilder)
+        public ModuleDefinitionBuilder AddType(Func<TypeDefinitionBuilder, TypeDefinitionBuilder> typeBuilderConfigurator)
         {
-            _typeBuilders.Add(typeBuilder);
+            _typeBuilders.Add(typeBuilderConfigurator(TypeDefinitionBuilder.Create()));
             return this;
         }
 
-        public ModuleDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder,FunctionDefinitionBuilder> functionBuilderConfigurator)
+        public ModuleDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder, FunctionDefinitionBuilder> functionBuilderConfigurator)
         {
             _functionBuilders.Add(functionBuilderConfigurator(new FunctionDefinitionBuilder()));
             return this;

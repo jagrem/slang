@@ -11,11 +11,11 @@ namespace slang.Compiler.Clr.Compilation.Core.Builders
         AccessModifierType _accessModifier;
         readonly List<FunctionDefinitionBuilder> _functionDefinitionBuilders = new List<FunctionDefinitionBuilder>();
 
-        TypeDefinitionBuilder() {}
+        TypeDefinitionBuilder() { }
 
         public static TypeDefinitionBuilder Create()
         {
-            return new TypeDefinitionBuilder ();
+            return new TypeDefinitionBuilder();
         }
 
         public TypeDefinitionBuilder WithName(string className)
@@ -36,27 +36,24 @@ namespace slang.Compiler.Clr.Compilation.Core.Builders
             return this;
         }
 
-        public TypeDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder,FunctionDefinitionBuilder> functionConfigurator)
+        public TypeDefinitionBuilder AddFunction(Func<FunctionDefinitionBuilder, FunctionDefinitionBuilder> functionConfigurator)
         {
-            _functionDefinitionBuilders.Add(functionConfigurator (new FunctionDefinitionBuilder()));
+            _functionDefinitionBuilders.Add(functionConfigurator(new FunctionDefinitionBuilder()));
             return this;
         }
 
         public TypeDefinition Build()
         {
             if (_accessModifier == AccessModifierType.Undefined)
-                throw new MalformedDefinitionException ("No access modifier has been defined for this class.");
+                throw new MalformedDefinitionException("No access modifier has been defined for this class.");
 
-            if(string.IsNullOrEmpty (_className)) {
-                throw new MalformedDefinitionException ("No name has been set for this class definition.");
+            if (string.IsNullOrEmpty(_className))
+            {
+                throw new MalformedDefinitionException("No name has been set for this class definition.");
             }
 
-            if(string.IsNullOrEmpty (_namespace)) {
-                throw new MalformedDefinitionException ("No namespace has been set for this class definition.");
-            }
-
-            var functionDefinitions = _functionDefinitionBuilders.Select (f => f.Build ());
-            return new TypeDefinition(_accessModifier,_className, _namespace, functionDefinitions);
+            var functionDefinitions = _functionDefinitionBuilders.Select(f => f.Build());
+            return new TypeDefinition(_accessModifier, _className, _namespace, functionDefinitions);
         }
     }
 }

@@ -65,5 +65,27 @@ namespace Clr.Tests.Compilation.CSharp
             var returnType = methodInfo.ReturnType;
             returnType.Should().Be<int>("because the Add method should return an integer");
         }
+
+        [Fact]
+        public void Given_a_type_with_a_property_When_compiled_Then_a_corresponding_class_is_created()
+        {
+            var assemblyDefinition = AssemblyDefinitionBuilder
+                .Create(CreateAnonymousAssemblyName())
+                .AsLibrary()
+                .AddModule(m => m
+                    .WithName(nameof(CSharpAssemblyGeneratorTests))
+                    .WithNamespace("slang.Clr.Tests")
+                    .AddType(t => t
+                        .Public()
+                        .WithName("TypeA")))
+                .Build();
+
+            // Act
+            var result = new CSharpAssemblyGenerator().GenerateDynamicAssembly(assemblyDefinition);
+
+            // Assert
+            var typeInfo = result.GetType($"slang.Clr.Tests.{nameof(CSharpAssemblyGeneratorTests)}+TypeA", true).GetTypeInfo();
+            typeInfo.IsNestedPublic.Should().BeTrue();
+        }
     }
 }
